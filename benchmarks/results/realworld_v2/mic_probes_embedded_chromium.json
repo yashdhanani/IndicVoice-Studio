@@ -1,0 +1,90 @@
+{
+  "program": "indicvoice_mic_validation_v2",
+  "contract": "Automated probes are capability checks, NOT physical microphone validation. Physical scenarios default to NOT TESTED.",
+  "env": {
+    "browser": "Chrome 150.0.7871.250",
+    "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Qoder/0.5.13 Chrome/150.0.7871.250 Electron/43.8.4 Safari/537.36",
+    "os": "Windows",
+    "secure_context": true,
+    "hardware_concurrency": 8,
+    "page_origin": "http://127.0.0.1:8010",
+    "recorded_at": "2026-11-17T10:08:02.208Z"
+  },
+  "probes": [
+    {
+      "id": "P1",
+      "name": "getUserMedia API present",
+      "result": "PASS",
+      "detail": "available"
+    },
+    {
+      "id": "P2",
+      "name": "AudioContext honors 16 kHz request",
+      "result": "PASS",
+      "detail": "ctx.sampleRate=16000 (native resampling path)"
+    },
+    {
+      "id": "P3",
+      "name": "Shipped MicProcessor worklet compiles",
+      "result": "PASS",
+      "detail": "extracted from /static/app.js and registered in a real AudioContext (compilation ≠ mic validation)"
+    },
+    {
+      "id": "P4",
+      "name": "Linear resampler math (48k→16k, 440 Hz)",
+      "result": "PASS",
+      "detail": "max sample error 0.0000 vs ideal sine (algorithmic check, not mic audio)"
+    },
+    {
+      "id": "P5",
+      "name": "Microphone permission state",
+      "result": "INFO",
+      "detail": "denied"
+    },
+    {
+      "id": "P6",
+      "name": "Audio input devices visible",
+      "result": "INFO",
+      "detail": "1 input(s); labels hidden until permission granted"
+    },
+    {
+      "id": "P7",
+      "name": "WebSocket transport reachable",
+      "result": "PASS",
+      "detail": "connection opened (no audio sent); closed immediately"
+    },
+    {
+      "id": "P8",
+      "name": "Playback graph initializes",
+      "result": "PASS",
+      "detail": "ctx.state=running, clock advanced 0.264s (silent buffer)"
+    }
+  ],
+  "mic_settings": null,
+  "scenarios": {
+    "M01": { "name": "Permission accepted", "status": "NOT TESTED" },
+    "M02": { "name": "Permission denied", "status": "NOT TESTED" },
+    "M03": { "name": "Microphone removed mid-call", "status": "NOT TESTED" },
+    "M04": { "name": "44.1 kHz input device", "status": "NOT TESTED" },
+    "M05": { "name": "48 kHz input device", "status": "NOT TESTED" },
+    "M06": { "name": "16 kHz resampling correctness", "status": "NOT TESTED" },
+    "M07": { "name": "Low-volume speech", "status": "NOT TESTED" },
+    "M08": { "name": "Normal-volume speech", "status": "NOT TESTED" },
+    "M09": { "name": "Loud speech", "status": "NOT TESTED" },
+    "M10": { "name": "Background noise", "status": "NOT TESTED" },
+    "M11": { "name": "Natural pauses", "status": "NOT TESTED" },
+    "M12": { "name": "Long utterance", "status": "NOT TESTED" },
+    "M13": { "name": "Rapid speech", "status": "NOT TESTED" },
+    "M14": { "name": "Different speaker", "status": "NOT TESTED" },
+    "M15": { "name": "Barge-in", "status": "NOT TESTED" },
+    "M16": { "name": "Tab backgrounding", "status": "NOT TESTED" },
+    "M17": { "name": "Network disconnect + reconnect", "status": "NOT TESTED" }
+  },
+  "execution_notes": {
+    "browser_caveat": "Probes ran in Qoder's embedded Chromium 150 (Electron 43.8.4), NOT standalone Chrome desktop. Standalone Chrome, Firefox, Safari, Android Chrome and iOS Safari remain NOT TESTED.",
+    "no_mic_capture": "Microphone permission is denied in this automated environment; getUserMedia was never granted and no speech was captured. measureMic was not invoked.",
+    "p8_cold_start": "First full probe run showed P8 FAIL (clock advanced 0.000s in a 250ms window). Diagnosis: cold audio-service startup latency in this environment; isolated trials with the same zero-gain graph advanced 0.176-0.592s once warm. Probe wait extended to 700ms + one retry (check itself unchanged: currentTime must advance). Second full run: P8 PASS at 0.264s. Recorded here rather than hidden.",
+    "server": "src.call_server on port 8010 (task-owned process, torn down after probes); pre-existing port-8000 process untouched.",
+    "first_run_artifact": "First-run JSON was not persisted; its only difference from this file was P8 FAIL with the 250ms window (documented above)."
+  }
+}

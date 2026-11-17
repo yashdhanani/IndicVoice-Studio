@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IndicVoice — microphone validation program</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 1.5rem; max-width: 1000px; color: #1a2332; }
+  h1 { font-size: 1.3rem; } h2 { font-size: 1.05rem; margin-top: 1.6rem; }
+  table { border-collapse: collapse; width: 100%; font-size: .85rem; }
+  th, td { border: 1px solid #c9d4e3; padding: .35rem .5rem; text-align: left; vertical-align: top; }
+  th { background: #eef3fa; }
+  .ok { color: #0a7d33; font-weight: 600; } .bad { color: #b3261e; font-weight: 600; }
+  .warn { color: #9a6700; font-weight: 600; }
+  button { padding: .45rem .9rem; margin: .3rem .4rem .3rem 0; cursor: pointer; }
+  textarea { width: 100%; height: 140px; font-family: monospace; font-size: .75rem; }
+  input, select { font-size: .85rem; padding: .2rem; }
+  .scenario { border: 1px solid #c9d4e3; border-radius: 6px; padding: .7rem; margin: .6rem 0; }
+  .scenario h3 { margin: 0 0 .3rem; font-size: .95rem; }
+  .scenario p { margin: .2rem 0 .5rem; font-size: .85rem; color: #445; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .4rem; }
+  .grid label { font-size: .75rem; display: flex; flex-direction: column; gap: .15rem; }
+  .note { background: #fff8e6; border: 1px solid #e6d9a8; padding: .6rem; font-size: .85rem; border-radius: 6px; }
+</style>
+</head>
+<body>
+<h1>IndicVoice microphone validation program (V2 Phase C)</h1>
+<p class="note"><b>Honesty contract:</b> the automated probes below check browser
+capabilities and the shipped audio code paths. They are <b>NOT</b> physical
+microphone validation. Scenarios M01–M17 require a human operator with a real
+microphone and real speech; they stay <b>NOT TESTED</b> until performed and
+recorded here. Never mark a physical scenario PASS from a probe result.</p>
+
+<h2>0. Environment (auto-detected)</h2>
+<table id="env"><tbody></tbody></table>
+
+<h2>1. Automated capability probes (no microphone speech involved)</h2>
+<button id="runProbes">Run automated probes</button>
+<button id="measureMic">Open mic briefly to read device settings (operator consent)</button>
+<table id="probes"><thead><tr><th>ID</th><th>Probe</th><th>Result</th><th>Detail</th></tr></thead><tbody></tbody></table>
+
+<h2>2. Physical scenarios — human operator required</h2>
+<p>Run each scenario on the actual call page (<a href="/" target="_blank">open call page</a>)
+in a second tab. Record observations here. “First-audio ms” comes from the call
+page's latency chip; transcript from the chat log. Export at the bottom.</p>
+<div id="scenarios"></div>
+
+<h2>3. Export</h2>
+<button id="export">Download results JSON</button>
+<button id="copy">Copy JSON to clipboard</button>
+<textarea id="json" readonly placeholder="Results JSON appears here after export…"></textarea>
+
+<script>
+"use strict";
+const SCENARIOS = [
+  ["M01", "Permission accepted", "Start a call; accept the mic prompt. Verify the state chip reaches connected and the mic meter moves when you speak."],
+  ["M02", "Permission denied", "Deny the mic prompt. Verify the page shows a clear error and does not crash or silently continue."],
+  ["M03", "Microphone removed mid-call", "Unplug/disable the input device during an active call. Verify behavior is observable (error/stall) and note recovery after re-plugging."],
+  ["M04", "44.1 kHz input device", "Use a device/interface whose native rate is 44.1 kHz. Record the reported input rate and whether recognition works."],
+  ["M05", "48 kHz input device", "Same with a 48 kHz native device (most laptop/phone mics)."],
+  ["M06", "16 kHz resampling correctness", "Speak a known sentence; verify the transcript matches (resampling is native via AudioContext or the linear fallback — probe P4 checks the fallback math)."],
+  ["M07", "Low-volume speech", "Speak quietly at ~30 cm. Note whether VAD triggers and the transcript is correct."],
+  ["M08", "Normal-volume speech", "Conversational volume baseline turn."],
+  ["M09", "Loud speech", "Speak loudly (no clipping distortion). Note transcript correctness and any AGC pumping."],
+  ["M10", "Background noise", "Fan/TV/office babble at realistic level. Note transcript degradation."],
+  ["M11", "Natural pauses", "Speak with 0.3–0.8 s hesitations mid-sentence. Verify the turn is not cut early and the full sentence is recognized."],
+  ["M12", "Long utterance", "Speak continuously for 20–40 s. Verify no truncation below the 60 s cap and a coherent reply."],
+  ["M13", "Rapid speech", "Speak fast. Note transcript correctness."],
+  ["M14", "Different speaker", "A second person speaks. Note recognition quality change."],
+  ["M15", "Barge-in", "Interrupt the assistant mid-reply with speech. Verify playback stops promptly and the new turn is recognized."],
+  ["M16", "Tab backgrounding", "Background the tab during a call for 30 s, return. Note whether audio/WS survived (browser throttling)."],
+  ["M17", "Network disconnect + reconnect", "Drop Wi-Fi briefly mid-call, restore. Note close behavior and whether a fresh call connects cleanly."],
+];
+const FIELDS = [
+  ["mic_type", "Microphone type/model", "text"],
+  ["input_rate", "Input sample rate (Hz)", "text"],
+  ["duration_s", "Actual audio duration (s)", "text"],
+  ["transcript", "ASR transcript", "text"],
+  ["correctness", "Recognition correctness", ["correct", "minor errors", "wrong", "no transcript", "n/a"]],
+  ["first_audio_ms", "First-audio latency (ms)", "text"],
+  ["playback", "Playback behavior", "text"],
+  ["errors", "Errors observed", "text"],
+  ["status", "Result", ["NOT TESTED", "PASS", "PARTIAL", "FAIL"]],
+];
+const state = { env: {}, probes: [], mic_settings: null, scenarios: {} };
+
+function el(tag, attrs, text) {
+  const n = document.createElement(tag);
+  for (const k in attrs || {}) n.setAttribute(k, attrs[k]);
+  if (text !== undefined) n.textContent = text;
+  return n;
+}
+function detectEnv() {
+  const ua = navigator.userAgent;
+  let browser = "unknown";
+  const m = ua.match(/(Chrome|Firefox|Edg|Safari)\/([\d.]+)/);
+  if (m) browser = (m[1] === "Edg" ? "Edge" : m[1]) + " " + m[2];
+  state.env = {
+    browser, user_agent: ua,
+    os: navigator.userAgentData?.platform || navigator.platform || "unknown",
+    secure_context: window.isSecureContext,
+    hardware_concurrency: navigator.hardwareConcurrency || null,
+    page_origin: location.origin,
+    recorded_at: new Date().toISOString(),
+  };
+  const tb = document.querySelector("#env tbody");
+  for (const [k, v] of Object.entries(state.env)) {
+    tb.appendChild(el("tr", {}, ""));
+    const tr = tb.lastChild;
+    tr.appendChild(el("td", {}, k)); tr.appendChild(el("td", {}, String(v)));
+  }
+}
+function probeRow(id, name, ok, detail) {
+  state.probes.push({ id, name, result: ok === true ? "PASS" : ok === false ? "FAIL" : "INFO", detail });
+  const tb = document.querySelector("#probes tbody");
+  const tr = el("tr");
+  tr.appendChild(el("td", {}, id));
+  tr.appendChild(el("td", {}, name));
+  tr.appendChild(el("td", { class: ok === true ? "ok" : ok === false ? "bad" : "warn" },
+    ok === true ? "PASS" : ok === false ? "FAIL" : "INFO"));
+  tr.appendChild(el("td", {}, detail));
+  tb.appendChild(tr);
+}
+async function runProbes() {
+  document.querySelector("#probes tbody").textContent = "";
+  state.probes = [];
+  probeRow("P1", "getUserMedia API present", !!navigator.mediaDevices?.getUserMedia,
+    navigator.mediaDevices?.getUserMedia ? "available" : "missing — mic calls impossible");
+  let ctx = null, native16k = false;
+  try {
+    ctx = new AudioContext({ sampleRate: 16000 });
+    native16k = Math.abs(ctx.sampleRate - 16000) <= 1;
+    probeRow("P2", "AudioContext honors 16 kHz request", native16k,
+      `ctx.sampleRate=${ctx.sampleRate}${native16k ? " (native resampling path)" : " (linear fallback path will be used)"}`);
+  } catch (e) { probeRow("P2", "AudioContext creation", false, String(e)); }
+  try {
+    const src = await (await fetch("/static/app.js")).text();
+    const m = src.match(/const WORKLET_CODE = `([\s\S]*?)`;/);
+    if (!m) throw new Error("WORKLET_CODE not found in shipped app.js");
+    const url = URL.createObjectURL(new Blob([m[1]], { type: "application/javascript" }));
+    await ctx.audioWorklet.addModule(url);
+    URL.revokeObjectURL(url);
+    const node = new AudioWorkletNode(ctx, "mic-processor");
+    probeRow("P3", "Shipped MicProcessor worklet compiles", true,
+      "extracted from /static/app.js and registered in a real AudioContext (compilation ≠ mic validation)");
+    node.disconnect();
+  } catch (e) { probeRow("P3", "Shipped MicProcessor worklet compiles", false, String(e)); }
+  try {
+    // exact fallback algorithm from app.js (linear interpolation)
+    const rate = 48000, n = 4800, f = 440;
+    const raw = Float32Array.from({ length: n }, (_, i) => Math.sin(2 * Math.PI * f * i / rate));
+    const outN = Math.max(1, Math.round(raw.length * 16000 / rate));
+    const f32 = new Float32Array(outN);
+    for (let i = 0; i < outN; i++) {
+      const pos = i * rate / 16000;
+      const a = Math.floor(pos), b = Math.min(a + 1, raw.length - 1);
+      f32[i] = raw[a] + (raw[b] - raw[a]) * (pos - a);
+    }
+    let maxErr = 0;
+    for (let i = 0; i < outN; i++) {
+      const ideal = Math.sin(2 * Math.PI * f * i / 16000);
+      maxErr = Math.max(maxErr, Math.abs(f32[i] - ideal));
+    }
+    probeRow("P4", "Linear resampler math (48k→16k, 440 Hz)", maxErr < 0.02,
+      `max sample error ${maxErr.toFixed(4)} vs ideal sine (algorithmic check, not mic audio)`);
+  } catch (e) { probeRow("P4", "Linear resampler math", false, String(e)); }
+  try {
+    const st = await navigator.permissions.query({ name: "microphone" });
+    probeRow("P5", "Microphone permission state", null, st.state);
+  } catch (e) { probeRow("P5", "Microphone permission state", null, "query unsupported: " + e); }
+  try {
+    const devs = await navigator.mediaDevices.enumerateDevices();
+    const ins = devs.filter(d => d.kind === "audioinput");
+    probeRow("P6", "Audio input devices visible", null,
+      `${ins.length} input(s); labels ${ins.some(d => d.label) ? "visible" : "hidden until permission granted"}`);
+  } catch (e) { probeRow("P6", "Device enumeration", false, String(e)); }
+  try {
+    const ws = new WebSocket(`${location.protocol === "https:" ? "wss" : "ws"}://${location.host}/ws/voice?lang=hi&streaming=1`);
+    const opened = await new Promise(res => {
+      const t = setTimeout(() => res(false), 5000);
+      ws.onopen = () => { clearTimeout(t); res(true); };
+      ws.onerror = () => { clearTimeout(t); res(false); };
+    });
+    probeRow("P7", "WebSocket transport reachable", opened,
+      opened ? "connection opened (no audio sent); closed immediately" : "could not open — server running? auth required?");
+    ws.close();
+  } catch (e) { probeRow("P7", "WebSocket transport reachable", false, String(e)); }
+  try {
+    if (ctx.state === "suspended") await ctx.resume();
+    const buf = ctx.createBuffer(1, 1600, 16000);
+    const s = ctx.createBufferSource(); s.buffer = buf;
+    const g = ctx.createGain(); g.gain.value = 0;
+    s.connect(g); g.connect(ctx.destination);
+    const t0 = ctx.currentTime; s.start();
+    // cold audio-service start can take >250 ms; wait, then retry once
+    await new Promise(r => setTimeout(r, 700));
+    if (ctx.currentTime <= t0) await new Promise(r => setTimeout(r, 700));
+    probeRow("P8", "Playback graph initializes", ctx.currentTime > t0,
+      `ctx.state=${ctx.state}, clock advanced ${(ctx.currentTime - t0).toFixed(3)}s (silent buffer)`);
+    s.stop();
+  } catch (e) { probeRow("P8", "Playback graph initializes", false, String(e)); }
+  if (ctx) ctx.close();
+}
+async function measureMic() {
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    const tr = stream.getAudioTracks()[0];
+    const s = tr.getSettings();
+    state.mic_settings = {
+      label: tr.label, sample_rate: s.sampleRate || null,
+      channel_count: s.channelCount || null,
+      echo_cancellation: s.echoCancellation ?? null,
+      noise_suppression: s.noiseSuppression ?? null,
+      auto_gain_control: s.autoGainControl ?? null,
+    };
+    alert("Mic settings captured (see export JSON). Track stopped immediately.");
+    stream.getTracks().forEach(t => t.stop());
+  } catch (e) { alert("getUserMedia failed: " + e); }
+}
+function buildScenarios() {
+  const host = document.getElementById("scenarios");
+  for (const [id, name, instr] of SCENARIOS) {
+    state.scenarios[id] = { name, status: "NOT TESTED" };
+    const div = el("div", { class: "scenario" });
+    div.appendChild(el("h3", {}, `${id} — ${name}`));
+    div.appendChild(el("p", {}, instr));
+    const grid = el("div", { class: "grid" });
+    for (const [key, label, type] of FIELDS) {
+      const lab = el("label", {}, label);
+      let inp;
+      if (Array.isArray(type)) {
+        inp = el("select");
+        for (const opt of type) inp.appendChild(el("option", { value: opt }, opt));
+        if (key === "status") inp.value = "NOT TESTED";
+        if (key === "correctness") inp.value = "n/a";
+      } else { inp = el("input", { type: "text" }); }
+      inp.addEventListener("change", () => { state.scenarios[id][key] = inp.value; });
+      lab.appendChild(inp); grid.appendChild(lab);
+    }
+    div.appendChild(grid); host.appendChild(div);
+  }
+}
+function resultsJSON() {
+  return JSON.stringify({
+    program: "indicvoice_mic_validation_v2",
+    contract: "Automated probes are capability checks, NOT physical microphone validation. Physical scenarios default to NOT TESTED.",
+    ...state,
+  }, null, 2);
+}
+document.getElementById("runProbes").addEventListener("click", runProbes);
+document.getElementById("measureMic").addEventListener("click", measureMic);
+document.getElementById("export").addEventListener("click", () => {
+  const json = resultsJSON();
+  document.getElementById("json").value = json;
+  const a = el("a", { href: URL.createObjectURL(new Blob([json], { type: "application/json" })),
+    download: `mic_validation_${new Date().toISOString().slice(0, 10)}.json` });
+  a.click(); URL.revokeObjectURL(a.href);
+});
+document.getElementById("copy").addEventListener("click", async () => {
+  const json = resultsJSON();
+  document.getElementById("json").value = json;
+  try { await navigator.clipboard.writeText(json); } catch { /* textarea fallback */ }
+});
+detectEnv(); buildScenarios();
+window.__validationState = state;
+window.__runProbes = runProbes;
+window.__resultsJSON = resultsJSON;
+</script>
+</body>
+</html>

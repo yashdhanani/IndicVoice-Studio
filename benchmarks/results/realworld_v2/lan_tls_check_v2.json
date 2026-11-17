@@ -1,0 +1,75 @@
+{
+  "program": "indicvoice_lan_tls_check_v2",
+  "contract": "Automated localhost TLS/auth checks only. Physical phone scenarios are NOT TESTED (docs/INDICVOICE_PHONE_LAN_TEST.md). A random throwaway token was used; no real credential appears in this report.",
+  "recorded_at": "2026-11-17T10:15:24.560840+00:00",
+  "port": 8444,
+  "certificate": {
+    "subject_cn": "IndicVoice local",
+    "issuer_cn": "IndicVoice local",
+    "self_signed": true,
+    "sans": [
+      "localhost",
+      "127.0.0.1",
+      "192.168.1.6"
+    ],
+    "not_valid_after": "2029-02-19T05:38:27+00:00",
+    "days_remaining": 824
+  },
+  "checks": [
+    {
+      "id": "L1",
+      "name": "HTTPS health endpoint",
+      "status": "PASS",
+      "detail": "ok=True auth=token (token mode enforced)"
+    },
+    {
+      "id": "L2",
+      "name": "Self-signed certificate properties",
+      "status": "PASS",
+      "detail": "CN=IndicVoice local, SANs=['localhost', '127.0.0.1', '192.168.1.6'], expires 2029-02-19T05:38:27+00:00"
+    },
+    {
+      "id": "L3",
+      "name": "WSS without credentials rejected (fail-closed)",
+      "status": "PASS",
+      "detail": "closed with 4401 as required"
+    },
+    {
+      "id": "L4",
+      "name": "Ticket issuance via Authorization header",
+      "status": "PASS",
+      "detail": "valid bearer→200, wrong bearer→401, no header→401"
+    },
+    {
+      "id": "L5",
+      "name": "WSS with one-time ticket admitted",
+      "status": "PASS",
+      "detail": "WSS opened and stayed open (no rejection close)"
+    },
+    {
+      "id": "L6",
+      "name": "Ticket is single-use (replay rejected)",
+      "status": "PASS",
+      "detail": "closed with 4401 as required"
+    },
+    {
+      "id": "L7",
+      "name": "WSS with legacy ?token= admitted",
+      "status": "PASS",
+      "detail": "WSS opened and stayed open (no rejection close)"
+    },
+    {
+      "id": "L8",
+      "name": "Plain HTTP rejected on TLS port",
+      "status": "PASS",
+      "detail": "failed as expected (ServerDisconnectedError)"
+    },
+    {
+      "id": "L9",
+      "name": "Non-localhost bind without token refuses startup",
+      "status": "PASS",
+      "detail": "exit=1, refusal message present=True"
+    }
+  ],
+  "all_pass": true
+}
