@@ -551,15 +551,33 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.manifest:
-        modes = ["block", "streaming"] if args.mode == "ab" else [args.mode]
-        rows: list[dict] = []
-        for mode in modes:
-            rows += evaluate_manifest(Path(args.manifest), args.backend,
-                                      mode=mode, asr_only=args.asr_only)
-        summary = summarise(rows)
-        report = render_markdown(summary)
         out = Path(args.out)
         out.parent.mkdir(parents=True, exist_ok=True)
+        manifest_path = Path(args.manifest)
+        rows: list[dict] = []
+        if args.mode == "ab":
+            # counterbalance mode order across the corpus: first half runs
+            # block->streaming, second half streaming->block, so thermal /
+            # cache order effects do not systematically favor one mode
+            entries = json.loads(manifest_path.read_text(encoding="utf-8"))
+            mid = len(entries) // 2
+            for group, subset, modes in (
+                ("A", entries[:mid], ["block", "streaming"]),
+                ("B", entries[mid:], ["streaming", "block"]),
+            ):
+                sub = out.with_name(out.stem + f"_order{group}.json")
+                sub.write_text(json.dumps(subset, ensure_ascii=False), encoding="utf-8")
+                for mode in modes:
+                    group_rows = evaluate_manifest(sub, args.backend,
+                                                   mode=mode, asr_only=args.asr_only)
+                    for row in group_rows:
+                        row["order_group"] = group
+                    rows += group_rows
+        else:
+            rows = evaluate_manifest(manifest_path, args.backend,
+                                     mode=args.mode, asr_only=args.asr_only)
+        summary = summarise(rows)
+        report = render_markdown(summary)
         out.write_text(json.dumps({"turns": rows, "summary": summary},
                                   ensure_ascii=False, indent=2), encoding="utf-8")
         markdown = out.with_suffix(".md")

@@ -10,6 +10,9 @@ NOT TESTED, NOT APPLICABLE.
 |---|---|
 | `5768a6d` | Stable baseline: pseudo-streaming ASR, audit fixes D1–D3/D7–D9/D11/D15–D16, 45-test suite, six phase-1/2 docs, raw A/B results |
 | `c483f3d` | P0 hardening: fail-closed bind, Origin allowlist, inbound caps, per-IP limit; 56-test suite; corpus-honesty doc corrections |
+| `8b9efc1` | Hardening V1 Phase B+D: ticket auth, dev-mode marking, abuse caps (utterance/session/queue), D22 XSS fix, 71-test suite; 240-slot dataset manifest + validator |
+| `4a84be9` | Preserved earlier visual-QA work (`[hidden]` CSS fix, screenshot tool) |
+| `b033dd3` | Phase F/H/I: E2E benchmark (2×40 live turns, both runs preserved), CI tiers, deployment guide, Phase C checklists |
 
 Git initialised this engagement (was D4: no version control). Repo-local identity
 `IndicVoice Dev <dev@indicvoice.local>` (user-approved placeholder). No remote configured;
