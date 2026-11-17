@@ -31,6 +31,7 @@ evaluation/dataset/audio/
 evaluation/dataset/originals/
 evaluation/human_voice_quality/audio/
 evaluation/human_voice_quality/responses/
+evaluation/human_voice_quality/private/
 
 # visual QA screenshots (regenerate with eval/shoot.mjs)
 eval/shots/

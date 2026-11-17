@@ -1,0 +1,38 @@
+{
+  "prepared_at": "2026-11-17T10:25:10.438859+00:00",
+  "seed": 20261117,
+  "repeats_per_lang": 2,
+  "langs_requested": [
+    "hi",
+    "bn",
+    "ta",
+    "te",
+    "kn",
+    "ml",
+    "mr",
+    "gu",
+    "pa",
+    "or",
+    "as",
+    "en"
+  ],
+  "langs_ok": [
+    "as",
+    "bn",
+    "en",
+    "gu",
+    "hi",
+    "kn",
+    "ml",
+    "mr",
+    "or",
+    "pa",
+    "ta",
+    "te"
+  ],
+  "failures": {},
+  "n_samples": 96,
+  "n_unique": 72,
+  "n_repeats": 24,
+  "utterance_set_status": "DRAFT — translations must be reviewed by a native/fluent speaker of each language before listening sessions begin"
+}

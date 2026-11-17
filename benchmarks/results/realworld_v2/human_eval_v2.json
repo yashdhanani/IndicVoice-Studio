@@ -1,0 +1,10 @@
+{
+  "program": "indicvoice_human_voice_quality_v2",
+  "metric_label": "mean listener rating (5-point scale) — NOT ITU-T MOS",
+  "recorded_at": "2026-11-17T10:25:43.084338+00:00",
+  "n_response_files": 0,
+  "n_listeners": 0,
+  "status": "NOT TESTED",
+  "note": "No listener responses exist. No scores are reported. Run listening sessions per docs/INDICVOICE_HUMAN_EVALUATION.md.",
+  "per_lang": {}
+}

@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IndicVoice — listening evaluation</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 760px; margin: 1.5rem auto; padding: 0 1rem; color: #1a1a2e; }
+  h1 { font-size: 1.3rem; } h2 { font-size: 1.05rem; }
+  .card { border: 1px solid #d0d0e0; border-radius: 10px; padding: 1rem; margin: 1rem 0; }
+  .dim { display: grid; grid-template-columns: 180px 1fr; align-items: center; gap: .5rem; margin: .35rem 0; }
+  .dim .name { font-size: .9rem; }
+  .scale { display: flex; gap: .6rem; }
+  .scale label { font-size: .85rem; display: flex; align-items: center; gap: .2rem; }
+  button { padding: .5rem 1.1rem; font-size: .95rem; border-radius: 8px; border: 1px solid #8888aa; background: #f0f0fa; cursor: pointer; }
+  button:disabled { opacity: .45; cursor: not-allowed; }
+  textarea, input[type=text] { width: 100%; box-sizing: border-box; font-size: .9rem; padding: .4rem; }
+  .muted { color: #666; font-size: .85rem; }
+  .banner { background: #fff8e0; border: 1px solid #e0d090; border-radius: 8px; padding: .7rem; font-size: .85rem; }
+  #progress { font-weight: 600; }
+  audio { width: 100%; margin: .5rem 0; }
+  .anchors { font-size: .8rem; color: #555; margin: .3rem 0 .8rem; }
+  fieldset { border: 1px solid #ccc; border-radius: 8px; margin: .6rem 0; }
+</style>
+</head>
+<body>
+<h1>IndicVoice — human listening evaluation (V2)</h1>
+<div class="banner">
+  Samples are anonymized and shuffled. Some samples repeat intentionally —
+  rate each presentation independently, from what you hear, not from memory.
+  Do not try to identify the language or voice. Rate every dimension, even if
+  the sample is not a question (judge whether the sentence ending sounds
+  right for its type). Headphones in a quiet room are recommended.
+</div>
+
+<div class="card" id="setup">
+  <h2>1. Listener setup</h2>
+  <p class="muted">Use a pseudonymous ID (e.g. listener_07). Never enter your real name.</p>
+  <label>Listener ID <input type="text" id="listener" placeholder="listener_01"></label>
+  <p><button id="start" disabled>Load package &amp; start</button> <span id="loadmsg" class="muted"></span></p>
+</div>
+
+<div class="card" id="rating" hidden>
+  <div id="progress"></div>
+  <audio id="player" controls preload="auto"></audio>
+  <div class="anchors" id="anchors"></div>
+  <div id="dims"></div>
+  <label class="muted">Optional qualitative feedback for this sample
+    <textarea id="feedback" rows="2" placeholder="anything you noticed…"></textarea>
+  </label>
+  <p><button id="next" disabled>Next sample</button></p>
+</div>
+
+<div class="card" id="finish" hidden>
+  <h2>2. Final questions (after all samples)</h2>
+  <fieldset>
+    <legend>Listening setup</legend>
+    <label><input type="radio" name="env" value="headphones" checked> Headphones</label>
+    <label><input type="radio" name="env" value="speakers"> Speakers</label>
+  </fieldset>
+  <label>Your native language <input type="text" id="native" placeholder="e.g. hi"></label>
+  <fieldset id="fluent">
+    <legend>Languages you are native or fluent in (check all that apply)</legend>
+  </fieldset>
+  <label class="muted">General comments
+    <textarea id="general" rows="3"></textarea>
+  </label>
+  <p>
+    <button id="export">Download response JSON</button>
+    <button id="copy">Copy to clipboard</button>
+  </p>
+  <p class="muted">Save the file into <code>evaluation/human_voice_quality/responses/</code>
+  (or send it to the evaluation coordinator). Thank you!</p>
+  <textarea id="json" rows="8" readonly hidden></textarea>
+</div>
+
+<script>
+"use strict";
+const LANGS = ["hi","bn","ta","te","kn","ml","mr","gu","pa","or","as","en"];
+let pkg = null, idx = 0, ratings = {}, feedback = {}, startedAt = null;
+
+const $ = id => document.getElementById(id);
+const fluentBox = $("fluent");
+for (const l of LANGS) {
+  const lab = document.createElement("label");
+  lab.style.marginRight = ".8rem";
+  const cb = document.createElement("input");
+  cb.type = "checkbox"; cb.value = l;
+  lab.append(cb, " " + l);
+  fluentBox.append(lab);
+}
+
+$("listener").addEventListener("input", () => {
+  $("start").disabled = !$("listener").value.trim();
+});
+
+$("start").addEventListener("click", async () => {
+  $("loadmsg").textContent = "loading package.json…";
+  try {
+    const r = await fetch("package.json");
+    pkg = await r.json();
+  } catch (e) {
+    $("loadmsg").textContent = "Could not load package.json — serve this folder over HTTP " +
+      "(python -m http.server 8020 --directory evaluation/human_voice_quality) and open " +
+      "http://127.0.0.1:8020/listening.html";
+    return;
+  }
+  startedAt = new Date().toISOString();
+  $("setup").hidden = true;
+  $("rating").hidden = false;
+  $("anchors").textContent = Object.entries(pkg.scale.anchors)
+    .map(([k, v]) => `${k} = ${v}`).join("  ·  ");
+  const dimsBox = $("dims");
+  for (const dim of pkg.dimensions) {
+    const row = document.createElement("div");
+    row.className = "dim";
+    const name = document.createElement("div");
+    name.className = "name";
+    name.textContent = dim.replaceAll("_", " ");
+    const scale = document.createElement("div");
+    scale.className = "scale";
+    for (let v = 1; v <= 5; v++) {
+      const lab = document.createElement("label");
+      const rb = document.createElement("input");
+      rb.type = "radio"; rb.name = dim; rb.value = String(v);
+      rb.addEventListener("change", updateNext);
+      lab.append(rb, String(v));
+      scale.append(lab);
+    }
+    row.append(name, scale);
+    dimsBox.append(row);
+  }
+  showSample();
+});
+
+function currentCode() { return pkg.samples[idx]; }
+
+function showSample() {
+  $("progress").textContent = `Sample ${idx + 1} / ${pkg.n_samples} — code ${currentCode()}`;
+  $("player").src = `audio/${currentCode()}.wav`;
+  $("feedback").value = feedback[currentCode()] || "";
+  for (const dim of pkg.dimensions) {
+    const prev = (ratings[currentCode()] || {})[dim];
+    for (const rb of document.querySelectorAll(`input[name="${dim}"]`))
+      rb.checked = prev !== undefined && Number(rb.value) === prev;
+  }
+  updateNext();
+}
+
+function updateNext() {
+  const done = pkg.dimensions.every(dim =>
+    document.querySelector(`input[name="${dim}"]:checked`));
+  $("next").disabled = !done;
+  $("next").textContent = idx + 1 === pkg.n_samples ? "Finish" : "Next sample";
+}
+
+$("next").addEventListener("click", () => {
+  const code = currentCode();
+  ratings[code] = {};
+  for (const dim of pkg.dimensions)
+    ratings[code][dim] = Number(document.querySelector(`input[name="${dim}"]:checked`).value);
+  const fb = $("feedback").value.trim();
+  if (fb) feedback[code] = fb;
+  idx += 1;
+  if (idx < pkg.n_samples) { showSample(); }
+  else { $("rating").hidden = true; $("finish").hidden = false; }
+});
+
+function responseJSON() {
+  const fluent = [...fluentBox.querySelectorAll("input:checked")].map(cb => cb.value);
+  return JSON.stringify({
+    program: pkg.program,
+    listener_id: $("listener").value.trim(),
+    started_at: startedAt,
+    finished_at: new Date().toISOString(),
+    environment: document.querySelector('input[name="env"]:checked').value,
+    native_lang: $("native").value.trim() || null,
+    fluent_langs: fluent,
+    general_comments: $("general").value.trim() || null,
+    n_samples_rated: Object.keys(ratings).length,
+    ratings, feedback,
+  }, null, 2);
+}
+
+$("export").addEventListener("click", () => {
+  const text = responseJSON();
+  $("json").hidden = false; $("json").value = text;
+  const blob = new Blob([text], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `response_${$("listener").value.trim() || "listener"}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+});
+$("copy").addEventListener("click", async () => {
+  const text = responseJSON();
+  $("json").hidden = false; $("json").value = text;
+  try { await navigator.clipboard.writeText(text); } catch (e) { /* textarea fallback shown */ }
+});
+</script>
+</body>
+</html>
