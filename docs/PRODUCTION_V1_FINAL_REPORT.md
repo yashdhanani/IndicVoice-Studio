@@ -14,8 +14,9 @@ existing 56-test suite. Two new defects were found by execution during this
 engagement (D22 XSS sink, D23 A/B sub-manifest paths) — not by inspection alone.
 
 **Implemented and verified in this environment**:
-- Git baseline + 6 checkpoints (`5768a6d` → `79cf74d`); rollback preserved at
-  three levels (per-call `?streaming=0`, server `--no-streaming`, `git revert`).
+- Git baseline + incremental checkpoints (`5768a6d` → `74da488`); rollback
+  preserved at three levels (per-call `?streaming=0`, server `--no-streaming`,
+  `git revert`).
 - Security hardening B1–B7: fail-closed non-localhost bind, one-time ticket
   transport, Origin allowlist, frame/payload/session/utterance/queue caps,
   dual watchdog, XSS sink elimination. All automated-tested.

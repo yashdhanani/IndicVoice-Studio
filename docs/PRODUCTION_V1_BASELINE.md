@@ -13,6 +13,8 @@ NOT TESTED, NOT APPLICABLE.
 | `8b9efc1` | Hardening V1 Phase B+D: ticket auth, dev-mode marking, abuse caps (utterance/session/queue), D22 XSS fix, 71-test suite; 240-slot dataset manifest + validator |
 | `4a84be9` | Preserved earlier visual-QA work (`[hidden]` CSS fix, screenshot tool) |
 | `b033dd3` | Phase F/H/I: E2E benchmark (2×40 live turns, both runs preserved), CI tiers, deployment guide, Phase C checklists |
+| `79cf74d` | Phase G: concurrency matrix 1/2/3/5 (33/33 turns, RSS 732 MB peak); counterbalanced A/B order in evaluate |
+| `74da488` | Phase E: TTS/noise/LLM benches, 2 counterbalanced A/B re-runs (parity 12/12 twice), D23 fix + regression test (72-test suite), final report A–L, readiness re-score 63/100 |
 
 Git initialised this engagement (was D4: no version control). Repo-local identity
 `IndicVoice Dev <dev@indicvoice.local>` (user-approved placeholder). No remote configured;
