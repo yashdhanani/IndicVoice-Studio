@@ -65,7 +65,10 @@ class StreamingSTT:
         self._cond = threading.Condition()
         self._stop = threading.Event()
         self._engine = None
-        self._buf = np.zeros(0, dtype=np.float32)
+        #: amortised-growth audio store: _buf is the filled view of _storage,
+        #: so appending a 32 ms frame no longer copies the whole utterance
+        self._storage = np.zeros(0, dtype=np.float32)
+        self._buf = self._storage
         self._generation = 0
         self._active = False
         self._decoding = False
@@ -104,6 +107,7 @@ class StreamingSTT:
                 np.asarray(seed, dtype=np.float32).reshape(-1).copy()
                 if seed is not None else np.zeros(0, dtype=np.float32)
             )
+            self._storage = self._buf
             self._decoded_upto = 0
             self._partial_text = ""
             self._partials = 0
@@ -125,7 +129,14 @@ class StreamingSTT:
                 return
             if self._max_samples is not None and len(self._buf) >= self._max_samples:
                 return
-            self._buf = np.concatenate([self._buf, chunk])
+            end = len(self._buf) + chunk.size
+            if end > len(self._storage):
+                grown = np.empty(max(end, 2 * len(self._storage), self.rate),
+                                 dtype=np.float32)
+                grown[:len(self._buf)] = self._buf
+                self._storage = grown
+            self._storage[len(self._buf):end] = chunk
+            self._buf = self._storage[:end]
             rms = float(np.sqrt(np.mean(chunk.astype(np.float32) ** 2)))
             self._peak = max(self._peak, rms)
             if rms > max(self._peak * 0.06, 1e-4):
@@ -159,6 +170,7 @@ class StreamingSTT:
             self._active = False
             self._generation += 1
             self._buf = np.zeros(0, dtype=np.float32)
+            self._storage = self._buf
             self._spec_text = None
             self._spec_requested = False
             self._cond.notify_all()
@@ -253,8 +265,12 @@ class StreamingSTT:
         with self._cond:
             self._active = False
             engine = self._engine
+            # capture this utterance's audio NOW: a concurrent start() for the
+            # next utterance must never swap the buffer out from under the
+            # authoritative decode while we wait for the worker
+            buf = self._buf
             local = engine is not None and getattr(engine, "backend", "") != "groq"
-            if local and self._spec_text is None and self._buf.size:
+            if local and self._spec_text is None and buf.size:
                 # no speculative decode yet: ask the worker for the authoritative
                 # one now; it may already be queued behind a partial
                 self._spec_requested = True
@@ -267,7 +283,6 @@ class StreamingSTT:
                 and time.perf_counter() < deadline
             ):
                 self._cond.wait(timeout=0.05)
-            buf = self._buf
             spec_text = self._spec_text
             if spec_text is not None:
                 # audio kept arriving after the speculative snapshot. Up to
@@ -278,7 +293,10 @@ class StreamingSTT:
                 if grew_s > self.endpoint_silence - self.speculate_after + 0.08:
                     spec_text = None
             partials = self._partials
+            # detach the store: ``buf`` may still be decoded outside the lock,
+            # and the next utterance must not overwrite samples mid-decode
             self._buf = np.zeros(0, dtype=np.float32)
+            self._storage = self._buf
             self._spec_text = None
             self._spec_requested = False
 

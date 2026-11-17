@@ -200,6 +200,10 @@ def _build_shared_tts(
     """Load (or fetch from cache) the sherpa-onnx voice for ``lang``."""
     import sherpa_onnx
 
+    if backend == "tiny":
+        # tiny runs on onnxruntime, not sherpa: its thread count comes from
+        # the explicit knob (0 = ORT default), not the sherpa num_threads arg
+        num_threads = config.TTS_NUM_THREADS
     key = (lang, backend, num_threads, provider, str(model_dir or ""))
     shared = _TTS_CACHE.get(key)
     if shared is not None:
@@ -216,7 +220,8 @@ def _build_shared_tts(
                 sys.path.insert(0, str(directory))
             from indic_tiny_tts import TinyTTSOnnx
 
-            tts = TinyTTSOnnx.from_pretrained(str(directory))
+            tts = TinyTTSOnnx.from_pretrained(
+                str(directory), threads=num_threads or None)
             shared = _SharedTTS(tts, int(tts.sample_rate), None)
         elif backend == "supertonic":
             source = config.SUPERTONIC_DIR

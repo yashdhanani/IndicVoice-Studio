@@ -38,6 +38,7 @@ import threading
 import time
 import urllib.parse
 from collections import deque
+from concurrent.futures import ThreadPoolExecutor
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -305,6 +306,7 @@ class CallSession:
         llm_backend: str | None = None,
         llm_model: str | None = None,
         streaming: bool = True,
+        asr_executor=None,
     ):
         self.ws = websocket
         self.loop = loop
@@ -312,6 +314,11 @@ class CallSession:
         self.echo_gate_db = echo_gate_db
         self.barge_in_seconds = barge_in_seconds
         self.out: queue.Queue = queue.Queue(maxsize=config.MAX_OUTBOUND_QUEUE)
+        #: dedicated decode pool (None = default executor, pre-V3 behaviour)
+        self._asr_executor = asr_executor
+        #: wakes sender() when a worker thread queues audio/events; replaces
+        #: the blocking executor poll that used to occupy a pool worker
+        self._wake = asyncio.Event()
         self.closed = False
         self.streaming = streaming
         #: pre-onset audio so the streaming recogniser never misses the first word
@@ -363,6 +370,19 @@ class CallSession:
             # client stopped draining audio: drop the call instead of
             # buffering unboundedly (B5 outbound queue cap)
             self.close()
+            return
+        self._signal()
+
+    def _signal(self) -> None:
+        """Wake sender() from any thread; tolerate a closed/absent loop."""
+        loop = getattr(self, "loop", None)
+        wake = getattr(self, "_wake", None)
+        if loop is None or wake is None:
+            return
+        try:
+            loop.call_soon_threadsafe(wake.set)
+        except RuntimeError:
+            pass
 
     def _emit_audio(self, audio: np.ndarray) -> None:
         if self.closed or audio.size == 0:
@@ -397,14 +417,22 @@ class CallSession:
             self._send_event({"type": "partial_transcript", "text": text})
 
     async def sender(self) -> None:
-        """Drain queued audio/events to the socket as fast as the client accepts."""
+        """Drain queued audio/events to the socket, woken by _signal().
+
+        Event-driven instead of a blocking executor poll: no pool worker is
+        held per session, so ASR decodes never queue behind audio delivery.
+        """
         while not self.closed:
             try:
-                item = await asyncio.get_running_loop().run_in_executor(None, self._get_item, 0.2)
-            except Exception:
-                continue
-            if item is None:
-                continue
+                item = self.out.get_nowait()
+            except queue.Empty:
+                self._wake.clear()
+                try:
+                    # re-check after clear: a put may have raced the clear
+                    item = self.out.get_nowait()
+                except queue.Empty:
+                    await self._wake.wait()
+                    continue
             try:
                 if isinstance(item, dict):
                     if "media" in item:
@@ -417,12 +445,6 @@ class CallSession:
             except Exception:
                 self.closed = True
                 return
-
-    def _get_item(self, timeout: float):
-        try:
-            return self.out.get(timeout=timeout)
-        except queue.Empty:
-            return None
 
     @staticmethod
     def _telephony_frames(payload_b64: str, frame_ms: int = 20):
@@ -507,11 +529,11 @@ class CallSession:
             try:
                 if self._streaming_active:
                     recognised, asr_info = await self.loop.run_in_executor(
-                        None, self.streamer.finalize
+                        self._asr_executor, self.streamer.finalize
                     )
                 else:
                     recognised = await self.loop.run_in_executor(
-                        None, self.agent.stt.transcribe, audio
+                        self._asr_executor, self.agent.stt.transcribe, audio
                     )
             except Exception as exc:                      # noqa: BLE001
                 # a cloud-ASR timeout or decode error must not drop the call
@@ -549,6 +571,7 @@ class CallSession:
             self.agent.player.cancel()
         except Exception:
             pass
+        self._signal()
 
 
 # --------------------------------------------------------------------------- #
@@ -724,6 +747,9 @@ def create_app(
     @asynccontextmanager
     async def lifespan(_app):
         probe = asyncio.create_task(_loop_lag_probe())
+        # dedicated decode pool: ASR never shares workers with other tasks
+        _app.state.asr_executor = ThreadPoolExecutor(
+            max_workers=max(1, config.ASR_WORKERS), thread_name_prefix="asr")
         try:
             yield
         finally:
@@ -732,6 +758,7 @@ def create_app(
                 await probe
             except asyncio.CancelledError:
                 pass
+            _app.state.asr_executor.shutdown(wait=False, cancel_futures=True)
 
     app = FastAPI(title="IndicVoice call server", lifespan=lifespan)
     #: live sessions per client IP; handlers run on one event loop, so a plain
@@ -777,7 +804,9 @@ def create_app(
             if not token or not hmac.compare_digest(token, config.ACCESS_TOKEN):
                 return JSONResponse({"error": "unauthorized"}, status_code=401)
         loop = asyncio.get_running_loop()
-        executor = getattr(loop, "_default_executor", None)
+        executor = getattr(app.state, "asr_executor", None)
+        if executor is None:
+            executor = getattr(loop, "_default_executor", None)
         asr_queue = executor._work_queue.qsize() if executor else 0
         queues = [s.out.qsize() for s in live_sessions]
         return JSONResponse({
@@ -875,6 +904,7 @@ def create_app(
             min_silence=min_silence or default_endpoint,
             llm_backend=llm_backend, llm_model=llm_model,
             streaming=streaming,
+            asr_executor=getattr(app.state, "asr_executor", None),
         )
         asyncio.create_task(session.sender())
 

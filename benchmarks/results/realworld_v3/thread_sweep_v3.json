@@ -1,0 +1,359 @@
+{
+  "benchmark": "thread_sweep_v3",
+  "started": "2026-11-17T16:58:28",
+  "machine": {
+    "platform": "win32",
+    "cpu_count_logical": 8,
+    "physical_cores": 4,
+    "model": "i7-8565U (15W laptop)",
+    "note": "IDE/webview background load present; recorded per block"
+  },
+  "runtime": {
+    "python": "3.13.18"
+  },
+  "config": {
+    "lang": "hi",
+    "repeats": 6,
+    "stt_threads": [
+      8,
+      4,
+      2,
+      1
+    ],
+    "tts_threads": [
+      0,
+      4,
+      2,
+      1
+    ]
+  },
+  "corpus": "TTS-synthesized starter clips (eval_data/), NOT real recordings",
+  "asr": [
+    {
+      "threads": 8,
+      "background_cpu_pct_before": 28.7,
+      "load_ms": 2786.0,
+      "rss_delta_mb": 233.9,
+      "decode_ms": {
+        "n": 18,
+        "p50": 351.8,
+        "p90": 676.1,
+        "p95": 912.2,
+        "max": 912.2,
+        "mean": 384.0
+      },
+      "per_clip": {
+        "hi_01": {
+          "n": 6,
+          "p50": 264.5,
+          "p90": 601.6,
+          "p95": 601.6,
+          "max": 601.6,
+          "mean": 312.7
+        },
+        "hi_02": {
+          "n": 6,
+          "p50": 675.4,
+          "p90": 912.2,
+          "p95": 912.2,
+          "max": 912.2,
+          "mean": 569.5
+        },
+        "hi_03": {
+          "n": 6,
+          "p50": 276.6,
+          "p90": 450.5,
+          "p95": 450.5,
+          "max": 450.5,
+          "mean": 269.6
+        }
+      },
+      "cpu_pct_during": 99.8,
+      "transcripts_identical_to_first_config": true,
+      "transcripts": {
+        "hi_01": "मेरा ऑर्डर नंबर एक दो तीन है",
+        "hi_02": "कल शाम तक डिलीवरी हो जाएगी",
+        "hi_03": "मेरा पता दिल्ली में है"
+      }
+    },
+    {
+      "threads": 4,
+      "background_cpu_pct_before": 30.8,
+      "load_ms": 2319.3,
+      "rss_delta_mb": 215.6,
+      "decode_ms": {
+        "n": 18,
+        "p50": 146.8,
+        "p90": 162.5,
+        "p95": 176.2,
+        "max": 176.2,
+        "mean": 139.9
+      },
+      "per_clip": {
+        "hi_01": {
+          "n": 6,
+          "p50": 155.6,
+          "p90": 176.2,
+          "p95": 176.2,
+          "max": 176.2,
+          "mean": 151.9
+        },
+        "hi_02": {
+          "n": 6,
+          "p50": 153.1,
+          "p90": 156.9,
+          "p95": 156.9,
+          "max": 156.9,
+          "mean": 150.4
+        },
+        "hi_03": {
+          "n": 6,
+          "p50": 117.6,
+          "p90": 129.7,
+          "p95": 129.7,
+          "max": 129.7,
+          "mean": 117.3
+        }
+      },
+      "cpu_pct_during": 77.2,
+      "transcripts_identical_to_first_config": true,
+      "transcripts": {
+        "hi_01": "मेरा ऑर्डर नंबर एक दो तीन है",
+        "hi_02": "कल शाम तक डिलीवरी हो जाएगी",
+        "hi_03": "मेरा पता दिल्ली में है"
+      }
+    },
+    {
+      "threads": 2,
+      "background_cpu_pct_before": 19.2,
+      "load_ms": 2462.0,
+      "rss_delta_mb": 214.6,
+      "decode_ms": {
+        "n": 18,
+        "p50": 226.5,
+        "p90": 246.3,
+        "p95": 246.8,
+        "max": 246.8,
+        "mean": 213.5
+      },
+      "per_clip": {
+        "hi_01": {
+          "n": 6,
+          "p50": 241.2,
+          "p90": 246.8,
+          "p95": 246.8,
+          "max": 246.8,
+          "mean": 237.4
+        },
+        "hi_02": {
+          "n": 6,
+          "p50": 226.5,
+          "p90": 236.3,
+          "p95": 236.3,
+          "max": 236.3,
+          "mean": 221.4
+        },
+        "hi_03": {
+          "n": 6,
+          "p50": 180.7,
+          "p90": 194.8,
+          "p95": 194.8,
+          "max": 194.8,
+          "mean": 181.8
+        }
+      },
+      "cpu_pct_during": 56.6,
+      "transcripts_identical_to_first_config": true,
+      "transcripts": {
+        "hi_01": "मेरा ऑर्डर नंबर एक दो तीन है",
+        "hi_02": "कल शाम तक डिलीवरी हो जाएगी",
+        "hi_03": "मेरा पता दिल्ली में है"
+      }
+    },
+    {
+      "threads": 1,
+      "background_cpu_pct_before": 30.1,
+      "load_ms": 2549.5,
+      "rss_delta_mb": 216.1,
+      "decode_ms": {
+        "n": 18,
+        "p50": 362.3,
+        "p90": 389.1,
+        "p95": 573.6,
+        "max": 573.6,
+        "mean": 351.5
+      },
+      "per_clip": {
+        "hi_01": {
+          "n": 6,
+          "p50": 380.8,
+          "p90": 389.1,
+          "p95": 389.1,
+          "max": 389.1,
+          "mean": 373.8
+        },
+        "hi_02": {
+          "n": 6,
+          "p50": 367.7,
+          "p90": 573.6,
+          "p95": 573.6,
+          "max": 573.6,
+          "mean": 398.8
+        },
+        "hi_03": {
+          "n": 6,
+          "p50": 280.0,
+          "p90": 308.2,
+          "p95": 308.2,
+          "max": 308.2,
+          "mean": 281.9
+        }
+      },
+      "cpu_pct_during": 47.1,
+      "transcripts_identical_to_first_config": true,
+      "transcripts": {
+        "hi_01": "मेरा ऑर्डर नंबर एक दो तीन है",
+        "hi_02": "कल शाम तक डिलीवरी हो जाएगी",
+        "hi_03": "मेरा पता दिल्ली में है"
+      }
+    }
+  ],
+  "tts": [
+    {
+      "threads": "ort-default",
+      "background_cpu_pct_before": 27.9,
+      "load_ms": 552.8,
+      "rss_delta_mb": 98.9,
+      "synth_ms": {
+        "n": 6,
+        "p50": 672.8,
+        "p90": 992.2,
+        "p95": 992.2,
+        "max": 992.2,
+        "mean": 718.4
+      },
+      "audio_s_mean": 6.16,
+      "rtf_p50": 0.109,
+      "cpu_pct_during": 98.5
+    },
+    {
+      "threads": 4,
+      "background_cpu_pct_before": 46.5,
+      "load_ms": 525.8,
+      "rss_delta_mb": 94.7,
+      "synth_ms": {
+        "n": 6,
+        "p50": 657.0,
+        "p90": 697.0,
+        "p95": 697.0,
+        "max": 697.0,
+        "mean": 650.0
+      },
+      "audio_s_mean": 6.16,
+      "rtf_p50": 0.107,
+      "cpu_pct_during": 97.3
+    },
+    {
+      "threads": 2,
+      "background_cpu_pct_before": 17.2,
+      "load_ms": 622.0,
+      "rss_delta_mb": 94.9,
+      "synth_ms": {
+        "n": 6,
+        "p50": 607.6,
+        "p90": 668.3,
+        "p95": 668.3,
+        "max": 668.3,
+        "mean": 587.9
+      },
+      "audio_s_mean": 6.16,
+      "rtf_p50": 0.099,
+      "cpu_pct_during": 57.9
+    },
+    {
+      "threads": 1,
+      "background_cpu_pct_before": 21.7,
+      "load_ms": 422.0,
+      "rss_delta_mb": 94.7,
+      "synth_ms": {
+        "n": 6,
+        "p50": 780.8,
+        "p90": 871.2,
+        "p95": 871.2,
+        "max": 871.2,
+        "mean": 770.0
+      },
+      "audio_s_mean": 6.16,
+      "rtf_p50": 0.127,
+      "cpu_pct_during": 28.3
+    }
+  ],
+  "contention": [
+    {
+      "stt_threads": 8,
+      "tts_threads": "ort-default",
+      "background_cpu_pct_before": 31.5,
+      "asr_ms_under_contention": {
+        "n": 18,
+        "p50": 577.1,
+        "p90": 1210.2,
+        "p95": 1457.3,
+        "max": 1457.3,
+        "mean": 677.3
+      },
+      "tts_ms_under_contention": {
+        "n": 6,
+        "p50": 1704.8,
+        "p90": 2922.6,
+        "p95": 2922.6,
+        "max": 2922.6,
+        "mean": 1851.9
+      },
+      "cpu_pct_during": 100.0
+    },
+    {
+      "stt_threads": 4,
+      "tts_threads": 2,
+      "background_cpu_pct_before": 77.6,
+      "asr_ms_under_contention": {
+        "n": 22,
+        "p50": 269.0,
+        "p90": 412.8,
+        "p95": 480.2,
+        "max": 490.2,
+        "mean": 293.1
+      },
+      "tts_ms_under_contention": {
+        "n": 6,
+        "p50": 1083.5,
+        "p90": 1405.0,
+        "p95": 1405.0,
+        "max": 1405.0,
+        "mean": 1060.7
+      },
+      "cpu_pct_during": 99.7
+    },
+    {
+      "stt_threads": 2,
+      "tts_threads": 2,
+      "background_cpu_pct_before": 19.4,
+      "asr_ms_under_contention": {
+        "n": 18,
+        "p50": 224.7,
+        "p90": 235.2,
+        "p95": 270.0,
+        "max": 270.0,
+        "mean": 206.5
+      },
+      "tts_ms_under_contention": {
+        "n": 6,
+        "p50": 628.5,
+        "p90": 687.9,
+        "p95": 687.9,
+        "max": 687.9,
+        "mean": 590.5
+      },
+      "cpu_pct_during": 70.6
+    }
+  ]
+}

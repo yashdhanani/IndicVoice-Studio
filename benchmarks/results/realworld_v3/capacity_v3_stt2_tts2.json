@@ -1,0 +1,1302 @@
+{
+  "benchmark": "capacity_v2",
+  "started": "2026-11-17T17:09:32",
+  "machine": {
+    "platform": "win32",
+    "cpu_count": 8
+  },
+  "config": {
+    "lang": "hi",
+    "levels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "turns_per_session": 3,
+    "cooldown_s": 8.0,
+    "note": "level 10 excluded by default on the 4-core/15W reference laptop"
+  },
+  "corpus": "TTS-synthesized starter clips (eval_data/), NOT real recordings",
+  "llm": {
+    "backend": "groq",
+    "model": "openai/gpt-oss-20b",
+    "ready": true
+  },
+  "server_rss": {
+    "available": true,
+    "peak_mb": 813.3,
+    "final_mb": 812.9,
+    "samples": 56
+  },
+  "rss_series_mb": [
+    [
+      0.0,
+      469.5
+    ],
+    [
+      2.1,
+      487.6
+    ],
+    [
+      4.1,
+      498.6
+    ],
+    [
+      6.1,
+      543.9
+    ],
+    [
+      8.1,
+      551.6
+    ],
+    [
+      10.1,
+      551.7
+    ],
+    [
+      12.1,
+      554.1
+    ],
+    [
+      14.1,
+      563.0
+    ],
+    [
+      16.1,
+      563.7
+    ],
+    [
+      18.1,
+      565.8
+    ],
+    [
+      20.1,
+      581.1
+    ],
+    [
+      22.2,
+      581.1
+    ],
+    [
+      24.2,
+      581.1
+    ],
+    [
+      26.2,
+      581.1
+    ],
+    [
+      28.2,
+      595.0
+    ],
+    [
+      30.2,
+      595.6
+    ],
+    [
+      32.2,
+      597.6
+    ],
+    [
+      34.2,
+      600.8
+    ],
+    [
+      36.2,
+      605.9
+    ],
+    [
+      38.2,
+      615.5
+    ],
+    [
+      40.2,
+      624.2
+    ],
+    [
+      42.3,
+      624.5
+    ],
+    [
+      44.3,
+      628.3
+    ],
+    [
+      46.3,
+      627.9
+    ],
+    [
+      48.3,
+      627.9
+    ],
+    [
+      50.3,
+      627.9
+    ],
+    [
+      52.3,
+      627.9
+    ],
+    [
+      54.3,
+      626.5
+    ],
+    [
+      56.3,
+      627.4
+    ],
+    [
+      58.3,
+      641.6
+    ],
+    [
+      60.3,
+      645.2
+    ],
+    [
+      62.3,
+      651.5
+    ],
+    [
+      64.3,
+      660.0
+    ],
+    [
+      66.3,
+      677.2
+    ],
+    [
+      68.3,
+      677.3
+    ],
+    [
+      70.3,
+      680.9
+    ],
+    [
+      72.4,
+      684.8
+    ],
+    [
+      74.4,
+      684.6
+    ],
+    [
+      76.4,
+      684.6
+    ],
+    [
+      78.4,
+      684.6
+    ],
+    [
+      80.4,
+      684.6
+    ],
+    [
+      82.4,
+      719.9
+    ],
+    [
+      84.4,
+      722.1
+    ],
+    [
+      86.4,
+      725.9
+    ],
+    [
+      88.4,
+      742.5
+    ],
+    [
+      90.4,
+      769.6
+    ],
+    [
+      92.4,
+      770.8
+    ],
+    [
+      94.4,
+      795.3
+    ],
+    [
+      96.4,
+      807.9
+    ],
+    [
+      98.5,
+      812.3
+    ],
+    [
+      100.5,
+      812.3
+    ],
+    [
+      102.5,
+      813.3
+    ],
+    [
+      104.5,
+      813.1
+    ],
+    [
+      106.5,
+      812.9
+    ],
+    [
+      108.5,
+      812.9
+    ],
+    [
+      110.5,
+      812.9
+    ]
+  ],
+  "levels": [
+    {
+      "level": 1,
+      "turns_total": 3,
+      "turns_ok": 3,
+      "success_rate": 1.0,
+      "wall_s": 19.9,
+      "e2e_client_ms": {
+        "n": 3,
+        "min": 1067.7,
+        "p50": 1157.9,
+        "p90": 1696.3,
+        "p95": 1696.3,
+        "max": 1696.3,
+        "mean": 1307.3
+      },
+      "first_audio_ms": {
+        "n": 3,
+        "min": 746.1,
+        "p50": 843.8,
+        "p90": 1390.0,
+        "p95": 1390.0,
+        "max": 1390.0,
+        "mean": 993.3
+      },
+      "asr_ms": {
+        "n": 3,
+        "min": 0.7,
+        "p50": 433.7,
+        "p90": 711.3,
+        "p95": 711.3,
+        "max": 711.3,
+        "mean": 381.9
+      },
+      "errors": [],
+      "turns": [
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 1,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1157.9,
+          "asr_ms": 433.7,
+          "llm_ms": 597.9,
+          "tts_ms": 231.4,
+          "first_audio_ms": 843.8,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 2,
+          "audio_s": 1.97,
+          "e2e_client_ms": 1067.7,
+          "asr_ms": 0.7,
+          "llm_ms": 577.6,
+          "tts_ms": 146.8,
+          "first_audio_ms": 746.1,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 3,
+          "audio_s": 1.58,
+          "e2e_client_ms": 1696.3,
+          "asr_ms": 711.3,
+          "llm_ms": 1170.4,
+          "tts_ms": 219.1,
+          "first_audio_ms": 1390.0,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 0
+        }
+      ],
+      "cpu": {
+        "available": true,
+        "peak_pct": 98.6,
+        "mean_pct": 64.5,
+        "samples": 19
+      },
+      "cpu_series": [
+        [
+          1.0,
+          72.1
+        ],
+        [
+          2.0,
+          77.5
+        ],
+        [
+          3.0,
+          98.6
+        ],
+        [
+          4.0,
+          82.5
+        ],
+        [
+          5.0,
+          62.1
+        ],
+        [
+          6.1,
+          78.1
+        ],
+        [
+          7.1,
+          61.0
+        ],
+        [
+          8.1,
+          30.3
+        ],
+        [
+          9.1,
+          39.8
+        ],
+        [
+          10.1,
+          67.0
+        ],
+        [
+          11.1,
+          53.7
+        ],
+        [
+          12.1,
+          73.6
+        ],
+        [
+          13.1,
+          76.7
+        ],
+        [
+          14.1,
+          32.8
+        ],
+        [
+          15.1,
+          40.4
+        ],
+        [
+          16.2,
+          43.3
+        ],
+        [
+          17.2,
+          94.0
+        ],
+        [
+          18.3,
+          78.9
+        ],
+        [
+          19.3,
+          62.7
+        ]
+      ],
+      "metrics_peaks": {
+        "available": true,
+        "samples": 19,
+        "peak_active_sessions": 1,
+        "peak_outbound_queue_total": 0,
+        "peak_outbound_queue_max": 0,
+        "peak_asr_executor_queue": 0,
+        "peak_event_loop_delay_ms": 107.21
+      },
+      "peak_event_loop_delay_ms": 107.21,
+      "safe": false
+    },
+    {
+      "level": 2,
+      "turns_total": 6,
+      "turns_ok": 6,
+      "success_rate": 1.0,
+      "wall_s": 17.2,
+      "e2e_client_ms": {
+        "n": 6,
+        "min": 685.6,
+        "p50": 1636.4,
+        "p90": 1728.1,
+        "p95": 1728.1,
+        "max": 1728.1,
+        "mean": 1276.2
+      },
+      "first_audio_ms": {
+        "n": 6,
+        "min": 377.4,
+        "p50": 1285.4,
+        "p90": 1418.3,
+        "p95": 1418.3,
+        "max": 1418.3,
+        "mean": 957.1
+      },
+      "asr_ms": {
+        "n": 6,
+        "min": 0.6,
+        "p50": 374.2,
+        "p90": 569.9,
+        "p95": 569.9,
+        "max": 569.9,
+        "mean": 220.6
+      },
+      "errors": [],
+      "turns": [
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 1,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1728.1,
+          "asr_ms": 569.9,
+          "llm_ms": 1101.2,
+          "tts_ms": 291.6,
+          "first_audio_ms": 1418.3,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 2,
+          "audio_s": 1.97,
+          "e2e_client_ms": 857.7,
+          "asr_ms": 0.6,
+          "llm_ms": 429.7,
+          "tts_ms": 99.5,
+          "first_audio_ms": 547.3,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 3,
+          "audio_s": 1.58,
+          "e2e_client_ms": 1636.4,
+          "asr_ms": 0.9,
+          "llm_ms": 954.2,
+          "tts_ms": 349.9,
+          "first_audio_ms": 1315.2,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 1,
+          "audio_s": 1.97,
+          "e2e_client_ms": 1099.7,
+          "asr_ms": 374.2,
+          "llm_ms": 639.3,
+          "tts_ms": 116.5,
+          "first_audio_ms": 798.9,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 2,
+          "audio_s": 1.58,
+          "e2e_client_ms": 685.6,
+          "asr_ms": 1.2,
+          "llm_ms": 271.4,
+          "tts_ms": 102.3,
+          "first_audio_ms": 377.4,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 3,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1649.8,
+          "asr_ms": 376.8,
+          "llm_ms": 1165.8,
+          "tts_ms": 104.3,
+          "first_audio_ms": 1285.4,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 1
+        }
+      ],
+      "cpu": {
+        "available": true,
+        "peak_pct": 81.5,
+        "mean_pct": 46.9,
+        "samples": 17
+      },
+      "cpu_series": [
+        [
+          1.0,
+          20.1
+        ],
+        [
+          2.0,
+          23.3
+        ],
+        [
+          3.0,
+          50.4
+        ],
+        [
+          4.0,
+          81.5
+        ],
+        [
+          5.0,
+          77.9
+        ],
+        [
+          6.0,
+          45.2
+        ],
+        [
+          7.0,
+          27.8
+        ],
+        [
+          8.1,
+          41.9
+        ],
+        [
+          9.1,
+          54.9
+        ],
+        [
+          10.1,
+          51.3
+        ],
+        [
+          11.1,
+          51.9
+        ],
+        [
+          12.1,
+          34.0
+        ],
+        [
+          13.1,
+          29.3
+        ],
+        [
+          14.1,
+          67.4
+        ],
+        [
+          15.1,
+          55.0
+        ],
+        [
+          16.1,
+          54.0
+        ],
+        [
+          17.2,
+          30.8
+        ]
+      ],
+      "metrics_peaks": {
+        "available": true,
+        "samples": 17,
+        "peak_active_sessions": 2,
+        "peak_outbound_queue_total": 0,
+        "peak_outbound_queue_max": 0,
+        "peak_asr_executor_queue": 0,
+        "peak_event_loop_delay_ms": 58.93
+      },
+      "peak_event_loop_delay_ms": 58.93
+    },
+    {
+      "level": 3,
+      "turns_total": 9,
+      "turns_ok": 9,
+      "success_rate": 1.0,
+      "wall_s": 19.5,
+      "e2e_client_ms": {
+        "n": 9,
+        "min": 608.6,
+        "p50": 1304.1,
+        "p90": 2930.6,
+        "p95": 2930.6,
+        "max": 2930.6,
+        "mean": 1508.0
+      },
+      "first_audio_ms": {
+        "n": 9,
+        "min": 294.1,
+        "p50": 1006.7,
+        "p90": 2605.1,
+        "p95": 2605.1,
+        "max": 2605.1,
+        "mean": 1184.8
+      },
+      "asr_ms": {
+        "n": 9,
+        "min": 0.5,
+        "p50": 421.7,
+        "p90": 567.7,
+        "p95": 567.7,
+        "max": 567.7,
+        "mean": 317.3
+      },
+      "errors": [],
+      "turns": [
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 1,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1621.1,
+          "asr_ms": 429.4,
+          "llm_ms": 908.0,
+          "tts_ms": 304.2,
+          "first_audio_ms": 1239.3,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 2,
+          "audio_s": 1.97,
+          "e2e_client_ms": 1172.6,
+          "asr_ms": 1.6,
+          "llm_ms": 662.3,
+          "tts_ms": 123.6,
+          "first_audio_ms": 852.5,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 3,
+          "audio_s": 1.58,
+          "e2e_client_ms": 1921.5,
+          "asr_ms": 567.7,
+          "llm_ms": 1485.4,
+          "tts_ms": 147.5,
+          "first_audio_ms": 1637.0,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 1,
+          "audio_s": 1.97,
+          "e2e_client_ms": 2930.6,
+          "asr_ms": 447.7,
+          "llm_ms": 2433.0,
+          "tts_ms": 141.8,
+          "first_audio_ms": 2605.1,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 2,
+          "audio_s": 1.58,
+          "e2e_client_ms": 1230.1,
+          "asr_ms": 201.2,
+          "llm_ms": 702.8,
+          "tts_ms": 140.2,
+          "first_audio_ms": 862.2,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 3,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1509.1,
+          "asr_ms": 455.9,
+          "llm_ms": 860.2,
+          "tts_ms": 283.7,
+          "first_audio_ms": 1196.8,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 1,
+          "audio_s": 1.58,
+          "e2e_client_ms": 608.6,
+          "asr_ms": 0.5,
+          "llm_ms": 163.1,
+          "tts_ms": 127.4,
+          "first_audio_ms": 294.1,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 2
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 2,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1274.3,
+          "asr_ms": 421.7,
+          "llm_ms": 846.5,
+          "tts_ms": 105.8,
+          "first_audio_ms": 969.7,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 2
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 3,
+          "audio_s": 1.97,
+          "e2e_client_ms": 1304.1,
+          "asr_ms": 330.3,
+          "llm_ms": 860.0,
+          "tts_ms": 138.1,
+          "first_audio_ms": 1006.7,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 2
+        }
+      ],
+      "cpu": {
+        "available": true,
+        "peak_pct": 88.1,
+        "mean_pct": 60.5,
+        "samples": 19
+      },
+      "cpu_series": [
+        [
+          1.0,
+          33.6
+        ],
+        [
+          2.0,
+          33.4
+        ],
+        [
+          3.0,
+          51.0
+        ],
+        [
+          4.0,
+          78.9
+        ],
+        [
+          5.0,
+          47.7
+        ],
+        [
+          6.0,
+          56.1
+        ],
+        [
+          7.0,
+          53.8
+        ],
+        [
+          8.0,
+          37.7
+        ],
+        [
+          9.0,
+          49.0
+        ],
+        [
+          10.1,
+          70.2
+        ],
+        [
+          11.1,
+          88.1
+        ],
+        [
+          12.1,
+          76.4
+        ],
+        [
+          13.1,
+          51.6
+        ],
+        [
+          14.1,
+          78.1
+        ],
+        [
+          15.1,
+          81.0
+        ],
+        [
+          16.1,
+          82.5
+        ],
+        [
+          17.1,
+          78.3
+        ],
+        [
+          18.1,
+          61.3
+        ],
+        [
+          19.1,
+          41.2
+        ]
+      ],
+      "metrics_peaks": {
+        "available": true,
+        "samples": 19,
+        "peak_active_sessions": 3,
+        "peak_outbound_queue_total": 0,
+        "peak_outbound_queue_max": 0,
+        "peak_asr_executor_queue": 0,
+        "peak_event_loop_delay_ms": 157.18
+      },
+      "peak_event_loop_delay_ms": 157.18
+    },
+    {
+      "level": 5,
+      "turns_total": 15,
+      "turns_ok": 15,
+      "success_rate": 1.0,
+      "wall_s": 22.5,
+      "e2e_client_ms": {
+        "n": 15,
+        "min": 1302.8,
+        "p50": 1983.8,
+        "p90": 2826.4,
+        "p95": 2844.7,
+        "max": 2844.7,
+        "mean": 2063.7
+      },
+      "first_audio_ms": {
+        "n": 15,
+        "min": 995.2,
+        "p50": 1657.1,
+        "p90": 2487.6,
+        "p95": 2522.9,
+        "max": 2522.9,
+        "mean": 1721.2
+      },
+      "asr_ms": {
+        "n": 15,
+        "min": 2.6,
+        "p50": 628.3,
+        "p90": 1050.6,
+        "p95": 1230.2,
+        "max": 1230.2,
+        "mean": 605.3
+      },
+      "errors": [],
+      "turns": [
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 1,
+          "audio_s": 2.2,
+          "e2e_client_ms": 2844.7,
+          "asr_ms": 1050.6,
+          "llm_ms": 1563.6,
+          "tts_ms": 925.4,
+          "first_audio_ms": 2522.9,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 2,
+          "audio_s": 1.97,
+          "e2e_client_ms": 1983.8,
+          "asr_ms": 69.7,
+          "llm_ms": 371.7,
+          "tts_ms": 1276.2,
+          "first_audio_ms": 1657.1,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 3,
+          "audio_s": 1.58,
+          "e2e_client_ms": 2599.1,
+          "asr_ms": 818.8,
+          "llm_ms": 1269.8,
+          "tts_ms": 988.4,
+          "first_audio_ms": 2273.0,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 0
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 1,
+          "audio_s": 1.97,
+          "e2e_client_ms": 2541.5,
+          "asr_ms": 2.6,
+          "llm_ms": 1376.6,
+          "tts_ms": 847.1,
+          "first_audio_ms": 2234.5,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 2,
+          "audio_s": 1.58,
+          "e2e_client_ms": 1938.0,
+          "asr_ms": 950.7,
+          "llm_ms": 1139.2,
+          "tts_ms": 462.8,
+          "first_audio_ms": 1615.1,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 3,
+          "audio_s": 2.2,
+          "e2e_client_ms": 2012.7,
+          "asr_ms": 869.6,
+          "llm_ms": 1403.5,
+          "tts_ms": 265.2,
+          "first_audio_ms": 1686.7,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 1
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 1,
+          "audio_s": 1.58,
+          "e2e_client_ms": 1936.2,
+          "asr_ms": 628.3,
+          "llm_ms": 1256.7,
+          "tts_ms": 317.8,
+          "first_audio_ms": 1589.8,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 2
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 2,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1819.1,
+          "asr_ms": 814.2,
+          "llm_ms": 1241.3,
+          "tts_ms": 239.5,
+          "first_audio_ms": 1507.0,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 2
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 3,
+          "audio_s": 1.97,
+          "e2e_client_ms": 1647.9,
+          "asr_ms": 391.4,
+          "llm_ms": 884.1,
+          "tts_ms": 431.1,
+          "first_audio_ms": 1321.2,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 2
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 1,
+          "audio_s": 2.2,
+          "e2e_client_ms": 2826.4,
+          "asr_ms": 1230.2,
+          "llm_ms": 1653.1,
+          "tts_ms": 815.7,
+          "first_audio_ms": 2487.6,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 3
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 2,
+          "audio_s": 1.97,
+          "e2e_client_ms": 2322.5,
+          "asr_ms": 171.6,
+          "llm_ms": 358.8,
+          "tts_ms": 1627.9,
+          "first_audio_ms": 1990.4,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 3
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 3,
+          "audio_s": 1.58,
+          "e2e_client_ms": 2148.3,
+          "asr_ms": 856.8,
+          "llm_ms": 1024.7,
+          "tts_ms": 810.9,
+          "first_audio_ms": 1842.9,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 3
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_02.wav",
+          "turn": 1,
+          "audio_s": 1.97,
+          "e2e_client_ms": 1302.8,
+          "asr_ms": 279.2,
+          "llm_ms": 773.4,
+          "tts_ms": 218.4,
+          "first_audio_ms": 995.2,
+          "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+          "asr_strategy": "speculative",
+          "ok": true,
+          "session": 4
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_03.wav",
+          "turn": 2,
+          "audio_s": 1.58,
+          "e2e_client_ms": 1409.1,
+          "asr_ms": 388.4,
+          "llm_ms": 890.0,
+          "tts_ms": 189.6,
+          "first_audio_ms": 1088.6,
+          "transcript": "मेरा पता दिल्ली में है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 4
+        },
+        {
+          "lang": "hi",
+          "clip": "hi_01.wav",
+          "turn": 3,
+          "audio_s": 2.2,
+          "e2e_client_ms": 1624.0,
+          "asr_ms": 557.8,
+          "llm_ms": 850.6,
+          "tts_ms": 142.3,
+          "first_audio_ms": 1005.3,
+          "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+          "asr_strategy": "full",
+          "ok": true,
+          "session": 4
+        }
+      ],
+      "cpu": {
+        "available": true,
+        "peak_pct": 100.0,
+        "mean_pct": 85.4,
+        "samples": 22
+      },
+      "cpu_series": [
+        [
+          1.0,
+          47.5
+        ],
+        [
+          2.0,
+          73.8
+        ],
+        [
+          3.0,
+          78.3
+        ],
+        [
+          4.0,
+          53.7
+        ],
+        [
+          5.0,
+          89.8
+        ],
+        [
+          6.0,
+          78.7
+        ],
+        [
+          7.1,
+          86.1
+        ],
+        [
+          8.1,
+          86.0
+        ],
+        [
+          9.1,
+          95.6
+        ],
+        [
+          10.1,
+          100.0
+        ],
+        [
+          11.1,
+          90.6
+        ],
+        [
+          12.1,
+          81.3
+        ],
+        [
+          13.1,
+          99.6
+        ],
+        [
+          14.1,
+          97.7
+        ],
+        [
+          15.1,
+          100.0
+        ],
+        [
+          16.2,
+          100.0
+        ],
+        [
+          17.2,
+          99.4
+        ],
+        [
+          18.2,
+          99.8
+        ],
+        [
+          19.2,
+          100.0
+        ],
+        [
+          20.2,
+          97.3
+        ],
+        [
+          21.2,
+          78.7
+        ],
+        [
+          22.2,
+          43.8
+        ]
+      ],
+      "metrics_peaks": {
+        "available": true,
+        "samples": 21,
+        "peak_active_sessions": 5,
+        "peak_outbound_queue_total": 0,
+        "peak_outbound_queue_max": 0,
+        "peak_asr_executor_queue": 0,
+        "peak_event_loop_delay_ms": 167.21
+      },
+      "peak_event_loop_delay_ms": 167.21
+    }
+  ],
+  "post_load": {
+    "active_sessions": 0,
+    "cleanup_ok": true,
+    "recovery_turn_ok": true,
+    "recovery_e2e_ms": 2590.3
+  },
+  "capacity_recommendation": {
+    "recommended_max_concurrency": 0,
+    "measured_levels": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "safe_levels": [],
+    "basis": "highest contiguous level with 100% turn success, event-loop delay <250 ms and CPU peak <95%",
+    "note": "conservative; not extrapolated beyond measured levels. Reference machine is a 4-core/15 W laptop."
+  }
+}

@@ -308,8 +308,22 @@ LLM_REASONING_EFFORT = os.environ.get("INDICVOICE_REASONING_EFFORT", "low")
 LLM_PRIMARY_MODEL = os.environ.get("INDICVOICE_LLM_MODEL", "openai/gpt-oss-20b")
 LLM_FALLBACK_MODELS: tuple[str, ...] = ()
 
-#: IndicConformer decoding threads (an i7 with 8 cores does ~20-30% better on 8).
-STT_NUM_THREADS = max(2, min(8, os.cpu_count() or 4))
+#: IndicConformer decoding threads. V3 Phase B live matrix on the reference
+#: i7-8565U (4 physical cores): STT=4/TTS=2 gave the best tail latency and
+#: loop health at 1-5 sessions; STT=8 oversubscribes, STT=2 decoded slower
+#: live despite winning the isolated microbench. Override with
+#: INDICVOICE_STT_THREADS (exact pre-V3 rollback: 8).
+STT_NUM_THREADS = int(os.environ.get(
+    "INDICVOICE_STT_THREADS", str(max(2, min(4, os.cpu_count() or 4)))))
+
+#: Indic Tiny TTS onnxruntime intra-op threads. V3 Phase B measured best: 2.
+#: 0 = onnxruntime default (all cores, the pre-V3 behaviour; rollback value).
+#: Override with INDICVOICE_TTS_THREADS.
+TTS_NUM_THREADS = int(os.environ.get("INDICVOICE_TTS_THREADS", "2"))
+
+#: Dedicated ASR decode pool size, separate from the default executor so
+#: outbound-audio work can never queue behind a decode (V3 Phase B).
+ASR_WORKERS = int(os.environ.get("INDICVOICE_ASR_WORKERS", "2"))
 
 #: Optional wav2vec2-CTC ONNX export (see colab/assamese_asr_export.ipynb).
 #: When present it is used for Assamese instead of the Bengali Conformer.
