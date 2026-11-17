@@ -78,6 +78,17 @@ class TestStreamingSTT(unittest.TestCase):
         self.assertEqual(text, "")
         self.assertEqual(info["strategy"], "empty")
 
+    def test_max_buffer_cap(self):
+        streamer = StreamingSTT(max_buffer=1.0)
+        try:
+            streamer.start(FakeEngine())
+            feed(streamer, loud(2.0))
+            self.assertEqual(len(streamer._buf), RATE)
+            text, _ = streamer.finalize()
+            self.assertEqual(text, "hello world")
+        finally:
+            streamer.close()
+
     def test_speculative_finalize(self):
         engine = FakeEngine()
         self.streamer.start(engine)

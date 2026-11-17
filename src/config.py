@@ -286,6 +286,17 @@ ALLOWED_ORIGINS = tuple(
 #: A call with no audio in either direction for this long is closed (4408).
 SESSION_IDLE_SECONDS = float(os.environ.get("INDICVOICE_IDLE_TIMEOUT", "180"))
 
+#: Abuse caps (Hardening V1 B5). Utterances longer than MAX_UTTERANCE_SECONDS
+#: are truncated (with a warning event); calls older than MAX_SESSION_SECONDS
+#: are closed (4410); a client that stops draining audio is dropped once the
+#: outbound queue holds MAX_OUTBOUND_QUEUE items.
+MAX_UTTERANCE_SECONDS = float(os.environ.get("INDICVOICE_MAX_UTTERANCE", "60"))
+MAX_SESSION_SECONDS = float(os.environ.get("INDICVOICE_MAX_SESSION", "1800"))
+MAX_OUTBOUND_QUEUE = int(os.environ.get("INDICVOICE_MAX_QUEUE", "4096"))
+
+#: Lifetime of a one-time ?ticket= issued by POST /auth/ticket (B2).
+TICKET_TTL_SECONDS = float(os.environ.get("INDICVOICE_TICKET_TTL", "60"))
+
 #: gpt-oss spends most of its first-token time "thinking". "low" halves latency
 #: (715 ms -> 362 ms measured) and keeps the short replies just as good.
 LLM_REASONING_EFFORT = os.environ.get("INDICVOICE_REASONING_EFFORT", "low")

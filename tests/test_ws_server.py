@@ -8,6 +8,7 @@ watchdog (4408).
 import asyncio
 import base64
 import json
+import queue
 import threading
 import time
 import unittest
@@ -306,6 +307,92 @@ class WSTests(unittest.IsolatedAsyncioTestCase):
             await asyncio.sleep(0.3)
             self.assertFalse(ws.closed)
             await ws.close()
+
+    # -- Production Hardening V1: B1/B2/B5 ----------------------------------- #
+
+    async def test_empty_and_invalid_token_rejected(self):
+        with mock.patch.object(config, "ACCESS_TOKEN", "test-secret-token"):
+            await self._expect_close("/ws/voice?lang=hi&token=", 4401)
+            await self._expect_close("/ws/voice?lang=hi&token=wrong", 4401)
+
+    async def _post_ticket(self, session, headers=None):
+        return await session.post(
+            f"http://127.0.0.1:{self.port}/auth/ticket", headers=headers or {})
+
+    async def test_ticket_endpoint_auth(self):
+        with mock.patch.object(config, "ACCESS_TOKEN", "test-secret-token"):
+            async with aiohttp.ClientSession() as session:
+                r = await self._post_ticket(session)
+                self.assertEqual(r.status, 401)
+                r = await self._post_ticket(
+                    session, {"Authorization": "Bearer wrong"})
+                self.assertEqual(r.status, 401)
+                r = await self._post_ticket(
+                    session, {"Authorization": "Bearer test-secret-token"})
+                self.assertEqual(r.status, 200)
+                body = await r.json()
+                self.assertTrue(body["ticket"])
+                self.assertGreater(body["expires_in"], 0)
+
+    async def test_ticket_single_use(self):
+        with mock.patch.object(config, "ACCESS_TOKEN", "test-secret-token"):
+            async with aiohttp.ClientSession() as session:
+                r = await self._post_ticket(
+                    session, {"Authorization": "Bearer test-secret-token"})
+                ticket = (await r.json())["ticket"]
+                ws = await session.ws_connect(
+                    self.base + f"/ws/voice?lang=hi&ticket={ticket}")
+                await ws.send_bytes(b"\x00" * 640)
+                await asyncio.sleep(0.3)
+                self.assertFalse(ws.closed)
+                await ws.close()
+            # the same ticket must not open a second session
+            await self._expect_close(f"/ws/voice?lang=hi&ticket={ticket}", 4401)
+
+    async def test_expired_ticket_rejected(self):
+        with mock.patch.object(config, "ACCESS_TOKEN", "test-secret-token"), \
+                mock.patch.object(config, "TICKET_TTL_SECONDS", 0.0):
+            async with aiohttp.ClientSession() as session:
+                r = await self._post_ticket(
+                    session, {"Authorization": "Bearer test-secret-token"})
+                ticket = (await r.json())["ticket"]
+            await self._expect_close(f"/ws/voice?lang=hi&ticket={ticket}", 4401)
+
+    async def test_ticket_endpoint_needs_token_configured(self):
+        with mock.patch.object(config, "ACCESS_TOKEN", ""):
+            async with aiohttp.ClientSession() as session:
+                r = await self._post_ticket(
+                    session, {"Authorization": "Bearer anything"})
+                self.assertEqual(r.status, 400)
+
+    async def test_health_reports_auth_mode(self):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(f"http://127.0.0.1:{self.port}/health") as r:
+                self.assertEqual((await r.json())["auth"], "open-dev")
+            with mock.patch.object(config, "ACCESS_TOKEN", "x"):
+                async with session.get(f"http://127.0.0.1:{self.port}/health") as r:
+                    self.assertEqual((await r.json())["auth"], "token")
+
+    async def test_max_session_duration_closes_4410(self):
+        with mock.patch.object(config, "MAX_SESSION_SECONDS", 0.5):
+            async with aiohttp.ClientSession() as session:
+                ws = await session.ws_connect(self.base + "/ws/voice?lang=hi")
+                msg = await asyncio.wait_for(ws.receive(), timeout=12)
+                self.assertEqual(msg.type, aiohttp.WSMsgType.CLOSE)
+                self.assertEqual(msg.data, 4410)
+
+
+class TestOutboundQueueCap(unittest.TestCase):
+    def test_full_queue_closes_session(self):
+        from src.call_server import CallSession
+        s = CallSession.__new__(CallSession)
+        s.closed = False
+        s.out = queue.Queue(maxsize=1)
+        s.close = lambda: setattr(s, "closed", True)
+        s._put(b"first")
+        self.assertFalse(s.closed)
+        s._put(b"second")
+        self.assertTrue(s.closed)
 
 
 class TestBindSecurity(unittest.TestCase):

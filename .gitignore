@@ -27,6 +27,7 @@ certs/
 
 # evaluation recordings (may contain real voices)
 eval/audio/
+evaluation/dataset/audio/
 
 # synthesised starter recordings (regenerate with --make-manifest)
 eval_data/*.wav

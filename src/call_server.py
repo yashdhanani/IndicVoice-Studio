@@ -31,6 +31,7 @@ import hmac
 import json
 import math
 import queue
+import secrets
 import sys
 import threading
 import time
@@ -39,7 +40,7 @@ from collections import deque
 from pathlib import Path
 
 import numpy as np
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from scipy import signal
@@ -88,9 +89,42 @@ def ulaw_decode(data: bytes) -> np.ndarray:
 
 
 def _authorised(params: dict) -> bool:
-    """Reject callers that do not present the configured token (if one is set)."""
+    """Reject callers that do not present the configured token (if one is set).
+
+    Two credentials are accepted: the long-lived ``?token=`` (legacy, visible
+    in URLs/logs) and a one-time short-lived ``?ticket=`` from POST /auth/ticket.
+    """
     token = config.ACCESS_TOKEN
-    return not token or hmac.compare_digest(params.get("token") or "", token)
+    if not token:
+        return True
+    supplied = params.get("token") or ""
+    if supplied and hmac.compare_digest(supplied, token):
+        return True
+    ticket = params.get("ticket") or ""
+    return bool(ticket) and _consume_ticket(ticket)
+
+
+#: one-time tickets: value -> expiry (wall clock). Single process only; a
+#: multi-worker deployment would need a shared store (see DEPLOYMENT_V1).
+_tickets: dict[str, float] = {}
+_tickets_lock = threading.Lock()
+
+
+def _issue_ticket() -> str:
+    ticket = secrets.token_urlsafe(24)
+    now = time.time()
+    with _tickets_lock:
+        for stale in [t for t, exp in _tickets.items() if exp <= now]:
+            _tickets.pop(stale, None)
+        _tickets[ticket] = now + config.TICKET_TTL_SECONDS
+    return ticket
+
+
+def _consume_ticket(ticket: str) -> bool:
+    """Single use: pop on first presentation, valid only before expiry."""
+    with _tickets_lock:
+        expiry = _tickets.pop(ticket, None)
+    return expiry is not None and expiry > time.time()
 
 
 _LOCAL_HOSTS = {"127.0.0.1", "::1", "localhost"}
@@ -238,7 +272,7 @@ class CallSession:
         self.mode = mode
         self.echo_gate_db = echo_gate_db
         self.barge_in_seconds = barge_in_seconds
-        self.out: queue.Queue = queue.Queue()
+        self.out: queue.Queue = queue.Queue(maxsize=config.MAX_OUTBOUND_QUEUE)
         self.closed = False
         self.streaming = streaming
         #: pre-onset audio so the streaming recogniser never misses the first word
@@ -261,7 +295,8 @@ class CallSession:
             llm_model=llm_model,
         )
         self.streamer = StreamingSTT(
-            on_partial=self._on_partial, endpoint_silence=cfg.min_silence
+            on_partial=self._on_partial, endpoint_silence=cfg.min_silence,
+            max_buffer=config.MAX_UTTERANCE_SECONDS,
         )
         llm = llm_factory() if llm_factory else None
         self.agent = VoiceAgent(cfg, llm=llm, player=self.sink)
@@ -277,8 +312,18 @@ class CallSession:
         self._turn: dict | None = None
         #: bumped on every inbound frame / outbound audio, used by the idle watchdog
         self.last_activity = time.perf_counter()
+        #: wall-clock start, used by the max-session-duration watchdog
+        self.started_at = time.perf_counter()
 
     # -- outbound ----------------------------------------------------------- #
+
+    def _put(self, item) -> None:
+        try:
+            self.out.put_nowait(item)
+        except queue.Full:
+            # client stopped draining audio: drop the call instead of
+            # buffering unboundedly (B5 outbound queue cap)
+            self.close()
 
     def _emit_audio(self, audio: np.ndarray) -> None:
         if self.closed or audio.size == 0:
@@ -300,13 +345,13 @@ class CallSession:
         if self.mode == "telephony":
             audio = resample(audio, SAMPLE_RATE, TELEPHONY_RATE)
             payload = base64.b64encode(ulaw_encode(audio)).decode("ascii")
-            self.out.put({"event": "media", "media": {"payload": payload}})
+            self._put({"event": "media", "media": {"payload": payload}})
         else:
-            self.out.put(float_to_pcm16(audio))
+            self._put(float_to_pcm16(audio))
 
     def _send_event(self, event: dict) -> None:
         if not self.closed:
-            self.out.put(event)
+            self._put(event)
 
     def _on_partial(self, text: str) -> None:
         if self._streaming_active:
@@ -410,6 +455,13 @@ class CallSession:
                     self.streamer.cancel()
                     self._streaming_active = False
                 continue
+            cap = int(config.MAX_UTTERANCE_SECONDS * SAMPLE_RATE)
+            if audio.size > cap:
+                audio = audio[:cap]
+                self._send_event({
+                    "type": "warning",
+                    "message": f"utterance truncated at {config.MAX_UTTERANCE_SECONDS:.0f}s",
+                })
             speech_end = time.perf_counter()
             # decode off the event loop: STT takes 0.15-0.8 s on CPU
             asr_info = None
@@ -669,10 +721,29 @@ def create_app(
             llm = {"ready": False, "error": str(exc)[:200]}
         return JSONResponse({
             "ok": all(v["ready"] for v in voices.values()),
+            "auth": "token" if config.ACCESS_TOKEN else "open-dev",
             "voices": voices,
             "supertonic": config.supertonic_available(),
             "llm": llm,
         })
+
+    @app.post("/auth/ticket")
+    async def auth_ticket(request: Request):
+        """Exchange the long-lived token for a one-time, short-lived ticket.
+
+        The token travels in the Authorization header (not the URL), so it
+        stays out of browser history, proxy logs and Referer headers. The
+        returned ``?ticket=`` is single-use and expires after
+        INDICVOICE_TICKET_TTL seconds (default 60).
+        """
+        if not config.ACCESS_TOKEN:
+            return JSONResponse(
+                {"error": "token auth is not configured"}, status_code=400)
+        auth = request.headers.get("authorization") or ""
+        supplied = auth[7:].strip() if auth[:7].lower() == "bearer " else ""
+        if not supplied or not hmac.compare_digest(supplied, config.ACCESS_TOKEN):
+            return JSONResponse({"error": "unauthorized"}, status_code=401)
+        return {"ticket": _issue_ticket(), "expires_in": config.TICKET_TTL_SECONDS}
 
     @app.get("/")
     async def index():
@@ -708,6 +779,13 @@ def create_app(
             """Close sessions whose socket went quiet, so buffers are not held forever."""
             while not session.closed:
                 await asyncio.sleep(5)
+                if time.perf_counter() - session.started_at > config.MAX_SESSION_SECONDS:
+                    session.close()
+                    try:
+                        await ws.close(code=4410)
+                    except Exception:
+                        pass
+                    return
                 if time.perf_counter() - session.last_activity > config.SESSION_IDLE_SECONDS:
                     session.close()
                     try:
@@ -855,6 +933,9 @@ def main(argv: list[str] | None = None) -> int:
     if bind_error:
         print(f"[security] {bind_error}")
         return 1
+    if not config.ACCESS_TOKEN:
+        print("[dev] no INDICVOICE_TOKEN set: open access, localhost development only."
+              " Set a token before exposing this server to any network.")
 
     missing = [
         str(p) for p in (config.VAD_PATH, config.tts_model_dir(args.lang) / "model.onnx")
@@ -904,7 +985,9 @@ def main(argv: list[str] | None = None) -> int:
     scheme = "https" if ssl_args else "http"
     print(f"IndicVoice call server on {scheme}://{args.host}:{args.port}  (Ctrl+C to stop)")
     if config.ACCESS_TOKEN:
-        print(f"  token required: open {scheme}://{args.host}:{args.port}/?token=<your-token>")
+        print("  token required. Preferred: POST /auth/ticket with"
+              " 'Authorization: Bearer <token>', then connect with ?ticket=<ticket>.")
+        print(f"  Legacy (token visible in URL/logs): {scheme}://{args.host}:{args.port}/?token=<your-token>")
     uvicorn.run(app, host=args.host, port=args.port, log_level="warning", **ssl_args)
     return 0
 

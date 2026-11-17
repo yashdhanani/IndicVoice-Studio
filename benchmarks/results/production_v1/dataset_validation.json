@@ -1,0 +1,94 @@
+{
+  "manifest": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\evaluation\\dataset\\dataset_manifest.jsonl",
+  "total_slots": 240,
+  "target_total": 240,
+  "collected": 0,
+  "invalid_entries": [],
+  "per_lang": {
+    "hi": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "bn": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "ta": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "te": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "kn": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "ml": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "mr": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "gu": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "pa": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "or": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "as": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    },
+    "en": {
+      "target": 20,
+      "collected": 0,
+      "not_collected": 20,
+      "rejected": 0,
+      "distinct_speakers": 0
+    }
+  },
+  "complete": false
+}

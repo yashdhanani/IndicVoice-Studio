@@ -50,6 +50,7 @@ class StreamingSTT:
         speculate_after: float = 0.12,
         endpoint_silence: float = ENDPOINT_SILENCE,
         sample_rate: int = SAMPLE_RATE,
+        max_buffer: float | None = None,
     ):
         self.on_partial = on_partial
         self.partial_interval = partial_interval
@@ -58,6 +59,8 @@ class StreamingSTT:
         self.speculate_after = speculate_after
         self.endpoint_silence = endpoint_silence
         self.rate = sample_rate
+        #: abuse cap: stop growing the buffer past this many seconds (None = off)
+        self._max_samples = int(max_buffer * sample_rate) if max_buffer else None
 
         self._cond = threading.Condition()
         self._stop = threading.Event()
@@ -119,6 +122,8 @@ class StreamingSTT:
             return
         with self._cond:
             if not self._active:
+                return
+            if self._max_samples is not None and len(self._buf) >= self._max_samples:
                 return
             self._buf = np.concatenate([self._buf, chunk])
             rms = float(np.sqrt(np.mean(chunk.astype(np.float32) ** 2)))

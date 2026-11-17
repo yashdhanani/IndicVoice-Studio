@@ -378,10 +378,11 @@ function renderHealth() {
       <p class="voice-native">${l.native}</p>
       <p class="voice-en">${l.en} · ${l.code}</p>
       <div class="voice-tags">
-        <span class="vtag vtag-backend">${v.backend || "…"}</span>
+        <span class="vtag vtag-backend"></span>
         <span class="vtag"><span class="dot ${ttsOk ? "dot-ok" : "dot-bad"}"></span>voice ${ttsOk ? "ready" : "missing"}</span>
         <span class="vtag"><span class="dot ${asrOk ? "dot-ok" : "dot-warn"}"></span>${asrOk ? "ASR local" : "ASR cloud"}</span>
       </div>`;
+    card.querySelector(".vtag-backend").textContent = v.backend || "…";
     const pick = () => { setLanguage(l.code); toast(`Language set to ${l.native} · ${l.en}.`, "ok"); };
     card.onclick = pick;
     card.onkeydown = e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pick(); } };
