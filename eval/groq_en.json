@@ -1,0 +1,36 @@
+{
+  "generated": "2026-11-17 11:32:19",
+  "source": "synthetic",
+  "languages": {
+    "en": {
+      "accuracy": {
+        "lang": "en",
+        "backend": "groq",
+        "n": 3,
+        "source": "synthetic",
+        "cer": 0.141,
+        "wer": 0.143,
+        "rows": [
+          {
+            "ref": "My order number is one two three.",
+            "hyp": "My order number is 123.",
+            "cer": 0.423,
+            "wer": 0.429
+          },
+          {
+            "ref": "Delivery will happen before tomorrow evening.",
+            "hyp": "Delivery will happen before tomorrow evening.",
+            "cer": 0.0,
+            "wer": 0.0
+          },
+          {
+            "ref": "My address is in Delhi.",
+            "hyp": "My address is in Delhi.",
+            "cer": 0.0,
+            "wer": 0.0
+          }
+        ]
+      }
+    }
+  }
+}

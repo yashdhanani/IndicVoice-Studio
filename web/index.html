@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IndicVoice Studio — real-time voice agent in 12 languages</title>
+<meta name="description" content="Talk to IndicVoice: a CPU-only, real-time speech-to-speech agent for 12 Indian languages.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23110d24'/%3E%3Cpath d='M6 16h3l3-7 4 14 3-9 2 2h5' stroke='%23ffb703' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+
+<div class="aurora" aria-hidden="true">
+  <div class="blob blob-a"></div>
+  <div class="blob blob-b"></div>
+  <div class="blob blob-c"></div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="topbar" id="topbar">
+  <a class="brand" href="#studio">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="26" height="26"><path d="M4 16h4l3-8 4.5 16L19 10l2.5 6H28" fill="none" stroke="url(#bg-grad)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><defs><linearGradient id="bg-grad" x1="0" y1="0" x2="32" y2="32"><stop offset="0" stop-color="#ffb703"/><stop offset=".55" stop-color="#ff2e88"/><stop offset="1" stop-color="#00e5c0"/></linearGradient></defs></svg>
+    </span>
+    <span class="brand-text">IndicVoice <em>Studio</em></span>
+  </a>
+  <nav class="nav" aria-label="Sections">
+    <a href="#studio" class="nav-link is-active" data-section="studio">Studio</a>
+    <a href="#voices" class="nav-link" data-section="voices">Voices</a>
+    <a href="#telemetry" class="nav-link" data-section="telemetry">Telemetry</a>
+  </nav>
+  <div class="top-actions">
+    <span class="status-pill" id="serverPill" title="Server health">
+      <span class="dot dot-wait"></span><span id="serverPillText">checking…</span>
+    </span>
+    <button class="mute-btn" id="masterMute" aria-pressed="false" title="Mute all sound (M)">
+      <svg class="ic-sound-on" viewBox="0 0 24 24" width="18" height="18"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <svg class="ic-sound-off" viewBox="0 0 24 24" width="18" height="18"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16 9l6 6M22 9l-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      <span id="masterMuteLabel">Sound on</span>
+    </button>
+  </div>
+</header>
+
+<main>
+<!-- ============================= STUDIO ============================= -->
+<section class="studio" id="studio">
+  <div class="studio-grid">
+
+    <!-- Conversation -->
+    <aside class="panel transcript-panel reveal" style="--d:.05s">
+      <div class="panel-head">
+        <h2>Conversation <span class="count-chip" id="msgCount">0</span></h2>
+        <div class="panel-tools">
+          <button class="icon-btn" id="copyTranscript" title="Copy transcript">
+            <svg viewBox="0 0 24 24" width="15" height="15"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M5 15V6a2 2 0 0 1 2-2h9" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          </button>
+          <button class="icon-btn" id="downloadTranscript" title="Download transcript (.txt)">
+            <svg viewBox="0 0 24 24" width="15" height="15"><path d="M12 4v11m0 0 4-4m-4 4-4-4M5 19h14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="icon-btn danger" id="clearTranscript" title="Clear conversation">
+            <svg viewBox="0 0 24 24" width="15" height="15"><path d="M5 7h14M10 7V5h4v2m-7 0 1 12h8l1-12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="transcript-filters">
+        <input type="search" id="transcriptSearch" placeholder="Search the conversation…" aria-label="Search transcript">
+        <div class="chip-row" role="group" aria-label="Filter by speaker">
+          <button class="chip is-on" data-role="all">All</button>
+          <button class="chip" data-role="you">You</button>
+          <button class="chip" data-role="agent">Agent</button>
+        </div>
+      </div>
+      <div class="transcript-list" id="transcriptList" aria-live="polite">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-orb" aria-hidden="true"></div>
+          <p class="empty-title">No conversation yet</p>
+          <p class="empty-sub">Start a call and speak — words appear here live, in any of 12 languages.</p>
+          <div class="try-list">
+            <button class="try-chip" data-lang="hi">हिन्दी · “नमस्ते, आज का मौसम कैसा है?”</button>
+            <button class="try-chip" data-lang="ta">தமிழ் · “சென்னையைப் பற்றி சொல்லுங்கள்.”</button>
+            <button class="try-chip" data-lang="bn">বাংলা · “একটা মজার গল্প বলো।”</button>
+            <button class="try-chip" data-lang="en">English · “Tell me about the Indus Valley.”</button>
+          </div>
+        </div>
+      </div>
+      <label class="autoscroll-row">
+        <input type="checkbox" id="autoScroll" checked>
+        <span>Follow live captions</span>
+      </label>
+    </aside>
+
+    <!-- Call stage -->
+    <div class="stage reveal" style="--d:.12s">
+      <div class="stage-eyebrow">
+        <span class="state-badge" id="stateBadge" data-state="idle"><span class="state-dot"></span><span id="stateText">Ready</span></span>
+        <span class="lang-chip" id="stageLangChip">हिन्दी · Hindi</span>
+        <span class="timer-chip" id="callTimer" hidden>00:00</span>
+      </div>
+
+      <div class="orb-wrap">
+        <canvas id="orbCanvas" aria-label="Live voice visualizer"></canvas>
+        <div class="orb-center-label" id="orbHint">
+          <span class="orb-hint-title">Talk to India</span>
+          <span class="orb-hint-sub">12 languages · one conversation</span>
+        </div>
+      </div>
+
+      <div class="live-captions" id="liveCaptions">
+        <p class="cap cap-you" id="capYou" hidden><span class="cap-tag">you</span><span id="capYouText"></span></p>
+        <p class="cap cap-agent" id="capAgent" hidden><span class="cap-tag">agent</span><span id="capAgentText"></span></p>
+      </div>
+
+      <div class="call-controls">
+        <button class="call-btn" id="callBtn">
+          <svg class="ic-call" viewBox="0 0 24 24" width="20" height="20"><path d="M12 3a4 4 0 0 1 4 4v5a4 4 0 0 1-8 0V7a4 4 0 0 1 4-4z" fill="currentColor"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4m-3 0h6" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+          <svg class="ic-hang" viewBox="0 0 24 24" width="20" height="20"><path d="M3.5 13.5c5-5 12-5 17 0l-2.6 2.6c-.6.6-1.5.7-2.2.2l-1.9-1.3a1.7 1.7 0 0 1-.7-1.6l.2-1.4c-2-.6-4.2-.6-6.2 0l.2 1.4c.1.6-.2 1.2-.7 1.6l-1.9 1.3c-.7.5-1.6.4-2.2-.2L3.5 13.5z" fill="currentColor"/></svg>
+          <span id="callBtnLabel">Start call</span>
+        </button>
+        <button class="round-btn" id="micMute" aria-pressed="false" title="Mute microphone" disabled>
+          <svg class="ic-mic" viewBox="0 0 24 24" width="18" height="18"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="ic-mic-off" viewBox="0 0 24 24" width="18" height="18"><rect x="9" y="3" width="6" height="11" rx="3" fill="currentColor"/><path d="M6 11a6 6 0 0 0 12 0M12 17v4M4 4l16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+        <button class="round-btn" id="speakerTest" title="Play a test chime through the speaker">
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5a3.5 3.5 0 0 1 0 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </div>
+      <p class="stage-hint" id="stageHint">Space starts / ends the call · speak naturally, interrupt any time</p>
+    </div>
+
+    <!-- Control deck -->
+    <aside class="panel deck reveal" style="--d:.2s">
+      <div class="panel-head">
+        <h2>Control deck</h2>
+        <button class="icon-btn" id="resetSettings" title="Reset all controls to defaults">
+          <svg viewBox="0 0 24 24" width="15" height="15"><path d="M4 10a8 8 0 1 1 2 6M4 10V4m0 6h6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+
+      <div class="deck-scroll">
+        <div class="deck-group">
+          <p class="deck-label">Call</p>
+
+          <label class="ctl">
+            <span class="ctl-name">Language</span>
+            <select id="ctlLang"></select>
+          </label>
+
+          <label class="ctl">
+            <span class="ctl-name">Speech recognition <em id="sttHint">auto</em></span>
+            <select id="ctlSttLang"></select>
+          </label>
+
+          <div class="ctl">
+            <span class="ctl-name">Turn-end silence <output id="endpointOut">0.50 s</output></span>
+            <input type="range" id="ctlEndpoint" min="0.1" max="2" step="0.05" value="0.5">
+            <span class="ctl-scale"><i>snappy 0.1s</i><i>patient 2.0s</i></span>
+          </div>
+
+          <label class="switch-row">
+            <span><span class="ctl-name">Human fillers</span><span class="ctl-sub">“हाँ जी…”, “hmm…” while thinking</span></span>
+            <input type="checkbox" id="ctlBackchannel" checked><i class="switch"></i>
+          </label>
+
+          <label class="switch-row">
+            <span><span class="ctl-name">Streaming recognition</span><span class="ctl-sub">words appear while you speak</span></span>
+            <input type="checkbox" id="ctlStreaming" checked><i class="switch"></i>
+          </label>
+
+          <label class="ctl">
+            <span class="ctl-name">Access token <em>if the server requires one</em></span>
+            <input type="password" id="ctlToken" placeholder="INDICVOICE_TOKEN" autocomplete="off">
+          </label>
+        </div>
+
+        <div class="deck-group">
+          <p class="deck-label">Audio</p>
+          <div class="ctl">
+            <span class="ctl-name">Speaker volume <output id="volumeOut">90%</output></span>
+            <input type="range" id="ctlVolume" min="0" max="150" step="1" value="90">
+          </div>
+          <div class="ctl">
+            <span class="ctl-name">Mic sensitivity <output id="micGainOut">1.0×</output></span>
+            <input type="range" id="ctlMicGain" min="0.2" max="3" step="0.1" value="1">
+          </div>
+        </div>
+
+        <div class="deck-group">
+          <p class="deck-label">Visualizer</p>
+          <label class="ctl">
+            <span class="ctl-name">Style</span>
+            <select id="ctlVizStyle">
+              <option value="orb">Nebula orb</option>
+              <option value="bars">Radial spectrum</option>
+              <option value="rings">Sonar rings</option>
+            </select>
+          </label>
+          <div class="ctl">
+            <span class="ctl-name">Energy <output id="vizIntensityOut">70%</output></span>
+            <input type="range" id="ctlVizIntensity" min="10" max="150" step="1" value="70">
+          </div>
+          <label class="switch-row">
+            <span><span class="ctl-name">Particles</span><span class="ctl-sub">drifting sparks around the orb</span></span>
+            <input type="checkbox" id="ctlParticles" checked><i class="switch"></i>
+          </label>
+        </div>
+
+        <div class="deck-actions">
+          <button class="ghost-btn" id="randomLang" title="Pick a random ready language">
+            <svg viewBox="0 0 24 24" width="15" height="15"><rect x="3" y="3" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="8.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="15.5" r="1.4" fill="currentColor"/><circle cx="15.5" cy="8.5" r="1.4" fill="currentColor"/><circle cx="8.5" cy="15.5" r="1.4" fill="currentColor"/></svg>
+            Surprise language
+          </button>
+          <button class="ghost-btn" id="exportJson" title="Download conversation as JSON">
+            <svg viewBox="0 0 24 24" width="15" height="15"><path d="M8 4H6a2 2 0 0 0-2 2v4l-2 2 2 2v4a2 2 0 0 0 2 2h2M16 4h2a2 2 0 0 1 2 2v4l2 2-2 2v4a2 2 0 0 1-2 2h-2" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+            Export JSON
+          </button>
+        </div>
+        <p class="deck-note">Audio &amp; visual controls apply instantly. Call settings reconnect the live call automatically.</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ============================= VOICES ============================= -->
+<section class="voices-section" id="voices">
+  <div class="section-head reveal">
+    <div>
+      <p class="section-eyebrow">Model rack</p>
+      <h2>Twelve voices, one pipeline</h2>
+      <p class="section-sub">Every language runs locally on CPU — Indic Conformer recognition, Matcha + Vocos synthesis, with Supertonic and MMS fallbacks.</p>
+    </div>
+    <button class="ghost-btn" id="refreshHealth">
+      <svg viewBox="0 0 24 24" width="15" height="15"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 4v5h-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Refresh status
+    </button>
+  </div>
+  <div class="llm-card reveal" id="llmCard" style="--d:.05s">
+    <div class="llm-left">
+      <span class="llm-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="22" height="22"><path d="M12 3l2 4.5L18.5 9 14 11l-2 4.5L10 11 5.5 9 10 7.5 12 3z" fill="currentColor"/><path d="M18 15l1 2.2L21 18l-2 .9L18 21l-1-2.1-2-.9 2-.8L18 15z" fill="currentColor" opacity=".7"/></svg>
+      </span>
+      <div>
+        <p class="llm-title">Reasoning engine</p>
+        <p class="llm-sub" id="llmSub">probing…</p>
+      </div>
+    </div>
+    <span class="ready-chip" id="llmReady">…</span>
+  </div>
+  <div class="voice-grid" id="voiceGrid"></div>
+</section>
+
+<!-- ============================= TELEMETRY ============================= -->
+<section class="telemetry-section" id="telemetry">
+  <div class="section-head reveal">
+    <div>
+      <p class="section-eyebrow">Live pipeline</p>
+      <h2>Latency telemetry</h2>
+      <p class="section-sub">Each turn reports where the milliseconds went — recognition, reasoning, synthesis, and the moment the first audio reaches your speaker.</p>
+    </div>
+  </div>
+
+  <div class="pipeline-strip reveal" aria-hidden="true">
+    <span class="pipe-node" data-pipe="mic">Mic</span><span class="pipe-arrow">→</span>
+    <span class="pipe-node" data-pipe="vad">VAD</span><span class="pipe-arrow">→</span>
+    <span class="pipe-node" data-pipe="stt">STT</span><span class="pipe-arrow">→</span>
+    <span class="pipe-node" data-pipe="llm">LLM</span><span class="pipe-arrow">→</span>
+    <span class="pipe-node" data-pipe="tts">TTS</span><span class="pipe-arrow">→</span>
+    <span class="pipe-node" data-pipe="spk">Speaker</span>
+  </div>
+
+  <div class="metric-grid">
+    <div class="metric-card reveal" style="--d:.05s" data-metric="asr">
+      <p class="metric-name"><i class="swatch sw-asr"></i>Recognition · ASR</p>
+      <p class="metric-value"><span id="mAsr">—</span><small>ms</small></p>
+      <canvas class="spark" id="sparkAsr" height="44"></canvas>
+      <p class="metric-foot">avg <b id="avgAsr">—</b> ms · <span id="cntAsr">0</span> turns</p>
+    </div>
+    <div class="metric-card reveal" style="--d:.1s" data-metric="llm">
+      <p class="metric-name"><i class="swatch sw-llm"></i>Reasoning · LLM</p>
+      <p class="metric-value"><span id="mLlm">—</span><small>ms</small></p>
+      <canvas class="spark" id="sparkLlm" height="44"></canvas>
+      <p class="metric-foot">avg <b id="avgLlm">—</b> ms</p>
+    </div>
+    <div class="metric-card reveal" style="--d:.15s" data-metric="tts">
+      <p class="metric-name"><i class="swatch sw-tts"></i>Synthesis · TTS</p>
+      <p class="metric-value"><span id="mTts">—</span><small>ms</small></p>
+      <canvas class="spark" id="sparkTts" height="44"></canvas>
+      <p class="metric-foot">avg <b id="avgTts">—</b> ms</p>
+    </div>
+    <div class="metric-card reveal" style="--d:.2s" data-metric="first">
+      <p class="metric-name"><i class="swatch sw-first"></i>First audio</p>
+      <p class="metric-value"><span id="mFirst">—</span><small>ms</small></p>
+      <canvas class="spark" id="sparkFirst" height="44"></canvas>
+      <p class="metric-foot">avg <b id="avgFirst">—</b> ms · target &lt; 1500</p>
+    </div>
+  </div>
+
+  <div class="session-strip reveal" style="--d:.25s">
+    <div class="session-stat"><b id="statTurns">0</b><span>turns</span></div>
+    <div class="session-stat"><b id="statInterrupts">0</b><span>barge-ins</span></div>
+    <div class="session-stat"><b id="statCalls">0</b><span>calls</span></div>
+    <div class="session-stat"><b id="statLangs">0</b><span>languages used</span></div>
+    <div class="session-stat"><b id="statUptime">00:00</b><span>talk time</span></div>
+  </div>
+</section>
+</main>
+
+<footer class="footer">
+  <span>IndicVoice Studio · CPU-only speech-to-speech · mic → VAD → STT → LLM → TTS → speaker</span>
+  <span class="foot-langs">हिन्दी ગુજરાતી मराठी বাংলা தமிழ் తెలుగు ಕನ್ನಡ മലയാളം ਪੰਜਾਬੀ ଓଡ଼ିଆ অসমীয়া English</span>
+</footer>
+
+<div class="toast-rack" id="toastRack" aria-live="assertive"></div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

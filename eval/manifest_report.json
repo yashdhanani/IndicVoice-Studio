@@ -1,0 +1,846 @@
+{
+  "turns": [
+    {
+      "audio_file": "hi_01.wav",
+      "language": "hi",
+      "backend": "indic",
+      "reference": "मेरा ऑर्डर नंबर एक दो तीन है।",
+      "hypothesis": "मेरा ऑर्डर नंबर एक दो तीन है",
+      "reply": "धन्यवाद, आपका ऑर्डर नंबर 123 है। क्या आपको किसी विशेष जानकारी की ज़रूरत है, जैसे कि शिपमेंट स्टेटस या डिलीवरी तिथि?",
+      "asr_ms": 129.8,
+      "llm_ttft_ms": 447.3,
+      "tts_ttfa_ms": 248.6,
+      "e2e_ms": 825.8,
+      "audio_seconds": 0.95,
+      "cer": 0.043,
+      "wer": 0.143
+    },
+    {
+      "audio_file": "hi_02.wav",
+      "language": "hi",
+      "backend": "indic",
+      "reference": "कल शाम तक डिलीवरी हो जाएगी।",
+      "hypothesis": "कल शाम तक डिलीवरी हो जाएगी",
+      "reply": "समझ गया, कल शाम तक डिलीवरी हो जाएगी। क्या आपको किसी और सहायता की ज़रूरत है?",
+      "asr_ms": 218.5,
+      "llm_ttft_ms": 180.6,
+      "tts_ttfa_ms": 173.5,
+      "e2e_ms": 572.6,
+      "audio_seconds": 0.98,
+      "cer": 0.045,
+      "wer": 0.167
+    },
+    {
+      "audio_file": "hi_03.wav",
+      "language": "hi",
+      "backend": "indic",
+      "reference": "मेरा पता दिल्ली में है।",
+      "hypothesis": "मेरा पता दिल्ली में है",
+      "reply": "धन्यवाद, आपका पता दिल्ली में है। क्या आपको किसी विशेष सेवा या उत्पाद के लिए सहायता चाहिए?",
+      "asr_ms": 159.8,
+      "llm_ttft_ms": 496.7,
+      "tts_ttfa_ms": 112.5,
+      "e2e_ms": 769.0,
+      "audio_seconds": 0.95,
+      "cer": 0.053,
+      "wer": 0.2
+    },
+    {
+      "audio_file": "gu_01.wav",
+      "language": "gu",
+      "backend": "indic",
+      "reference": "મારો ઓર્ડર નંબર એક બે ત્રણ છે.",
+      "hypothesis": "મારો ઓર્ડર નંબર એક બે ત્રણ છે",
+      "reply": "ठीक है, मैं आपका ऑर्डर नंबर 123 जाँचता हूँ. क्या आप बता सकते हैं कि यह किस दिन का है?",
+      "asr_ms": 1098.9,
+      "llm_ttft_ms": 406.6,
+      "tts_ttfa_ms": 33.9,
+      "e2e_ms": 1539.4,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "gu_02.wav",
+      "language": "gu",
+      "backend": "indic",
+      "reference": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+      "hypothesis": "કાલે સાંજ સુધીમાં ડિલીિવરી થાઈ જશે",
+      "reply": "સમજી લીધું, હું ખાતરી કરીશ કે બધું સમયસર તૈયાર રહે. શું તમને ટ્રેકિંગ નંબર કે કોઈ વધુ માહિતી જોઈએ?",
+      "asr_ms": 831.1,
+      "llm_ttft_ms": 471.7,
+      "tts_ttfa_ms": 212.1,
+      "e2e_ms": 1514.8,
+      "audio_seconds": 1.38,
+      "cer": 0.074,
+      "wer": 0.333
+    },
+    {
+      "audio_file": "gu_03.wav",
+      "language": "gu",
+      "backend": "indic",
+      "reference": "મારું સરનામું અમદાવાદમાં છે.",
+      "hypothesis": "મારું સરનામું અમદાવાદમાં છે",
+      "reply": "આભાર, સરનામું નોંધ્યું. શું તમે કોઈ ખાસ સેવા અથવા ઓર્ડર વિશે પૂછવા માંગો છો?",
+      "asr_ms": 793.1,
+      "llm_ttft_ms": 1684.5,
+      "tts_ttfa_ms": 178.6,
+      "e2e_ms": 2656.2,
+      "audio_seconds": 0.95,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_01.wav",
+      "language": "mr",
+      "backend": "indic",
+      "reference": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+      "hypothesis": "माझा ऑर्डर नंबर एक दोन तीन आहे",
+      "reply": "माफ करा, मला तुमचा ऑर्डर नंबर नीट समजला नाही. कृपया 123 असा क्रमांक द्या किंवा तो तपशील सांगू शकाल का?",
+      "asr_ms": 1415.1,
+      "llm_ttft_ms": 392.3,
+      "tts_ttfa_ms": 134.4,
+      "e2e_ms": 1941.7,
+      "audio_seconds": 1.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_02.wav",
+      "language": "mr",
+      "backend": "indic",
+      "reference": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल.",
+      "hypothesis": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल",
+      "reply": "हां, उद्या संध्याकाळपर्यंत तुमची डिलिव्हरी होईल. आणखी काही मदत हवी का?",
+      "asr_ms": 1443.1,
+      "llm_ttft_ms": 447.5,
+      "tts_ttfa_ms": 99.4,
+      "e2e_ms": 1990.0,
+      "audio_seconds": 0.61,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_03.wav",
+      "language": "mr",
+      "backend": "indic",
+      "reference": "माझा पत्ता पुण्यात आहे.",
+      "hypothesis": "माझा पत्ता पुण्यात आहे",
+      "reply": "धन्यवाद! तुमचा पत्ता पुण्यात आहे हे लक्षात घेतले. पुढे काय मदत हवी आहे?",
+      "asr_ms": 975.9,
+      "llm_ttft_ms": 664.9,
+      "tts_ttfa_ms": 667.2,
+      "e2e_ms": 2307.9,
+      "audio_seconds": 5.93,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "bn_01.wav",
+      "language": "bn",
+      "backend": "indic",
+      "reference": "আমার অর্ডার নম্বর এক দুই তিন।",
+      "hypothesis": "আমার অর্ডার নম্বর এক দুই তিন",
+      "reply": "আপনার অর্ডার নম্বর ১২৩, ঠিক তো? যদি সঠিক হয়, তাহলে আমি এখনই স্ট্যাটাস চেক করছি।",
+      "asr_ms": 776.5,
+      "llm_ttft_ms": 600.4,
+      "tts_ttfa_ms": 248.2,
+      "e2e_ms": 1625.1,
+      "audio_seconds": 2.5,
+      "cer": 0.042,
+      "wer": 0.167
+    },
+    {
+      "audio_file": "bn_02.wav",
+      "language": "bn",
+      "backend": "indic",
+      "reference": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে।",
+      "hypothesis": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে",
+      "reply": "বুঝেছি, সন্ধ্যা পর্যন্ত ডেলিভারি হবে। কোনো বিশেষ ঠিকানা বা সময়ের কথা জানতে চান?",
+      "asr_ms": 764.7,
+      "llm_ttft_ms": 261.1,
+      "tts_ttfa_ms": 201.5,
+      "e2e_ms": 1227.3,
+      "audio_seconds": 0.93,
+      "cer": 0.036,
+      "wer": 0.2
+    },
+    {
+      "audio_file": "bn_03.wav",
+      "language": "bn",
+      "backend": "indic",
+      "reference": "আমার ঠিকানা কলকাতায়।",
+      "hypothesis": "আমার ঠিকানা কলকাতায়",
+      "reply": "ঠিক আছে, কলকাতায় আপনার ঠিকানা নোট করেছি। এখন কি আপনি কোনো অর্ডার বা ডেলিভারি সম্পর্কে জানতে চান?",
+      "asr_ms": 598.0,
+      "llm_ttft_ms": 562.1,
+      "tts_ttfa_ms": 143.0,
+      "e2e_ms": 1303.1,
+      "audio_seconds": 0.85,
+      "cer": 0.053,
+      "wer": 0.333
+    },
+    {
+      "audio_file": "ta_01.wav",
+      "language": "ta",
+      "backend": "indic",
+      "reference": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று.",
+      "hypothesis": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று",
+      "reply": "உங்கள் ஆர்டர் எண் 123 என்பதை உறுதிப்படுத்துகிறேன். இதன் நிலைமையைச் சரிபார்க்க, உங்கள் மின்னஞ்சல் முகவரியைத் தர முடியுமா?",
+      "asr_ms": 718.3,
+      "llm_ttft_ms": 503.3,
+      "tts_ttfa_ms": 641.8,
+      "e2e_ms": 1863.3,
+      "audio_seconds": 7.28,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "ta_02.wav",
+      "language": "ta",
+      "backend": "indic",
+      "reference": "நாளை மாலைக்குள் டெலிவரி ஆகும்.",
+      "hypothesis": "நாளை மாலைக்குள் டெலிவரி ஆகும்",
+      "reply": "ஆம், நாளை மாலைக்குள் டெலிவரி ஆகும். மேலும் ஏதேனும் உதவி தேவைதா?",
+      "asr_ms": 748.6,
+      "llm_ttft_ms": 509.8,
+      "tts_ttfa_ms": 103.3,
+      "e2e_ms": 1361.7,
+      "audio_seconds": 0.57,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "ta_03.wav",
+      "language": "ta",
+      "backend": "indic",
+      "reference": "என் முகவரி சென்னையில் உள்ளது.",
+      "hypothesis": "என் முகவரி சென்னையில் உள்ளது",
+      "reply": "சென்னையில் உங்கள் முகவரி உள்ளது என்று கூறியதற்கு நன்றி. இப்போது நீங்கள் என்ன உதவி தேவைப்படுகிறது?",
+      "asr_ms": 767.1,
+      "llm_ttft_ms": 472.6,
+      "tts_ttfa_ms": 530.3,
+      "e2e_ms": 1770.1,
+      "audio_seconds": 5.56,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "te_01.wav",
+      "language": "te",
+      "backend": "indic",
+      "reference": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు.",
+      "hypothesis": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు",
+      "reply": "హాయ్! మీ ఆర్డర్ నంబర్ 123, కదా? డెలివరీ స్థితి తెలుసుకోవడానికి కొంచెం వేచివుండాలి, నేను చెక్ చేస్తాను.",
+      "asr_ms": 751.6,
+      "llm_ttft_ms": 591.7,
+      "tts_ttfa_ms": 463.2,
+      "e2e_ms": 1806.6,
+      "audio_seconds": 3.41,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "te_02.wav",
+      "language": "te",
+      "backend": "indic",
+      "reference": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది.",
+      "hypothesis": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది",
+      "reply": "అవును, రేపు సాయంత్రం వరకు డెలివరీ వస్తుంది. ఇంకేదైనా సహాయం కావాలా?",
+      "asr_ms": 841.7,
+      "llm_ttft_ms": 465.0,
+      "tts_ttfa_ms": 149.8,
+      "e2e_ms": 1456.6,
+      "audio_seconds": 0.6,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "te_03.wav",
+      "language": "te",
+      "backend": "indic",
+      "reference": "నా చిరునామా హైదరాబాద్‌లో ఉంది.",
+      "hypothesis": "నా చిరునామా హైదరాబాద్ లో ఉంది",
+      "reply": "బాగుంది, హైదరాబాద్‌లో ఉన్న మీ చిరునామా గమనించాం. ఏదైనా సహాయం కావాలంటే చెప్పండి.",
+      "asr_ms": 755.3,
+      "llm_ttft_ms": 1748.1,
+      "tts_ttfa_ms": 140.0,
+      "e2e_ms": 2643.4,
+      "audio_seconds": 0.76,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "kn_01.wav",
+      "language": "kn",
+      "backend": "indic",
+      "reference": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು.",
+      "hypothesis": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು",
+      "reply": "ಸರಿ, ನಿಮ್ಮ ಆರ್ಡರ್ ಸಂಖ್ಯೆ 123. ದಯವಿಟ್ಟು ನೀವು ಯಾವ ಉತ್ಪನ್ನವನ್ನು ಖರೀದಿಸಿದ್ದೀರಿ ಎಂದು ತಿಳಿಸಬಹುದೇ?",
+      "asr_ms": 988.6,
+      "llm_ttft_ms": 1866.8,
+      "tts_ttfa_ms": 167.2,
+      "e2e_ms": 3022.6,
+      "audio_seconds": 0.82,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "kn_02.wav",
+      "language": "kn",
+      "backend": "indic",
+      "reference": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ.",
+      "hypothesis": "ನಾೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ",
+      "reply": "ಹೌದು, ಸಂಜೆ 6 ಗಂಟೆಗೆ ಮುಂಚೆ ಡೆಲಿವರಿ ಆಗುವಂತೆ ನೋಡಿಕೊಳ್ಳುತ್ತೇನೆ. ಇನ್ನೇನಾದರೂ ಸಹಾಯ ಬೇಕೇ?",
+      "asr_ms": 1006.1,
+      "llm_ttft_ms": 403.8,
+      "tts_ttfa_ms": 179.0,
+      "e2e_ms": 1589.0,
+      "audio_seconds": 0.64,
+      "cer": 0.036,
+      "wer": 0.25
+    },
+    {
+      "audio_file": "kn_03.wav",
+      "language": "kn",
+      "backend": "indic",
+      "reference": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ.",
+      "hypothesis": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ",
+      "reply": "ಸರಿ, ನಿಮ್ಮ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ ಎಂದು ತಿಳಿಯಿತು. ಇನ್ನೇನಾದರೂ ಸಹಾಯ ಬೇಕೇ?",
+      "asr_ms": 916.6,
+      "llm_ttft_ms": 267.6,
+      "tts_ttfa_ms": 209.5,
+      "e2e_ms": 1393.7,
+      "audio_seconds": 0.82,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "ml_01.wav",
+      "language": "ml",
+      "backend": "indic",
+      "reference": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്.",
+      "hypothesis": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്",
+      "reply": "നന്ദി, നിങ്ങളുടെ ഓർഡർ നമ്പർ 123 ആണ്. നിങ്ങളുടെ ഓർഡറിന്റെ നിലവിലെ നില അറിയാൻ, ദയവായി നിങ്ങളുടെ ഇമെയിൽ വിലാസം പറയാമോ?",
+      "asr_ms": 1484.6,
+      "llm_ttft_ms": 309.5,
+      "tts_ttfa_ms": 279.9,
+      "e2e_ms": 2074.0,
+      "audio_seconds": 0.42,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "ml_02.wav",
+      "language": "ml",
+      "backend": "indic",
+      "reference": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും.",
+      "hypothesis": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും",
+      "reply": "ശരി, നാളെ വൈകുന്നേരം ഡെലിവറി എത്തുമെന്ന് ഉറപ്പാക്കാം. മറ്റെന്തെങ്കിലും സഹായം വേണമെങ്കിൽ അറിയിക്കൂ.",
+      "asr_ms": 2005.7,
+      "llm_ttft_ms": 1367.0,
+      "tts_ttfa_ms": 151.6,
+      "e2e_ms": 3524.3,
+      "audio_seconds": 0.42,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "ml_03.wav",
+      "language": "ml",
+      "backend": "indic",
+      "reference": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+      "hypothesis": "എറെ വിലാസം കൊച്ചിയിലാണ്",
+      "reply": "ശരി, കൊച്ചിയിലെ വിലാസം ശ്രദ്ധിച്ചു. ഇനി എന്തെങ്കിലും സഹായം വേണോ?",
+      "asr_ms": 604.3,
+      "llm_ttft_ms": 1277.1,
+      "tts_ttfa_ms": 87.3,
+      "e2e_ms": 1968.7,
+      "audio_seconds": 0.42,
+      "cer": 0.087,
+      "wer": 0.333
+    },
+    {
+      "audio_file": "pa_01.wav",
+      "language": "pa",
+      "backend": "indic",
+      "reference": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ।",
+      "hypothesis": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ",
+      "reply": "ਠੀਕ ਹੈ, ਮੈਂ ਤੁਹਾਡਾ ਆਰਡਰ ਚੈਕ ਕਰਦਾ ਹਾਂ. ਕੀ ਤੁਸੀਂ ਕਿਰਪਾ ਕਰਕੇ ਮੈਨੂੰ ਦੱਸ ਸਕਦੇ ਹੋ ਕਿ ਤੁਸੀਂ ਕਿਹੜੇ ਉਤਪਾਦ ਆਰਡਰ ਕੀਤੇ ਹਨ?",
+      "asr_ms": 918.9,
+      "llm_ttft_ms": 471.8,
+      "tts_ttfa_ms": 87.0,
+      "e2e_ms": 1477.7,
+      "audio_seconds": 0.64,
+      "cer": 0.042,
+      "wer": 0.143
+    },
+    {
+      "audio_file": "pa_02.wav",
+      "language": "pa",
+      "backend": "indic",
+      "reference": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ।",
+      "hypothesis": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ",
+      "reply": "ਵਧੀਆ! ਕੀ ਤੁਹਾਨੂੰ ਹੋਰ ਕੁਝ ਚਾਹੀਦਾ ਹੈ ਜਾਂ ਕੋਈ ਵਿਸ਼ੇਸ਼ ਵੇਰਵਾ ਚੈਕ ਕਰਨਾ ਹੈ?",
+      "asr_ms": 821.3,
+      "llm_ttft_ms": 965.7,
+      "tts_ttfa_ms": 493.0,
+      "e2e_ms": 2280.0,
+      "audio_seconds": 4.91,
+      "cer": 0.036,
+      "wer": 0.167
+    },
+    {
+      "audio_file": "pa_03.wav",
+      "language": "pa",
+      "backend": "indic",
+      "reference": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ।",
+      "hypothesis": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ",
+      "reply": "ਠੀਕ ਹੈ, ਲੁਧਿਆਣਾ ਵਿੱਚ ਤੁਹਾਡਾ ਪਤਾ ਨੋਟ ਕਰ ਲਿਆ। ਕੀ ਤੁਸੀਂ ਚਾਹੁੰਦੇ ਹੋ ਕਿ ਮੈਂ ਡਿਲਿਵਰੀ ਦੀ ਤਰੀਕ ਜਾਂ ਹੋਰ ਕੋਈ ਵੇਰਵਾ ਪੁਸ਼ਟੀ ਕਰਾਂ?",
+      "asr_ms": 668.7,
+      "llm_ttft_ms": 377.3,
+      "tts_ttfa_ms": 147.4,
+      "e2e_ms": 1193.4,
+      "audio_seconds": 0.64,
+      "cer": 0.048,
+      "wer": 0.2
+    },
+    {
+      "audio_file": "or_01.wav",
+      "language": "or",
+      "backend": "indic",
+      "reference": "ମୋ ଅର୍ଡର ନମ୍ବର ଏକ ଦୁଇ ତିନି।",
+      "hypothesis": "ମୋ ଅର୍ଡ଼ ନମ୍ବର୍ ଏକ ଦୁଇ ତିନି",
+      "reply": "ଓଃ ଠିକ ଅଛି, ଆପଣଙ୍କ ଅର୍ଡର ନମ୍ବର ଦୟାକରି ଦେବେ?",
+      "asr_ms": 787.2,
+      "llm_ttft_ms": 685.9,
+      "tts_ttfa_ms": 379.2,
+      "e2e_ms": 1852.3,
+      "audio_seconds": 1.66,
+      "cer": 0.136,
+      "wer": 0.5
+    },
+    {
+      "audio_file": "or_02.wav",
+      "language": "or",
+      "backend": "indic",
+      "reference": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ।",
+      "hypothesis": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ",
+      "reply": "ଠିକ ଅଛି, ଆପଣଙ୍କ ଅର୍ଡର ଆଗାମୀ ଦିନ ସନ୍ଧ୍ୟା ପର୍ଯ୍ୟନ୍ତ ଡେଲିଭରି ହେବ। ଆଉ କିଛି ଜଣାଇବା ଆବଶ୍ୟକ ଅଛି କି?",
+      "asr_ms": 805.5,
+      "llm_ttft_ms": 1903.6,
+      "tts_ttfa_ms": 170.7,
+      "e2e_ms": 2879.9,
+      "audio_seconds": 1.19,
+      "cer": 0.036,
+      "wer": 0.2
+    },
+    {
+      "audio_file": "or_03.wav",
+      "language": "or",
+      "backend": "indic",
+      "reference": "ମୋ ଠିକଣା ଭୁବନେଶ୍ୱରରେ ଅଛି।",
+      "hypothesis": "ମୋ ଠିକଣ ଭୁବନେଶ୍ୱରରେ ଅଛି",
+      "reply": "ଠିକ ଅଛି, ଭୁବନେଶ୍ୱର ଠିକଣ ନିଶ୍ଚିତ ହେଲା। ଆପଣଙ୍କ ଅର୍ଡର ଟ୍ରାକିଂ ନମ୍ବର ଦେଖି ଦେଖିବି।",
+      "asr_ms": 869.9,
+      "llm_ttft_ms": 991.8,
+      "tts_ttfa_ms": 136.0,
+      "e2e_ms": 1997.7,
+      "audio_seconds": 1.19,
+      "cer": 0.091,
+      "wer": 0.5
+    },
+    {
+      "audio_file": "as_01.wav",
+      "language": "as",
+      "backend": "indic",
+      "reference": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+      "hypothesis": "মোর অর্ডার নম্বর এক দুই তিন",
+      "reply": "ধন্যবাদ, ১২৩ নম্বর অর্ডারটি চেক করছি। আপনার ঠিকানা বা ডেলিভারি তারিখ জানতে পারি?",
+      "asr_ms": 816.0,
+      "llm_ttft_ms": 139.0,
+      "tts_ttfa_ms": 230.8,
+      "e2e_ms": 1185.9,
+      "audio_seconds": 1.12,
+      "cer": 0.25,
+      "wer": 0.667
+    },
+    {
+      "audio_file": "as_02.wav",
+      "language": "as",
+      "backend": "indic",
+      "reference": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+      "hypothesis": "কাইল সন্ধ্যিার ভিতরত ডেলিভারি হব",
+      "reply": "ঠিক আছে, ডেলিভারি সন্ধ্যা ৬টার মধ্যে পৌঁছে যাবে। আর কিছু জানতে চান?",
+      "asr_ms": 767.1,
+      "llm_ttft_ms": 667.9,
+      "tts_ttfa_ms": 190.9,
+      "e2e_ms": 1626.0,
+      "audio_seconds": 0.83,
+      "cer": 0.267,
+      "wer": 1.0
+    },
+    {
+      "audio_file": "as_03.wav",
+      "language": "as",
+      "backend": "indic",
+      "reference": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+      "hypothesis": "মোর ঠিকোনা গুয়াহাটিত আছে",
+      "reply": "মনে হচ্ছে আপনি আপনার ঠিকানা গুৱাহাটীতে আছে বলছেন। কীভাবে সহায়তা করতে পারি?",
+      "asr_ms": 685.5,
+      "llm_ttft_ms": 1012.5,
+      "tts_ttfa_ms": 244.4,
+      "e2e_ms": 1942.4,
+      "audio_seconds": 3.56,
+      "cer": 0.286,
+      "wer": 1.0
+    },
+    {
+      "audio_file": "en_01.wav",
+      "language": "en",
+      "backend": "groq",
+      "reference": "My order number is one two three.",
+      "hypothesis": "My order number is 123.",
+      "reply": "Sure, let me pull up your details. Can you confirm if that’s the full order number?",
+      "asr_ms": 516.8,
+      "llm_ttft_ms": 770.1,
+      "tts_ttfa_ms": 144.8,
+      "e2e_ms": 1431.7,
+      "audio_seconds": 0.61,
+      "cer": 0.423,
+      "wer": 0.429
+    },
+    {
+      "audio_file": "en_02.wav",
+      "language": "en",
+      "backend": "groq",
+      "reference": "Delivery will happen before tomorrow evening.",
+      "hypothesis": "Delivery will happen before tomorrow evening.",
+      "reply": "Sure, I’ll confirm that for you. Just to be sure, you want the delivery by tomorrow evening, right?",
+      "asr_ms": 450.0,
+      "llm_ttft_ms": 672.2,
+      "tts_ttfa_ms": 144.2,
+      "e2e_ms": 1266.4,
+      "audio_seconds": 0.61,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "en_03.wav",
+      "language": "en",
+      "backend": "groq",
+      "reference": "My address is in Delhi.",
+      "hypothesis": "My address is in Delhi.",
+      "reply": "Sure, I can help. Could you tell me what you need regarding your Delhi address?",
+      "asr_ms": 464.1,
+      "llm_ttft_ms": 938.3,
+      "tts_ttfa_ms": 102.1,
+      "e2e_ms": 1504.4,
+      "audio_seconds": 0.61,
+      "cer": 0.0,
+      "wer": 0.0
+    }
+  ],
+  "summary": {
+    "hi": {
+      "n": 3,
+      "cer": 0.047,
+      "wer": 0.17,
+      "asr_ms": {
+        "n": 3,
+        "p50": 159.8,
+        "p95": 218.5
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 447.3,
+        "p95": 496.7
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 173.5,
+        "p95": 248.6
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 769.0,
+        "p95": 825.8
+      }
+    },
+    "gu": {
+      "n": 3,
+      "cer": 0.025,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 831.1,
+        "p95": 1098.9
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 471.7,
+        "p95": 1684.5
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 178.6,
+        "p95": 212.1
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1539.4,
+        "p95": 2656.2
+      }
+    },
+    "mr": {
+      "n": 3,
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 1415.1,
+        "p95": 1443.1
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 447.5,
+        "p95": 664.9
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 134.4,
+        "p95": 667.2
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1990.0,
+        "p95": 2307.9
+      }
+    },
+    "bn": {
+      "n": 3,
+      "cer": 0.044,
+      "wer": 0.233,
+      "asr_ms": {
+        "n": 3,
+        "p50": 764.7,
+        "p95": 776.5
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 562.1,
+        "p95": 600.4
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 201.5,
+        "p95": 248.2
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1303.1,
+        "p95": 1625.1
+      }
+    },
+    "ta": {
+      "n": 3,
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 748.6,
+        "p95": 767.1
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 503.3,
+        "p95": 509.8
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 530.3,
+        "p95": 641.8
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1770.1,
+        "p95": 1863.3
+      }
+    },
+    "te": {
+      "n": 3,
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 755.3,
+        "p95": 841.7
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 591.7,
+        "p95": 1748.1
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 149.8,
+        "p95": 463.2
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1806.6,
+        "p95": 2643.4
+      }
+    },
+    "kn": {
+      "n": 3,
+      "cer": 0.012,
+      "wer": 0.083,
+      "asr_ms": {
+        "n": 3,
+        "p50": 988.6,
+        "p95": 1006.1
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 403.8,
+        "p95": 1866.8
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 179.0,
+        "p95": 209.5
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1589.0,
+        "p95": 3022.6
+      }
+    },
+    "ml": {
+      "n": 3,
+      "cer": 0.029,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 1484.6,
+        "p95": 2005.7
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 1277.1,
+        "p95": 1367.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 151.6,
+        "p95": 279.9
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 2074.0,
+        "p95": 3524.3
+      }
+    },
+    "pa": {
+      "n": 3,
+      "cer": 0.042,
+      "wer": 0.17,
+      "asr_ms": {
+        "n": 3,
+        "p50": 821.3,
+        "p95": 918.9
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 471.8,
+        "p95": 965.7
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 147.4,
+        "p95": 493.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1477.7,
+        "p95": 2280.0
+      }
+    },
+    "or": {
+      "n": 3,
+      "cer": 0.088,
+      "wer": 0.4,
+      "asr_ms": {
+        "n": 3,
+        "p50": 805.5,
+        "p95": 869.9
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 991.8,
+        "p95": 1903.6
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 170.7,
+        "p95": 379.2
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1997.7,
+        "p95": 2879.9
+      }
+    },
+    "as": {
+      "n": 3,
+      "cer": 0.268,
+      "wer": 0.889,
+      "asr_ms": {
+        "n": 3,
+        "p50": 767.1,
+        "p95": 816.0
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 667.9,
+        "p95": 1012.5
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 230.8,
+        "p95": 244.4
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1626.0,
+        "p95": 1942.4
+      }
+    },
+    "en": {
+      "n": 3,
+      "cer": 0.141,
+      "wer": 0.143,
+      "asr_ms": {
+        "n": 3,
+        "p50": 464.1,
+        "p95": 516.8
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 770.1,
+        "p95": 938.3
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 144.2,
+        "p95": 144.8
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 1431.7,
+        "p95": 1504.4
+      }
+    }
+  }
+}

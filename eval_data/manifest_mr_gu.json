@@ -1,0 +1,32 @@
+[
+  {
+    "audio_file": "gu_01.wav",
+    "language": "gu",
+    "reference_text": "મારો ઓર્ડર નંબર એક બે ત્રણ છે."
+  },
+  {
+    "audio_file": "gu_02.wav",
+    "language": "gu",
+    "reference_text": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે."
+  },
+  {
+    "audio_file": "gu_03.wav",
+    "language": "gu",
+    "reference_text": "મારું સરનામું અમદાવાદમાં છે."
+  },
+  {
+    "audio_file": "mr_01.wav",
+    "language": "mr",
+    "reference_text": "माझा ऑर्डर नंबर एक दोन तीन आहे."
+  },
+  {
+    "audio_file": "mr_02.wav",
+    "language": "mr",
+    "reference_text": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल."
+  },
+  {
+    "audio_file": "mr_03.wav",
+    "language": "mr",
+    "reference_text": "माझा पत्ता पुण्यात आहे."
+  }
+]

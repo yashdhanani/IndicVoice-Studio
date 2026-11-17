@@ -1,0 +1,32 @@
+# secrets
+.env
+
+# python
+__pycache__/
+*.py[cod]
+
+# virtual environments and toolchains
+venv/
+.venv313/
+.python/
+
+# tool binaries (keep the scripts, e.g. tools/smoke_streaming.py)
+tools/*.exe
+tools/*.zip
+
+# models and audio (large, reproducible via src.download_models)
+models/
+audio_out/
+
+# scratch
+*.log
+.freebuff/
+
+# local TLS material (private key)
+certs/
+
+# evaluation recordings (may contain real voices)
+eval/audio/
+
+# synthesised starter recordings (regenerate with --make-manifest)
+eval_data/*.wav

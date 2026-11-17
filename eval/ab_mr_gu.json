@@ -1,0 +1,332 @@
+{
+  "turns": [
+    {
+      "audio_file": "gu_01.wav",
+      "language": "gu",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "મારો ઓર્ડર નંબર એક બે ત્રણ છે.",
+      "hypothesis": "મારો ઓર્ડર નંબર એક બે ત્રણ છે",
+      "reply": "",
+      "asr_ms": 661.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 661.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "gu_02.wav",
+      "language": "gu",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+      "hypothesis": "કાલે સાંજ સુધીમાં ડિલીિવરી થાઈ જશે",
+      "reply": "",
+      "asr_ms": 892.6,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 892.6,
+      "audio_seconds": 0.0,
+      "cer": 0.074,
+      "wer": 0.333
+    },
+    {
+      "audio_file": "gu_03.wav",
+      "language": "gu",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "મારું સરનામું અમદાવાદમાં છે.",
+      "hypothesis": "મારું સરનામું અમદાવાદમાં છે",
+      "reply": "",
+      "asr_ms": 594.2,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 594.2,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_01.wav",
+      "language": "mr",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+      "hypothesis": "माझा ऑर्डर नंबर एक दोन तीन आहे",
+      "reply": "",
+      "asr_ms": 1138.6,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1138.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_02.wav",
+      "language": "mr",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल.",
+      "hypothesis": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल",
+      "reply": "",
+      "asr_ms": 819.2,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 819.2,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_03.wav",
+      "language": "mr",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "माझा पत्ता पुण्यात आहे.",
+      "hypothesis": "माझा पत्ता पुण्यात आहे",
+      "reply": "",
+      "asr_ms": 513.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 513.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "gu_01.wav",
+      "language": "gu",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "મારો ઓર્ડર નંબર એક બે ત્રણ છે.",
+      "hypothesis": "મારો ઓર્ડર નંબર એક બે ત્રણ છે",
+      "reply": "",
+      "asr_ms": 655.0,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 655.0,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "gu_02.wav",
+      "language": "gu",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+      "hypothesis": "કાલે સાંજ સુધીમાં ડિલીિવરી થાઈ જશે",
+      "reply": "",
+      "asr_ms": 457.0,
+      "asr_strategy": "speculative",
+      "partials": 3,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 457.0,
+      "audio_seconds": 0.0,
+      "cer": 0.074,
+      "wer": 0.333
+    },
+    {
+      "audio_file": "gu_03.wav",
+      "language": "gu",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "મારું સરનામું અમદાવાદમાં છે.",
+      "hypothesis": "મારું સરનામું અમદાવાદમાં છે",
+      "reply": "",
+      "asr_ms": 627.8,
+      "asr_strategy": "speculative",
+      "partials": 3,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 627.8,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_01.wav",
+      "language": "mr",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+      "hypothesis": "माझा ऑर्डर नंबर एक दोन तीन आहे",
+      "reply": "",
+      "asr_ms": 948.9,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 948.9,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_02.wav",
+      "language": "mr",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल.",
+      "hypothesis": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल",
+      "reply": "",
+      "asr_ms": 729.6,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 729.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    },
+    {
+      "audio_file": "mr_03.wav",
+      "language": "mr",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "माझा पत्ता पुण्यात आहे.",
+      "hypothesis": "माझा पत्ता पुण्यात आहे",
+      "reply": "",
+      "asr_ms": 486.1,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 486.1,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0
+    }
+  ],
+  "summary": {
+    "gu/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.025,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 661.5,
+        "p95": 892.6
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 661.5,
+        "p95": 892.6
+      }
+    },
+    "mr/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 819.2,
+        "p95": 1138.6
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 819.2,
+        "p95": 1138.6
+      }
+    },
+    "gu/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.025,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 627.8,
+        "p95": 655.0
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 627.8,
+        "p95": 655.0
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "mr/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 729.6,
+        "p95": 948.9
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 729.6,
+        "p95": 948.9
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    }
+  }
+}
