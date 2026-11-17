@@ -34,6 +34,7 @@ import queue
 import sys
 import threading
 import time
+import urllib.parse
 from collections import deque
 from pathlib import Path
 
@@ -90,6 +91,40 @@ def _authorised(params: dict) -> bool:
     """Reject callers that do not present the configured token (if one is set)."""
     token = config.ACCESS_TOKEN
     return not token or hmac.compare_digest(params.get("token") or "", token)
+
+
+_LOCAL_HOSTS = {"127.0.0.1", "::1", "localhost"}
+
+#: inbound caps: 2 s of 16 kHz PCM16 per voice frame; telephony gateways send
+#: 20 ms mu-law frames, so anything near these sizes is abusive or broken
+MAX_VOICE_FRAME_BYTES = 64 * 1024
+MAX_TELEPHONY_TEXT_BYTES = 64 * 1024
+MAX_TELEPHONY_PAYLOAD_CHARS = 32 * 1024
+MAX_SESSIONS_PER_IP = 8
+
+
+def _bind_security_error(host: str, token: str) -> str | None:
+    """Fail closed: a non-localhost bind without a token is a configuration error."""
+    if host not in _LOCAL_HOSTS and not token:
+        return (
+            f"refusing to listen on {host} without INDICVOICE_TOKEN: anyone on the "
+            "network could use your LLM key. Set INDICVOICE_TOKEN in .env, "
+            "or bind to 127.0.0.1."
+        )
+    return None
+
+
+def _origin_ok(ws) -> bool:
+    """Browser origins must be localhost or explicitly allowlisted.
+
+    Non-browser clients (telephony gateways, test scripts) send no Origin and
+    are governed by the token instead.
+    """
+    origin = (ws.headers.get("origin") or "").lower()
+    if not origin:
+        return True
+    host = urllib.parse.urlparse(origin).hostname or ""
+    return host in _LOCAL_HOSTS or origin.rstrip("/") in config.ALLOWED_ORIGINS
 
 
 def ulaw_encode(samples: np.ndarray) -> bytes:
@@ -581,6 +616,29 @@ def create_app(
     ``ws`` as a required query parameter (rejecting every handshake with 403).
     """
     app = FastAPI(title="IndicVoice call server")
+    #: live sessions per client IP; handlers run on one event loop, so a plain
+    #: dict is safe (no await between the check and the increment)
+    sessions_by_ip: dict[str, int] = {}
+
+    def _admit(ws, params: dict) -> str | None:
+        """Handshake gates shared by both endpoints. Returns a close reason."""
+        if not _authorised(params):
+            return "token"
+        if not _origin_ok(ws):
+            return "origin"
+        ip = ws.client.host if ws.client else "?"
+        if sessions_by_ip.get(ip, 0) >= MAX_SESSIONS_PER_IP:
+            return "limit"
+        sessions_by_ip[ip] = sessions_by_ip.get(ip, 0) + 1
+        return None
+
+    def _release(ws) -> None:
+        ip = ws.client.host if ws.client else "?"
+        left = sessions_by_ip.get(ip, 0) - 1
+        if left > 0:
+            sessions_by_ip[ip] = left
+        else:
+            sessions_by_ip.pop(ip, None)
 
     web_dir = Path(__file__).resolve().parent.parent / "web"
     if (web_dir / "index.html").exists():
@@ -665,8 +723,9 @@ def create_app(
     async def voice(ws: WebSocket):
         await ws.accept()
         params = dict(ws.query_params)
-        if not _authorised(params):
-            await ws.close(code=4401)
+        reason = _admit(ws, params)
+        if reason:
+            await ws.close(code={"token": 4401, "origin": 4403, "limit": 4429}[reason])
             return
         session = _make_session(
             ws, "browser", params.get("lang", "hi"), params.get("stt_lang"),
@@ -677,22 +736,28 @@ def create_app(
         try:
             while True:
                 message = await ws.receive()
-                if message.get("bytes") is None:
+                data = message.get("bytes")
+                if data is None:
                     if message.get("type") == "websocket.disconnect":
                         break
                     continue
-                await session.feed(pcm16_to_float(message["bytes"]))
+                if len(data) > MAX_VOICE_FRAME_BYTES:
+                    await ws.close(code=1009)
+                    break
+                await session.feed(pcm16_to_float(data))
         except WebSocketDisconnect:
             pass
         finally:
             session.close()
+            _release(ws)
 
     @app.websocket("/ws/telephony")
     async def telephony(ws: WebSocket):
         await ws.accept()
         params = dict(ws.query_params)
-        if not _authorised(params):
-            await ws.close(code=4401)
+        reason = _admit(ws, params)
+        if reason:
+            await ws.close(code={"token": 4401, "origin": 4403, "limit": 4429}[reason])
             return
         session = _make_session(
             ws, "telephony", params.get("lang", "hi"), params.get("stt_lang"),
@@ -704,18 +769,34 @@ def create_app(
         try:
             while True:
                 raw = await ws.receive_text()
-                event = json.loads(raw)
+                if len(raw) > MAX_TELEPHONY_TEXT_BYTES:
+                    await ws.close(code=1009)
+                    break
+                try:
+                    event = json.loads(raw)
+                    payload = (event.get("media") or {}).get("payload")
+                    audio8k = (
+                        ulaw_decode(base64.b64decode(payload))
+                        if payload and len(payload) <= MAX_TELEPHONY_PAYLOAD_CHARS
+                        else None
+                    )
+                except (ValueError, AttributeError):
+                    # malformed JSON / base64 / shape: drop the client, not the server
+                    await ws.close(code=1003)
+                    break
                 if event.get("event") in {"stop", "disconnect"}:
                     break
-                payload = (event.get("media") or {}).get("payload")
-                if not payload:
+                if payload and audio8k is None:
+                    await ws.close(code=1009)
+                    break
+                if audio8k is None:
                     continue
-                audio8k = ulaw_decode(base64.b64decode(payload))
                 await session.feed(resample(audio8k, TELEPHONY_RATE, SAMPLE_RATE))
         except WebSocketDisconnect:
             pass
         finally:
             session.close()
+            _release(ws)
 
     return app
 
@@ -770,6 +851,11 @@ def main(argv: list[str] | None = None) -> int:
                         help="decode only after the caller stops speaking (block ASR)")
     args = parser.parse_args(argv)
 
+    bind_error = _bind_security_error(args.host, config.ACCESS_TOKEN)
+    if bind_error:
+        print(f"[security] {bind_error}")
+        return 1
+
     missing = [
         str(p) for p in (config.VAD_PATH, config.tts_model_dir(args.lang) / "model.onnx")
         if not Path(p).exists()
@@ -819,9 +905,6 @@ def main(argv: list[str] | None = None) -> int:
     print(f"IndicVoice call server on {scheme}://{args.host}:{args.port}  (Ctrl+C to stop)")
     if config.ACCESS_TOKEN:
         print(f"  token required: open {scheme}://{args.host}:{args.port}/?token=<your-token>")
-    elif args.host not in {"127.0.0.1", "localhost"}:
-        print("  [warn] listening beyond localhost with no INDICVOICE_TOKEN - anyone on the")
-        print("         network can use your LLM key. Set INDICVOICE_TOKEN in .env.")
     uvicorn.run(app, host=args.host, port=args.port, log_level="warning", **ssl_args)
     return 0
 

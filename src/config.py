@@ -271,8 +271,17 @@ STT_BACKEND_BY_LANG = {"en": "groq"}
 #: "fast" (default) lets slow languages use cloud ASR; "accurate" keeps them local.
 STT_MODE = os.environ.get("INDICVOICE_STT_MODE", "fast").lower()
 
-#: When set, /ws/voice and /ws/telephony require ?token=<value>. Empty = open.
+#: When set, /ws/voice and /ws/telephony require ?token=<value>. Empty = open
+#: on localhost only; binding beyond localhost without a token refuses startup.
 ACCESS_TOKEN = os.environ.get("INDICVOICE_TOKEN", "")
+
+#: Extra browser origins allowed on the WebSocket endpoints (comma-separated,
+#: e.g. "https://calls.example.com"). Localhost origins are always allowed;
+#: clients without an Origin header (telephony gateways, scripts) are not affected.
+ALLOWED_ORIGINS = tuple(
+    o.strip().lower() for o in os.environ.get("INDICVOICE_ALLOWED_ORIGINS", "").split(",")
+    if o.strip()
+)
 
 #: A call with no audio in either direction for this long is closed (4408).
 SESSION_IDLE_SECONDS = float(os.environ.get("INDICVOICE_IDLE_TIMEOUT", "180"))

@@ -9,14 +9,14 @@ measured are scored on implementation state only and say so.
 
 | Category | Weight | Score | Justification |
 |---|---|---|---|
-| Recognition accuracy | 20% | 78 | Strong on 9/12 languages (CER 0.00–0.09 on the 36-clip set); `as` 0.268 (bn-model workaround), `en` 0.141 driven by one bad clip (0.423). Corpus too small (n=3/lang) for confidence. Streaming preserves block accuracy exactly — measured. |
+| Recognition accuracy | 20% | 70 | Streaming preserves block accuracy exactly — measured. On the synthesized 36-clip set: CER 0.00–0.09 for 9/12 languages; `as` 0.268 (bn-model workaround), `en` 0.141 driven by one bad clip. Absolute values are optimistic (TTS audio, n=3/lang); real-recording accuracy is unmeasured. |
 | Latency | 20% | 62 | ASR stage: streaming p50 0–530 ms on 10/12 languages (measured A/B). E2E EOU→first-audio not benchmarked; single live smoke turn showed 721–1074 ms. The brief's 300–500 ms E2E target is **not met / not proven**. |
 | Voice naturalness | 10% | 45 | Humanizer, clause pauses, seam blending, room tone implemented and audible in smoke audio, but **no MOS or listener study exists** — score reflects implementation only, not verified quality. |
 | Reliability | 15% | 60 | ASR errors no longer drop calls (tested); watchdog fixed (tested); barge-in socket race mitigated but not stress-tested; no load test, no multi-turn stability test, no concurrency data. |
 | Security & privacy | 10% | 45 | Constant-time token compare, XSS fixed, no secrets in logs/reports, TLS available. But: default open access, token in query string, no inbound size/rate limits, no per-IP caps. Not safe beyond localhost as-is. |
 | Observability | 5% | 40 | Per-turn latency events + strategy info + `/health` readiness (backend-aware). No structured logs, turn IDs, metrics, or alerting. |
 | Testing & CI | 10% | 65 | 45 automated tests across unit/WS-integration layers, all passing, covering every fixed defect except D9. No CI, no git, other languages' WS paths not individually tested. |
-| Evaluation rigor | 5% | 55 | Real recordings, real-time feeding, server-matching endpoint semantics, accuracy-gated A/B, honest noise handling. Corpus 3/lang vs ≥20 target; no robustness or naturalness sets. |
+| Evaluation rigor | 5% | 45 | Real measurement pipeline: real-time feeding, server-matching endpoint semantics, accuracy-gated A/B, honest noise handling. But the corpus is **synthesized TTS starter audio** (3/lang), not the real human recordings (≥20/lang) the brief requires; no robustness or naturalness sets. |
 | Documentation & rollback | 5% | 75 | Inventory, audit, changelog, eval framework, roadmap, this report; runtime kill switch restores block behavior. No git history yet (P0.1). |
 
 **Weighted total: 61 / 100** — a solid single-machine prototype with measured,

@@ -19,7 +19,7 @@ Effort estimates are engineering judgment, not measurements.
 
 | # | Item | Why | Effort | Status |
 |---|---|---|---|---|
-| P1.1 | Expand eval corpus to ≥20 utterances/language incl. short answers and code-switching | n=3 makes p95 meaningless; the brief's ≥20 target is unmet | 3–5 d (recording + native review) | planned |
+| P1.1 | Replace the synthesized starter corpus with ≥20 **real** recordings/language (240 total) incl. short answers, code-switching, varied speakers/accents/speeds, noise and natural pauses | current wavs are TTS-generated; absolute CER is optimistic and the brief's real-recordings requirement is unmet; n=3 makes p95 meaningless | 3–5 d (recording + native review) | planned |
 | P1.2 | Full E2E streaming-vs-block A/B on the live server (EOU→first-audio, p50/p95, ≥20 turns/lang) | only the ASR stage is A/B-measured; the user-perceived number is E2E | 2 d | planned |
 | P1.3 | CI: run `unittest discover tests` + the A/B accuracy gate on every change (after P0.1) | 45 tests exist but nothing runs them automatically (D5 remainder) | 1 d | partial (suite **done**, CI planned) |
 | P1.4 | Tune post-miss suppression for fast languages | live smoke: pause-heavy hi turn finalized "full" at 353 ms vs block 203 ms — guards are conservative where the model is fast enough to re-speculate safely | 1–2 d | planned |

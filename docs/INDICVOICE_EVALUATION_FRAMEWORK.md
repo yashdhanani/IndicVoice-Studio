@@ -1,9 +1,15 @@
 # IndicVoice evaluation framework
 
-Status of every claim in this document: **measured** (real audio, real models, numbers
-in `benchmarks/results/`), **implemented** (code exists and runs), or **planned** (not
-built yet). Nothing here is simulated. No MOS, WER-on-large-corpus, or success-rate
-figures are claimed because none were measured.
+Status of every claim in this document: **measured** (real models, real decodes,
+numbers in `benchmarks/results/`), **implemented** (code exists and runs), or
+**planned** (not built yet). Nothing here is simulated. No MOS, WER-on-large-corpus,
+or success-rate figures are claimed because none were measured.
+
+**Corpus caveat (material)**: the current `eval_data/*.wav` clips are
+**TTS-synthesized starter audio**, not human recordings. All published CER/WER and
+latency numbers were measured on that corpus: the pipeline is real, but absolute
+accuracy is optimistic versus real callers. The streaming-vs-block parity claim
+holds regardless (same audio, both modes). Real recordings are the P1.1 gate.
 
 ## 1. What exists today (implemented + measured)
 
@@ -13,8 +19,10 @@ figures are claimed because none were measured.
 python -m src.evaluate --manifest eval_data/manifest.json --mode ab --asr-only --out eval/ab_full.json
 ```
 
-- **Input**: real recordings (`eval_data/*.wav`, 16 kHz mono) with native-script
-  reference texts in `eval_data/manifest.json`. Currently 3 utterances × 12 languages.
+- **Input**: `eval_data/*.wav` (16 kHz mono, currently TTS-synthesized starter clips)
+  with native-script reference texts in `eval_data/manifest.json`. Currently
+  3 utterances × 12 languages. The harness consumes real recordings unchanged once
+  they replace the wavs.
 - **Block mode**: whole utterance → `STTEngine.transcribe` once; latency = decode time.
 - **Streaming mode**: audio fed at real-time pace in 20 ms frames through
   `StreamingSTT`, exactly as the live server feeds it; feeding stops at
@@ -32,7 +40,7 @@ python -m src.evaluate --manifest eval_data/manifest.json --mode ab --asr-only -
 
 ### 1.2 Live-server smoke — `tools/smoke_streaming.py`
 
-Streams one real recording into a running `src.call_server` over WebSocket in both
+Streams one recording into a running `src.call_server` over WebSocket in both
 modes and prints partials, final transcript, strategy, and the server's own latency
 event (`asr_ms`, `llm_ms`, `tts_ms`, `first_audio_ms`). Verified 2026-11-17 on hi
 (`benchmarks/results/smoke_live_hi.md`). This is a functional check, not a benchmark.
@@ -58,6 +66,7 @@ PYTHONIOENCODING=utf-8 .venv313/Scripts/python.exe -m unittest discover tests -v
 
 | Gap | Why it matters | Priority |
 |---|---|---|
+| Corpus is **synthesized TTS audio**, not human recordings | absolute CER/WER are optimistic; no accent/noise/speed variation; the brief's "real recordings primary" requirement is unmet | P1 (top) |
 | Corpus is 3 utterances/language, not ≥20 | p50/p95 on n=3 is noisy; single-run deltas <20% are not trustworthy (mr regression appeared in one run, vanished in the isolated re-run) | P1 |
 | No full E2E (ASR+LLM+TTS) streaming-vs-block A/B on the live server | the user-perceived number is EOU→first-audio; only the ASR stage is A/B-measured so far | P1 |
 | No MOS / naturalness measurement | voice-quality work (humanizer, seam blending) is implemented but unmeasured; needs ≥10 native listeners per language rating 1–5, or a validated proxy | P2 |

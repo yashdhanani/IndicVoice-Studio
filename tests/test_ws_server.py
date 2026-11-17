@@ -19,7 +19,13 @@ import numpy as np
 import uvicorn
 
 from src import config
-from src.call_server import create_app, resample, ulaw_encode
+from src.call_server import (
+    MAX_SESSIONS_PER_IP,
+    _bind_security_error,
+    create_app,
+    resample,
+    ulaw_encode,
+)
 from src.evaluate import read_wav
 from src.sts_pipeline import STTEngine
 
@@ -221,6 +227,103 @@ class WSTests(unittest.IsolatedAsyncioTestCase):
                 msg = await asyncio.wait_for(ws.receive(), timeout=12)
                 self.assertEqual(msg.type, aiohttp.WSMsgType.CLOSE)
                 self.assertEqual(msg.data, 4408)
+
+    # -- Production Hardening V1: P0 security gates -------------------------- #
+
+    async def _expect_close(self, path, code, headers=None, send=None):
+        async with aiohttp.ClientSession() as session:
+            ws = await session.ws_connect(self.base + path, headers=headers or {})
+            if send is not None:
+                await send(ws)
+            deadline = time.perf_counter() + 10
+            while time.perf_counter() < deadline:
+                msg = await asyncio.wait_for(ws.receive(), timeout=10)
+                if msg.type == aiohttp.WSMsgType.TEXT:
+                    continue  # e.g. telephony "connected" before the close
+                self.assertEqual(msg.type, aiohttp.WSMsgType.CLOSE)
+                self.assertEqual(msg.data, code)
+                return
+            self.fail(f"no close frame with code {code}")
+
+    async def test_foreign_origin_rejected(self):
+        await self._expect_close(
+            "/ws/voice?lang=hi", 4403, headers={"Origin": "http://evil.example"})
+
+    async def test_localhost_origin_allowed(self):
+        async with aiohttp.ClientSession() as session:
+            ws = await session.ws_connect(
+                self.base + "/ws/voice?lang=hi",
+                headers={"Origin": f"http://127.0.0.1:{self.port}"})
+            await ws.send_bytes(b"\x00" * 640)
+            await asyncio.sleep(0.3)
+            self.assertFalse(ws.closed)
+            await ws.close()
+
+    async def test_allowlisted_origin_allowed(self):
+        with mock.patch.object(config, "ALLOWED_ORIGINS", ("https://calls.example.com",)):
+            async with aiohttp.ClientSession() as session:
+                ws = await session.ws_connect(
+                    self.base + "/ws/voice?lang=hi",
+                    headers={"Origin": "https://calls.example.com"})
+                await ws.send_bytes(b"\x00" * 640)
+                await asyncio.sleep(0.3)
+                self.assertFalse(ws.closed)
+                await ws.close()
+
+    async def test_oversized_voice_frame_closes_1009(self):
+        async def send(ws):
+            await ws.send_bytes(b"\x00" * 70000)
+        await self._expect_close("/ws/voice?lang=hi", 1009, send=send)
+
+    async def test_oversized_telephony_payload_closes_1009(self):
+        async def send(ws):
+            await ws.send_str(json.dumps(
+                {"event": "media", "media": {"payload": "A" * 40000}}))
+        await self._expect_close("/ws/telephony?lang=hi", 1009, send=send)
+
+    async def test_malformed_telephony_json_closes_1003(self):
+        async def send(ws):
+            await ws.send_str("this is not json")
+        await self._expect_close("/ws/telephony?lang=hi", 1003, send=send)
+
+    async def test_per_ip_session_limit(self):
+        async with aiohttp.ClientSession() as session:
+            held = []
+            try:
+                for _ in range(MAX_SESSIONS_PER_IP):
+                    held.append(await session.ws_connect(self.base + "/ws/voice?lang=hi"))
+                ws = await session.ws_connect(self.base + "/ws/voice?lang=hi")
+                msg = await asyncio.wait_for(ws.receive(), timeout=10)
+                self.assertEqual(msg.type, aiohttp.WSMsgType.CLOSE)
+                self.assertEqual(msg.data, 4429)
+            finally:
+                for ws in held:
+                    await ws.close()
+            # slots are released on disconnect
+            await asyncio.sleep(0.5)
+            ws = await session.ws_connect(self.base + "/ws/voice?lang=hi")
+            await ws.send_bytes(b"\x00" * 640)
+            await asyncio.sleep(0.3)
+            self.assertFalse(ws.closed)
+            await ws.close()
+
+
+class TestBindSecurity(unittest.TestCase):
+    def test_non_localhost_without_token_fails_closed(self):
+        for host in ("0.0.0.0", "192.168.1.5", "10.0.0.2"):
+            self.assertIsNotNone(_bind_security_error(host, ""))
+
+    def test_non_localhost_with_token_ok(self):
+        self.assertIsNone(_bind_security_error("0.0.0.0", "secret"))
+
+    def test_localhost_open_ok(self):
+        for host in ("127.0.0.1", "localhost", "::1"):
+            self.assertIsNone(_bind_security_error(host, ""))
+
+    def test_main_refuses_insecure_bind(self):
+        from src.call_server import main
+        with mock.patch.object(config, "ACCESS_TOKEN", ""):
+            self.assertEqual(main(["--host", "0.0.0.0", "--no-warm"]), 1)
 
 
 if __name__ == "__main__":
