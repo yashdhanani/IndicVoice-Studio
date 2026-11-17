@@ -17,3 +17,4 @@ websockets==17.4
 #   tools/uv.exe pip install --python .venv313/Scripts/python.exe -r requirements.txt
 onnxruntime>=1.20
 cryptography>=42  # self-signed HTTPS for phone access (--tls)
+aiohttp>=3.9  # test/benchmark WebSocket client (tests/, benchmarks/)

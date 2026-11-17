@@ -9,9 +9,9 @@ Effort estimates are engineering judgment, not measurements.
 
 | # | Item | Why | Effort | Status |
 |---|---|---|---|---|
-| P0.1 | Initialise git, commit current state, fix `.gitignore` (`tools/` ignored, D18) | no rollback path exists today (D4); every future change is unrecoverable | 0.5 d | planned |
-| P0.2 | Auth hardening for non-localhost: token out of the query string (header or subprotocol), refuse non-localhost bind without token + TLS (D3 remainder) | query-string tokens land in proxy logs; constant-time compare alone is not enough | 1 d | partial (compare fixed, transport not) |
-| P0.3 | Inbound WS limits: max frame size, telephony payload cap, per-IP connection limit (D14) | one malicious client can exhaust memory today | 1 d | planned |
+| P0.1 | Initialise git, commit current state, fix `.gitignore` (`tools/` ignored, D18) | no rollback path exists today (D4); every future change is unrecoverable | 0.5 d | **done** (5768a6d, c483f3d, 8b9efc1, 4a84be9) |
+| P0.2 | Auth hardening for non-localhost: token out of the query string (header or subprotocol), refuse non-localhost bind without token + TLS (D3 remainder) | query-string tokens land in proxy logs; constant-time compare alone is not enough | 1 d | **done server-side** (fail-closed bind + one-time `?ticket=` via Authorization header); web/gateway client migration still planned |
+| P0.3 | Inbound WS limits: max frame size, telephony payload cap, per-IP connection limit (D14) | one malicious client can exhaust memory today | 1 d | **done** (+ utterance/session-duration caps, bounded outbound queue; see SECURITY_HARDENING B5) |
 | P0.4 | ASR error survival | one Groq blip dropped the whole call (D1) | — | **done** (fix + regression test) |
 | P0.5 | Streaming accuracy guards | stale speculative transcript corrupted kn_02 (D6) | — | **done** (guards + A/B parity all 12 langs) |
 
@@ -19,9 +19,9 @@ Effort estimates are engineering judgment, not measurements.
 
 | # | Item | Why | Effort | Status |
 |---|---|---|---|---|
-| P1.1 | Replace the synthesized starter corpus with ≥20 **real** recordings/language (240 total) incl. short answers, code-switching, varied speakers/accents/speeds, noise and natural pauses | current wavs are TTS-generated; absolute CER is optimistic and the brief's real-recordings requirement is unmet; n=3 makes p95 meaningless | 3–5 d (recording + native review) | planned |
-| P1.2 | Full E2E streaming-vs-block A/B on the live server (EOU→first-audio, p50/p95, ≥20 turns/lang) | only the ASR stage is A/B-measured; the user-perceived number is E2E | 2 d | planned |
-| P1.3 | CI: run `unittest discover tests` + the A/B accuracy gate on every change (after P0.1) | 45 tests exist but nothing runs them automatically (D5 remainder) | 1 d | partial (suite **done**, CI planned) |
+| P1.1 | Replace the synthesized starter corpus with ≥20 **real** recordings/language (240 total) incl. short answers, code-switching, varied speakers/accents/speeds, noise and natural pauses | current wavs are TTS-generated; absolute CER is optimistic and the brief's real-recordings requirement is unmet; n=3 makes p95 meaningless | 3–5 d (recording + native review) | tooling **done** (240-slot manifest, validator, consent guide); recordings 0/240 NOT COLLECTED |
+| P1.2 | Full E2E streaming-vs-block A/B on the live server (EOU→first-audio, p50/p95, ≥20 turns/lang) | only the ASR stage is A/B-measured; the user-perceived number is E2E | 2 d | partial (streaming E2E p50/p90/p95 measured, hi+en n=20 each, `benchmarks/run_e2e_latency.py`; matched block-mode E2E run outstanding) |
+| P1.3 | CI: run `unittest discover tests` + the A/B accuracy gate on every change (after P0.1) | 71 tests exist but nothing runs them automatically (D5 remainder) | 1 d | partial (suite **done**; `.github/workflows/ci.yml` authored; GitHub execution NOT TESTED — no remote) |
 | P1.4 | Tune post-miss suppression for fast languages | live smoke: pause-heavy hi turn finalized "full" at 353 ms vs block 203 ms — guards are conservative where the model is fast enough to re-speculate safely | 1–2 d | planned |
 | P1.5 | Rapid-barge-in stress test to reproduce/verify D9 | `abort_active()` mitigation is code-inspection-verified only | 1 d | planned |
 

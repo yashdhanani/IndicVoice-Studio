@@ -69,6 +69,7 @@ and is not included in `asr_ms`/E2E — true EOU-to-first-audio is ~260 ms highe
 - D19 `agent.marks` is cleared per respond(); a latency event emitted after the next turn started reads the new turn's marks (minor race, cosmetic).
 - D20 `AudioSink.is_speaking` is wall-clock estimated from emit time, not client playback; network jitter skews the echo gate/barge-in window slightly.
 - D21 hi/mr and bn/as are indistinguishable by script; session default wins ties (documented behavior, but a Marathi caller in a hi-default session stays on the Hindi ASR).
+- D22 **(resolved, Hardening V1 B3)** `web/app.js` rendered the server-provided `v.backend` string from `/health` through an `innerHTML` template — a spoofed/compromised health response could inject HTML. Fixed to `textContent`; pinned by `tests/test_xss.py`.
 
 ## 3. Accuracy findings (measured, n=3/language — small sample, expand per Phase 6)
 

@@ -54,6 +54,15 @@ class StubLLM:
 class WSTests(unittest.IsolatedAsyncioTestCase):
     @classmethod
     def setUpClass(cls):
+        # fast CI tier: these tests need local models + starter clips, which
+        # are git-ignored; skip (never silently pass) when they are absent
+        models_present = (
+            Path(config.VAD_PATH).exists()
+            and (config.tts_model_dir("hi") / "model.onnx").exists()
+            and config.has_indic_asr("hi")
+        )
+        if not models_present or not WAV.exists():
+            raise unittest.SkipTest("local hi models / starter WAVs not present")
         cls.audio = read_wav(WAV)
         cls.pcm = (cls.audio * 32767).astype("<i2")
         app = create_app(agent_factory=StubLLM, streaming=True)

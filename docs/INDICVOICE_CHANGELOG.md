@@ -13,7 +13,7 @@ All numbers below are measured on this machine (Windows, CPU-only) with
 | Streaming integration in the call server (ring-buffer seed, partial events, `?streaming=0` / `--no-streaming` kill switch) | `src/call_server.py` | implemented, WS-integration-tested, live-smoke-tested |
 | Real block-vs-streaming A/B evaluation (`--mode ab --asr-only`), real-time-pace feeding with server-matching endpoint semantics | `src/evaluate.py` | implemented, used for all numbers below |
 | Live-server smoke client (same recording, both modes) | `tools/smoke_streaming.py` | implemented, run successfully |
-| Test suite: 39 unit tests + 6 WebSocket integration tests (stdlib `unittest`, real local hi ASR/TTS, stub LLM — no cloud calls in tests) | `tests/` | all passing |
+| Test suite: 71 tests (unit + state-machine + WebSocket integration + security + static XSS; stdlib `unittest`, real local hi ASR/TTS, stub LLM — no cloud calls in tests) | `tests/` | all passing (136 s) |
 | Codebase inventory | `docs/INDICVOICE_CODEBASE_INVENTORY.md` | complete |
 | Technical audit with defect register D1–D21 | `docs/INDICVOICE_TECHNICAL_AUDIT.md` | complete |
 
@@ -34,6 +34,24 @@ All numbers below are measured on this machine (Windows, CPU-only) with
 Deferred to the roadmap (not fixed this pass): D4 (no version control), D5/D6 (eval corpus
 size, no CI), D10 (tiny-TTS cancel_event ignored mid-sentence), D12–D14 (observability
 gaps), D17–D21 (hardening items). See `docs/INDICVOICE_TECHNICAL_AUDIT.md`.
+
+## Production Hardening V1 (2026-11-17, commits 5768a6d → c483f3d → 8b9efc1)
+
+| Phase | Item | Status |
+|---|---|---|
+| A | Baseline preserved in git; revalidation + environment characterization | `docs/PRODUCTION_V1_BASELINE.md` |
+| B1 | Fail-closed non-localhost bind; visible dev mode (startup banner + `/health` `auth` field); empty/invalid token rejected | PASS (automated) |
+| B2 | One-time short-lived `?ticket=` via `POST /auth/ticket` (Authorization header); legacy `?token=` preserved; migration documented | PASS (automated); client migration NOT TESTED |
+| B3 | **D22 fixed**: `/health`-derived `v.backend` string rendered via `innerHTML` in `web/app.js` → `textContent`; static XSS regression tests pin all sinks | PASS (automated) |
+| B4 | Env-driven Origin allowlist (`INDICVOICE_ALLOWED_ORIGINS`), 4403 on foreign origins | PASS (automated) |
+| B5 | Abuse caps: 64 KiB frames, 32 Ki-char telephony payloads, 8 sessions/IP, 60 s utterance cap (truncation + warning; `StreamingSTT(max_buffer=…)`), 1800 s session cap (4410), 4096-item bounded outbound queue (slow-drain close) | PASS (automated; >60 s live utterance NOT TESTED) |
+| B6 | Idle watchdog 4408 + max-duration watchdog 4410; IP slot always released | PASS (automated) |
+| B7 | Security regression suite; full suite 71/71 (was 56; none weakened) | PASS |
+| D | 240-slot real-recording manifest (12 langs × 20, all NOT_COLLECTED), schema validator (self-tested 6/6), consent/recording guide | tooling PASS; dataset 0/240 NOT COLLECTED |
+| H | GitHub Actions fast tier (model-free, cloud-free) + manual model tier; model-absent tests skip explicitly | authored; execution on GitHub NOT TESTED (no remote) |
+
+Details: `docs/INDICVOICE_SECURITY_HARDENING.md`, `docs/INDICVOICE_CI_GUIDE.md`,
+`evaluation/dataset/README.md`.
 
 ## Measured: block vs streaming A/B (ASR-only, synthesized starter corpus)
 

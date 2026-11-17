@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  fast:
+    name: Fast tier (model-free, cloud-free)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: PortAudio runtime (sounddevice import)
+        run: sudo apt-get update && sudo apt-get install -y libportaudio2
+      - name: Install fast-tier dependencies
+        run: pip install -r requirements-ci.txt
+      - name: Unit + security regression tests
+        run: python -m unittest discover -s tests -v
+        env:
+          PYTHONIOENCODING: utf-8
+      - name: Dataset schema validation (completeness is a manual gate)
+        run: python benchmarks/validate_dataset.py
+
+  model-tier:
+    name: Model tier (manual; local models, still no paid cloud)
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: PortAudio runtime
+        run: sudo apt-get update && sudo apt-get install -y libportaudio2
+      - name: Install full dependencies
+        run: pip install -r requirements.txt
+      - name: Download hi + en models and VAD
+        run: python -m src.download_models --langs hi en --vad
+      - name: Full test suite (model-backed tests now run)
+        run: python -m unittest discover -s tests -v
+        env:
+          PYTHONIOENCODING: utf-8

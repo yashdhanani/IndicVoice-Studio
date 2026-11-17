@@ -68,10 +68,10 @@ PYTHONIOENCODING=utf-8 .venv313/Scripts/python.exe -m unittest discover tests -v
 |---|---|---|
 | Corpus is **synthesized TTS audio**, not human recordings | absolute CER/WER are optimistic; no accent/noise/speed variation; the brief's "real recordings primary" requirement is unmet | P1 (top) |
 | Corpus is 3 utterances/language, not ≥20 | p50/p95 on n=3 is noisy; single-run deltas <20% are not trustworthy (mr regression appeared in one run, vanished in the isolated re-run) | P1 |
-| No full E2E (ASR+LLM+TTS) streaming-vs-block A/B on the live server | the user-perceived number is EOU→first-audio; only the ASR stage is A/B-measured so far | P1 |
-| No MOS / naturalness measurement | voice-quality work (humanizer, seam blending) is implemented but unmeasured; needs ≥10 native listeners per language rating 1–5, or a validated proxy | P2 |
-| No noise/reverb/codec robustness set | real phone audio is 8 kHz μ-law with noise; only clean recordings tested (telephony path is functionally tested, not accuracy-benchmarked) | P2 |
-| No CI | tests exist but nothing runs them automatically; repo is not even under git (D4) | P1 |
+| No full E2E (ASR+LLM+TTS) streaming-vs-block A/B on the live server | single-session E2E percentiles now measured (`benchmarks/run_e2e_latency.py`, streaming mode); a matched block-mode E2E A/B is still outstanding | P1 |
+| No MOS / naturalness measurement | voice-quality work (humanizer, seam blending) is implemented but unmeasured; protocol below, ≥10 native listeners per language rating 1–5 | P2 |
+| No noise/reverb/codec robustness set | labeled synthetic-noise matrix tool exists (`benchmarks/run_noise_matrix.py`); real babble/reverb and 8 kHz μ-law accuracy deltas still unmeasured | P2 |
+| CI authored, not executed on GitHub | `.github/workflows/ci.yml` fast+model tiers exist; no remote configured, so cloud execution is NOT TESTED (see `INDICVOICE_CI_GUIDE.md`) | P1 |
 | No long-call / multi-turn stability test | watchdog, barge-in, language switching over 20+ turns untested | P2 |
 | `as` evaluated against the bn-model workaround | CER 0.268 is a mapping artifact; needs native Assamese references + ideally a real as model | P2 |
 
@@ -96,3 +96,28 @@ PYTHONIOENCODING=utf-8 .venv313/Scripts/python.exe -m unittest discover tests -v
 - References double-checked by a native reader; store in `eval_data/manifest.json`
   format so the existing harness consumes them unchanged.
 - Re-run the A/B gate on every change to `streaming_stt.py`, VAD, or endpoint config.
+
+## 5. Human MOS protocol (workflow only — NOT conducted, no scores exist)
+
+Naturalness claims require real listeners. Until this study is run, every
+naturalness statement must say "implemented, unmeasured".
+
+1. **Stimuli**: per language, 10 replies rendered by the current pipeline
+   (humanizer on) and the same 10 with humanizer off, plus 2 anchor clips
+   (a professional recording as high anchor, a robotic TTS as low anchor).
+   Render offline at the voice's native rate; normalize loudness.
+2. **Listeners**: ≥10 native speakers per language, normal hearing,
+   recruited with consent; no affiliation with the project.
+3. **Procedure**: randomized order, blind to condition; each clip rated
+   1–5 (bad–excellent) for naturalness only; one sitting ≤20 minutes;
+   headphones in a quiet room; repeat 10% of clips to check intra-rater
+   consistency (drop raters with <0.7 correlation).
+4. **Reporting**: mean MOS ± 95% CI per language per condition, n listeners,
+   n ratings, dropout count. A condition difference is claimed only if the
+   CIs do not overlap.
+5. **Storage**: raw ratings CSV + consent records under `evaluation/mos/`
+   (git-ignored if it contains listener identifiers); results summarized in
+   the final report with the exact protocol version.
+
+Fabricating MOS numbers, substituting TTS-vs-TTS "listening" by the
+developer, or reporting a proxy metric as MOS are all prohibited.

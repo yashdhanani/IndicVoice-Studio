@@ -1,0 +1,10 @@
+# Fast CI tier: everything the model-free tests need, nothing else.
+# Models, sherpa-onnx and onnxruntime are intentionally absent; model-backed
+# tests skip themselves when the models are not on disk. No cloud keys.
+numpy==2.5.5
+scipy==1.18.1
+fastapi==0.163.1
+uvicorn==0.54.0
+websockets==17.4
+aiohttp>=3.9
+sounddevice==0.5.6
