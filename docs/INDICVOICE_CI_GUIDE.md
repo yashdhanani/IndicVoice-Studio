@@ -5,7 +5,7 @@
 | Tier | Trigger | Models | Cloud keys | What runs |
 |---|---|---|---|---|
 | **fast** | every push / PR | none | none | codecs, text normalization, streaming state machine (fake engine), bind security, queue cap, static XSS checks, dataset schema validation |
-| **model** | manual `workflow_dispatch` | downloaded in-job (hi, en, VAD) | none | the full 71-test suite including real-model WebSocket integration turns (StubLLM — still no cloud) |
+| **model** | manual `workflow_dispatch` | downloaded in-job (hi, en, VAD) | none | the full 72-test suite including real-model WebSocket integration turns (StubLLM — still no cloud) |
 | **cloud** | never in CI | — | — | live Groq/OpenAI turns stay a local, authorized activity (`tools/smoke_streaming.py`, `benchmarks/run_e2e_latency.py`) |
 | **stress / benchmarks** | local only | yes | LLM key from `.env` | `benchmarks/run_e2e_latency.py`, `benchmarks/run_concurrency.py` — hardware-sensitive, must not run on shared CI runners |
 
@@ -55,7 +55,7 @@ python benchmarks/validate_dataset.py --require-complete
   the fast job runs green; then trigger the model tier once via
   *Actions → CI → Run workflow*.
 - Fast-tier test selection verified locally (skip simulation above); the
-  full 71-test suite passes locally on Windows/Python 3.13. Linux behavior
+  full 72-test suite passes locally on Windows/Python 3.13. Linux behavior
   of the model tier (sherpa-onnx/onnxruntime wheels) is **NOT TESTED**.
 
 ## Rules for future changes

@@ -13,7 +13,7 @@ All numbers below are measured on this machine (Windows, CPU-only) with
 | Streaming integration in the call server (ring-buffer seed, partial events, `?streaming=0` / `--no-streaming` kill switch) | `src/call_server.py` | implemented, WS-integration-tested, live-smoke-tested |
 | Real block-vs-streaming A/B evaluation (`--mode ab --asr-only`), real-time-pace feeding with server-matching endpoint semantics | `src/evaluate.py` | implemented, used for all numbers below |
 | Live-server smoke client (same recording, both modes) | `tools/smoke_streaming.py` | implemented, run successfully |
-| Test suite: 71 tests (unit + state-machine + WebSocket integration + security + static XSS; stdlib `unittest`, real local hi ASR/TTS, stub LLM — no cloud calls in tests) | `tests/` | all passing (136 s) |
+| Test suite: 72 tests (unit + state-machine + WebSocket integration + security + static XSS + A/B sub-manifest regression; stdlib `unittest`, real local hi ASR/TTS, stub LLM — no cloud calls in tests) | `tests/` | all passing |
 | Codebase inventory | `docs/INDICVOICE_CODEBASE_INVENTORY.md` | complete |
 | Technical audit with defect register D1–D21 | `docs/INDICVOICE_TECHNICAL_AUDIT.md` | complete |
 
@@ -49,9 +49,90 @@ gaps), D17–D21 (hardening items). See `docs/INDICVOICE_TECHNICAL_AUDIT.md`.
 | B7 | Security regression suite; full suite 71/71 (was 56; none weakened) | PASS |
 | D | 240-slot real-recording manifest (12 langs × 20, all NOT_COLLECTED), schema validator (self-tested 6/6), consent/recording guide | tooling PASS; dataset 0/240 NOT COLLECTED |
 | H | GitHub Actions fast tier (model-free, cloud-free) + manual model tier; model-absent tests skip explicitly | authored; execution on GitHub NOT TESTED (no remote) |
+| E | TTS RTF/first-audio bench (12 langs), noise matrix (hi/gu/kn), LLM script check (12 langs), counterbalanced A/B re-run | measured — see Phase E section below |
+| F | E2E latency benchmark, 2 runs × 40 live turns (hi/en), RSS-corrected | `docs/INDICVOICE_E2E_LATENCY_REPORT.md`; 300–500 ms target NOT met |
+| G | Concurrency matrix 1/2/3/5 sessions, 33/33 turns OK | `docs/INDICVOICE_CONCURRENCY_REPORT.md`; level 10 excluded by design |
+| I | Single-worker deployment guide, LAN + TLS-proxy topologies, 3-level rollback | `docs/INDICVOICE_DEPLOYMENT_V1.md`; physical deployment NOT TESTED |
+| J | **D23 fixed**: A/B sub-manifest audio paths broke when `--out` was outside the corpus dir; regression test added | PASS (automated) |
 
 Details: `docs/INDICVOICE_SECURITY_HARDENING.md`, `docs/INDICVOICE_CI_GUIDE.md`,
 `evaluation/dataset/README.md`.
+
+## Production Hardening V1 — Phase E measurements (2026-11-17)
+
+All raw outputs in `benchmarks/results/production_v1/`. Corpus caveat as below:
+starter clips are TTS-synthesized, not human recordings.
+
+### TTS synthesis speed (`tts_v1.json`, n=6/language, warm model excluded)
+
+All 12 languages use the Indic Tiny backend. RTF = synthesis wall time / audio
+duration (lower is faster; <1 means faster than real-time). First-sentence
+render = time to produce the first sentence's audio, the number that matters
+for first-audio latency.
+
+| lang | RTF p50 | RTF max | first-sentence render p50 ms |
+|---|---|---|---|
+| hi | 0.110 | 0.140 | 215.7 |
+| gu | 0.140 | 0.184 | 307.1 |
+| mr | 0.193 | 0.275 | 574.2 |
+| bn | 0.182 | 0.243 | 369.8 |
+| ta | 0.139 | 0.145 | 289.1 |
+| te | 0.169 | 0.196 | 453.3 |
+| kn | 0.200 | 0.244 | 495.1 |
+| ml | 0.194 | 0.210 | 345.5 |
+| pa | 0.118 | 0.156 | 331.4 |
+| or | 0.133 | 0.167 | 320.3 |
+| as | 0.136 | 0.165 | 276.8 |
+| en | 0.148 | 0.201 | 313.4 |
+
+Every voice synthesizes 5–9× faster than real-time on the reference laptop.
+**Naturalness is NOT measured** — no MOS or listener study exists; these are
+speed numbers only.
+
+### Noise robustness (`noise_matrix_v1.json`, hi/gu/kn, block decode)
+
+Synthetic low-pass-shaped noise at SNR 20/10/5 dB on the synthesized clips.
+Relative degradation only — **not** real-world acoustic validation.
+
+| lang | mean CER clean | snr20 | snr10 | snr5 |
+|---|---|---|---|---|
+| hi | 0.047 | 0.065 | 0.047 | 0.047 |
+| gu | 0.025 | 0.025 | 0.012 | 0.037 |
+| kn | 0.012 | 0.000 | 0.000 | 0.000 |
+
+Degradation is small and non-monotonic at n=3 — the clean clips are already
+easy; this matrix cannot certify noisy-call behavior. Real noise recordings
+are part of the Phase D corpus (slots 15–20 per language).
+
+### LLM native-script consistency (`llm_script_check_v1.json`, Groq gpt-oss-20b)
+
+12/12 languages replied fully in the expected script (letter fraction 1.00,
+threshold 0.6; replies 279–716 ms). This is a script spot check, **not** a
+quality eval: one mr reply was factually wrong ("capital = Mumbai") while
+script-perfect — content quality needs the human eval protocol
+(`INDICVOICE_EVALUATION_FRAMEWORK.md` §5), which has no scores yet.
+
+### Counterbalanced A/B re-runs (`ab_v1.json`, `ab_v1_run2.json`)
+
+Protocol: corpus split in half; group A block→streaming, group B
+streaming→block (order groups tagged per row; sub-manifests preserved).
+Two executions on 2026-11-17, the second after a machine cooldown.
+
+- **Accuracy parity reproduced exactly in both re-runs**: 12/12 languages,
+  CER/WER identical between modes and identical to the original full run.
+- Re-run 1 showed inflated latencies in *both* modes (block p50 up to 2.4×
+  the original) and streaming worse than block in 7/12 languages despite
+  33/33 speculative hits — regressions appeared in both order groups.
+- Re-run 2 (cooldown): block p50 back to baseline (kn 2040→916 ms,
+  pa 1859→714 ms); streaming penalties shrank to ≤225 ms; streaming p50 ≤
+  block in 6/12 languages, hi near-zero in every run (0–23 ms).
+- **Conclusion**: the accuracy guarantee is robust; the latency benefit is
+  real but load-dependent on the 15 W reference laptop. Capacity planning
+  must assume block-equivalent worst-case decode times. Full analysis:
+  `PRODUCTION_V1_FINAL_REPORT.md` §E + addendum.
+- Executing the re-run exposed **D23** (sub-manifest audio paths resolved
+  against the wrong directory when `--out` is outside the corpus dir) —
+  fixed, regression-tested (`tests/test_evaluate_ab.py`).
 
 ## Measured: block vs streaming A/B (ASR-only, synthesized starter corpus)
 

@@ -1,0 +1,727 @@
+{
+  "benchmark": "tts_v1",
+  "date": "2026-11-17T14:42:41",
+  "note": "offline synthesis; first_sentence_render_ms excludes playback/network",
+  "per_lang": {
+    "hi": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.11,
+      "rtf_p90": 0.14,
+      "rtf_max": 0.14,
+      "synth_ms_p50": 205.8,
+      "first_sentence_render_ms_p50": 215.7,
+      "runs": [
+        {
+          "text": "मेरा ऑर्डर नंबर एक दो तीन है।",
+          "synth_ms": 180.4,
+          "audio_s": 2.2,
+          "rtf": 0.082,
+          "first_sentence_render_ms": 164.3,
+          "first_sentence_audio_s": 2.45
+        },
+        {
+          "text": "मेरा ऑर्डर नंबर एक दो तीन है।",
+          "synth_ms": 183.2,
+          "audio_s": 2.2,
+          "rtf": 0.083,
+          "first_sentence_render_ms": 202.4,
+          "first_sentence_audio_s": 2.47
+        },
+        {
+          "text": "कल शाम तक डिलीवरी हो जाएगी।",
+          "synth_ms": 217.4,
+          "audio_s": 1.97,
+          "rtf": 0.11,
+          "first_sentence_render_ms": 213.3,
+          "first_sentence_audio_s": 2.18
+        },
+        {
+          "text": "कल शाम तक डिलीवरी हो जाएगी।",
+          "synth_ms": 205.7,
+          "audio_s": 1.97,
+          "rtf": 0.104,
+          "first_sentence_render_ms": 215.7,
+          "first_sentence_audio_s": 2.25
+        },
+        {
+          "text": "मेरा पता दिल्ली में है।",
+          "synth_ms": 220.4,
+          "audio_s": 1.58,
+          "rtf": 0.14,
+          "first_sentence_render_ms": 220.0,
+          "first_sentence_audio_s": 1.8
+        },
+        {
+          "text": "मेरा पता दिल्ली में है।",
+          "synth_ms": 205.8,
+          "audio_s": 1.58,
+          "rtf": 0.13,
+          "first_sentence_render_ms": 291.7,
+          "first_sentence_audio_s": 1.81
+        }
+      ]
+    },
+    "gu": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.14,
+      "rtf_p90": 0.184,
+      "rtf_max": 0.184,
+      "synth_ms_p50": 408.6,
+      "first_sentence_render_ms_p50": 307.1,
+      "runs": [
+        {
+          "text": "મારો ઓર્ડર નંબર એક બે ત્રણ છે.",
+          "synth_ms": 408.6,
+          "audio_s": 2.92,
+          "rtf": 0.14,
+          "first_sentence_render_ms": 513.3,
+          "first_sentence_audio_s": 3.19
+        },
+        {
+          "text": "મારો ઓર્ડર નંબર એક બે ત્રણ છે.",
+          "synth_ms": 416.9,
+          "audio_s": 2.92,
+          "rtf": 0.143,
+          "first_sentence_render_ms": 539.0,
+          "first_sentence_audio_s": 3.21
+        },
+        {
+          "text": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+          "synth_ms": 419.4,
+          "audio_s": 2.28,
+          "rtf": 0.184,
+          "first_sentence_render_ms": 265.7,
+          "first_sentence_audio_s": 2.48
+        },
+        {
+          "text": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+          "synth_ms": 301.4,
+          "audio_s": 2.28,
+          "rtf": 0.132,
+          "first_sentence_render_ms": 307.1,
+          "first_sentence_audio_s": 2.56
+        },
+        {
+          "text": "મારું સરનામું અમદાવાદમાં છે.",
+          "synth_ms": 272.2,
+          "audio_s": 1.95,
+          "rtf": 0.139,
+          "first_sentence_render_ms": 277.6,
+          "first_sentence_audio_s": 2.17
+        },
+        {
+          "text": "મારું સરનામું અમદાવાદમાં છે.",
+          "synth_ms": 266.8,
+          "audio_s": 1.95,
+          "rtf": 0.137,
+          "first_sentence_render_ms": 304.3,
+          "first_sentence_audio_s": 2.19
+        }
+      ]
+    },
+    "mr": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.193,
+      "rtf_p90": 0.275,
+      "rtf_max": 0.275,
+      "synth_ms_p50": 615.0,
+      "first_sentence_render_ms_p50": 574.2,
+      "runs": [
+        {
+          "text": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+          "synth_ms": 615.0,
+          "audio_s": 3.18,
+          "rtf": 0.193,
+          "first_sentence_render_ms": 583.7,
+          "first_sentence_audio_s": 3.43
+        },
+        {
+          "text": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+          "synth_ms": 474.1,
+          "audio_s": 3.18,
+          "rtf": 0.149,
+          "first_sentence_render_ms": 533.6,
+          "first_sentence_audio_s": 3.46
+        },
+        {
+          "text": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल.",
+          "synth_ms": 648.6,
+          "audio_s": 2.84,
+          "rtf": 0.229,
+          "first_sentence_render_ms": 685.6,
+          "first_sentence_audio_s": 3.04
+        },
+        {
+          "text": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल.",
+          "synth_ms": 781.0,
+          "audio_s": 2.84,
+          "rtf": 0.275,
+          "first_sentence_render_ms": 574.2,
+          "first_sentence_audio_s": 3.14
+        },
+        {
+          "text": "माझा पत्ता पुण्यात आहे.",
+          "synth_ms": 328.8,
+          "audio_s": 1.87,
+          "rtf": 0.176,
+          "first_sentence_render_ms": 292.2,
+          "first_sentence_audio_s": 2.08
+        },
+        {
+          "text": "माझा पत्ता पुण्यात आहे.",
+          "synth_ms": 318.7,
+          "audio_s": 1.87,
+          "rtf": 0.171,
+          "first_sentence_render_ms": 319.6,
+          "first_sentence_audio_s": 2.1
+        }
+      ]
+    },
+    "bn": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.182,
+      "rtf_p90": 0.243,
+      "rtf_max": 0.243,
+      "synth_ms_p50": 342.1,
+      "first_sentence_render_ms_p50": 369.8,
+      "runs": [
+        {
+          "text": "আমার অর্ডার নম্বর এক দুই তিন।",
+          "synth_ms": 317.0,
+          "audio_s": 2.21,
+          "rtf": 0.144,
+          "first_sentence_render_ms": 455.0,
+          "first_sentence_audio_s": 2.46
+        },
+        {
+          "text": "আমার অর্ডার নম্বর এক দুই তিন।",
+          "synth_ms": 537.0,
+          "audio_s": 2.21,
+          "rtf": 0.243,
+          "first_sentence_render_ms": 356.8,
+          "first_sentence_audio_s": 2.48
+        },
+        {
+          "text": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে।",
+          "synth_ms": 342.1,
+          "audio_s": 2.01,
+          "rtf": 0.171,
+          "first_sentence_render_ms": 334.4,
+          "first_sentence_audio_s": 2.2
+        },
+        {
+          "text": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে।",
+          "synth_ms": 350.5,
+          "audio_s": 2.01,
+          "rtf": 0.175,
+          "first_sentence_render_ms": 369.8,
+          "first_sentence_audio_s": 2.28
+        },
+        {
+          "text": "আমার ঠিকানা কলকাতায়।",
+          "synth_ms": 274.2,
+          "audio_s": 1.5,
+          "rtf": 0.182,
+          "first_sentence_render_ms": 274.3,
+          "first_sentence_audio_s": 1.72
+        },
+        {
+          "text": "আমার ঠিকানা কলকাতায়।",
+          "synth_ms": 285.5,
+          "audio_s": 1.5,
+          "rtf": 0.19,
+          "first_sentence_render_ms": 459.4,
+          "first_sentence_audio_s": 1.73
+        }
+      ]
+    },
+    "ta": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.139,
+      "rtf_p90": 0.145,
+      "rtf_max": 0.145,
+      "synth_ms_p50": 253.9,
+      "first_sentence_render_ms_p50": 289.1,
+      "runs": [
+        {
+          "text": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று.",
+          "synth_ms": 270.3,
+          "audio_s": 2.19,
+          "rtf": 0.124,
+          "first_sentence_render_ms": 304.6,
+          "first_sentence_audio_s": 2.43
+        },
+        {
+          "text": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று.",
+          "synth_ms": 304.4,
+          "audio_s": 2.19,
+          "rtf": 0.139,
+          "first_sentence_render_ms": 289.1,
+          "first_sentence_audio_s": 2.45
+        },
+        {
+          "text": "நாளை மாலைக்குள் டெலிவரி ஆகும்.",
+          "synth_ms": 251.0,
+          "audio_s": 1.97,
+          "rtf": 0.127,
+          "first_sentence_render_ms": 250.7,
+          "first_sentence_audio_s": 2.17
+        },
+        {
+          "text": "நாளை மாலைக்குள் டெலிவரி ஆகும்.",
+          "synth_ms": 248.0,
+          "audio_s": 1.97,
+          "rtf": 0.126,
+          "first_sentence_render_ms": 324.2,
+          "first_sentence_audio_s": 2.25
+        },
+        {
+          "text": "என் முகவரி சென்னையில் உள்ளது.",
+          "synth_ms": 243.8,
+          "audio_s": 1.75,
+          "rtf": 0.139,
+          "first_sentence_render_ms": 260.2,
+          "first_sentence_audio_s": 1.96
+        },
+        {
+          "text": "என் முகவரி சென்னையில் உள்ளது.",
+          "synth_ms": 253.9,
+          "audio_s": 1.75,
+          "rtf": 0.145,
+          "first_sentence_render_ms": 269.3,
+          "first_sentence_audio_s": 1.98
+        }
+      ]
+    },
+    "te": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.169,
+      "rtf_p90": 0.196,
+      "rtf_max": 0.196,
+      "synth_ms_p50": 382.9,
+      "first_sentence_render_ms_p50": 453.3,
+      "runs": [
+        {
+          "text": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు.",
+          "synth_ms": 382.9,
+          "audio_s": 2.75,
+          "rtf": 0.139,
+          "first_sentence_render_ms": 444.4,
+          "first_sentence_audio_s": 3.0
+        },
+        {
+          "text": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు.",
+          "synth_ms": 520.5,
+          "audio_s": 2.75,
+          "rtf": 0.189,
+          "first_sentence_render_ms": 453.3,
+          "first_sentence_audio_s": 3.03
+        },
+        {
+          "text": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది.",
+          "synth_ms": 355.8,
+          "audio_s": 2.26,
+          "rtf": 0.157,
+          "first_sentence_render_ms": 581.3,
+          "first_sentence_audio_s": 2.46
+        },
+        {
+          "text": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది.",
+          "synth_ms": 442.5,
+          "audio_s": 2.26,
+          "rtf": 0.196,
+          "first_sentence_render_ms": 530.2,
+          "first_sentence_audio_s": 2.55
+        },
+        {
+          "text": "నా చిరునామా హైదరాబాద్‌లో ఉంది.",
+          "synth_ms": 340.0,
+          "audio_s": 2.02,
+          "rtf": 0.169,
+          "first_sentence_render_ms": 334.4,
+          "first_sentence_audio_s": 2.23
+        },
+        {
+          "text": "నా చిరునామా హైదరాబాద్‌లో ఉంది.",
+          "synth_ms": 328.9,
+          "audio_s": 2.02,
+          "rtf": 0.163,
+          "first_sentence_render_ms": 448.7,
+          "first_sentence_audio_s": 2.25
+        }
+      ]
+    },
+    "kn": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.2,
+      "rtf_p90": 0.244,
+      "rtf_max": 0.244,
+      "synth_ms_p50": 467.1,
+      "first_sentence_render_ms_p50": 495.1,
+      "runs": [
+        {
+          "text": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು.",
+          "synth_ms": 330.1,
+          "audio_s": 2.78,
+          "rtf": 0.119,
+          "first_sentence_render_ms": 495.1,
+          "first_sentence_audio_s": 3.03
+        },
+        {
+          "text": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು.",
+          "synth_ms": 678.8,
+          "audio_s": 2.78,
+          "rtf": 0.244,
+          "first_sentence_render_ms": 514.5,
+          "first_sentence_audio_s": 3.06
+        },
+        {
+          "text": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ.",
+          "synth_ms": 595.0,
+          "audio_s": 2.77,
+          "rtf": 0.215,
+          "first_sentence_render_ms": 391.6,
+          "first_sentence_audio_s": 2.96
+        },
+        {
+          "text": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ.",
+          "synth_ms": 434.2,
+          "audio_s": 2.77,
+          "rtf": 0.157,
+          "first_sentence_render_ms": 585.4,
+          "first_sentence_audio_s": 3.07
+        },
+        {
+          "text": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ.",
+          "synth_ms": 467.1,
+          "audio_s": 2.34,
+          "rtf": 0.2,
+          "first_sentence_render_ms": 407.7,
+          "first_sentence_audio_s": 2.56
+        },
+        {
+          "text": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ.",
+          "synth_ms": 360.7,
+          "audio_s": 2.34,
+          "rtf": 0.154,
+          "first_sentence_render_ms": 407.9,
+          "first_sentence_audio_s": 2.58
+        }
+      ]
+    },
+    "ml": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.194,
+      "rtf_p90": 0.21,
+      "rtf_max": 0.21,
+      "synth_ms_p50": 364.7,
+      "first_sentence_render_ms_p50": 345.5,
+      "runs": [
+        {
+          "text": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്.",
+          "synth_ms": 466.6,
+          "audio_s": 2.22,
+          "rtf": 0.21,
+          "first_sentence_render_ms": 330.8,
+          "first_sentence_audio_s": 2.47
+        },
+        {
+          "text": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്.",
+          "synth_ms": 318.8,
+          "audio_s": 2.22,
+          "rtf": 0.144,
+          "first_sentence_render_ms": 438.4,
+          "first_sentence_audio_s": 2.49
+        },
+        {
+          "text": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും.",
+          "synth_ms": 364.7,
+          "audio_s": 2.36,
+          "rtf": 0.155,
+          "first_sentence_render_ms": 345.5,
+          "first_sentence_audio_s": 2.56
+        },
+        {
+          "text": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും.",
+          "synth_ms": 493.9,
+          "audio_s": 2.36,
+          "rtf": 0.209,
+          "first_sentence_render_ms": 350.9,
+          "first_sentence_audio_s": 2.64
+        },
+        {
+          "text": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+          "synth_ms": 243.3,
+          "audio_s": 1.33,
+          "rtf": 0.182,
+          "first_sentence_render_ms": 262.5,
+          "first_sentence_audio_s": 1.55
+        },
+        {
+          "text": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+          "synth_ms": 259.3,
+          "audio_s": 1.33,
+          "rtf": 0.194,
+          "first_sentence_render_ms": 301.1,
+          "first_sentence_audio_s": 1.56
+        }
+      ]
+    },
+    "pa": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.118,
+      "rtf_p90": 0.156,
+      "rtf_max": 0.156,
+      "synth_ms_p50": 289.2,
+      "first_sentence_render_ms_p50": 331.4,
+      "runs": [
+        {
+          "text": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ।",
+          "synth_ms": 289.2,
+          "audio_s": 2.93,
+          "rtf": 0.099,
+          "first_sentence_render_ms": 357.9,
+          "first_sentence_audio_s": 3.19
+        },
+        {
+          "text": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ।",
+          "synth_ms": 370.6,
+          "audio_s": 2.93,
+          "rtf": 0.126,
+          "first_sentence_render_ms": 331.4,
+          "first_sentence_audio_s": 3.22
+        },
+        {
+          "text": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ।",
+          "synth_ms": 258.1,
+          "audio_s": 2.19,
+          "rtf": 0.118,
+          "first_sentence_render_ms": 284.2,
+          "first_sentence_audio_s": 2.39
+        },
+        {
+          "text": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ।",
+          "synth_ms": 244.1,
+          "audio_s": 2.19,
+          "rtf": 0.112,
+          "first_sentence_render_ms": 254.5,
+          "first_sentence_audio_s": 2.46
+        },
+        {
+          "text": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ।",
+          "synth_ms": 358.4,
+          "audio_s": 2.29,
+          "rtf": 0.156,
+          "first_sentence_render_ms": 374.3,
+          "first_sentence_audio_s": 2.5
+        },
+        {
+          "text": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ।",
+          "synth_ms": 246.9,
+          "audio_s": 2.29,
+          "rtf": 0.108,
+          "first_sentence_render_ms": 305.1,
+          "first_sentence_audio_s": 2.52
+        }
+      ]
+    },
+    "or": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.133,
+      "rtf_p90": 0.167,
+      "rtf_max": 0.167,
+      "synth_ms_p50": 334.4,
+      "first_sentence_render_ms_p50": 320.3,
+      "runs": [
+        {
+          "text": "ମୋ ଅର୍ଡର ନମ୍ବର ଏକ ଦୁଇ ତିନି।",
+          "synth_ms": 334.4,
+          "audio_s": 2.52,
+          "rtf": 0.133,
+          "first_sentence_render_ms": 320.3,
+          "first_sentence_audio_s": 2.77
+        },
+        {
+          "text": "ମୋ ଅର୍ଡର ନମ୍ବର ଏକ ଦୁଇ ତିନି।",
+          "synth_ms": 420.6,
+          "audio_s": 2.52,
+          "rtf": 0.167,
+          "first_sentence_render_ms": 298.0,
+          "first_sentence_audio_s": 2.79
+        },
+        {
+          "text": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ।",
+          "synth_ms": 257.0,
+          "audio_s": 2.12,
+          "rtf": 0.121,
+          "first_sentence_render_ms": 273.3,
+          "first_sentence_audio_s": 2.32
+        },
+        {
+          "text": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ।",
+          "synth_ms": 271.9,
+          "audio_s": 2.12,
+          "rtf": 0.128,
+          "first_sentence_render_ms": 270.0,
+          "first_sentence_audio_s": 2.4
+        },
+        {
+          "text": "ମୋ ଠିକଣା ଭୁବନେଶ୍ୱରରେ ଅଛି।",
+          "synth_ms": 345.8,
+          "audio_s": 2.53,
+          "rtf": 0.137,
+          "first_sentence_render_ms": 330.0,
+          "first_sentence_audio_s": 2.75
+        },
+        {
+          "text": "ମୋ ଠିକଣା ଭୁବନେଶ୍ୱରରେ ଅଛି।",
+          "synth_ms": 279.0,
+          "audio_s": 2.53,
+          "rtf": 0.11,
+          "first_sentence_render_ms": 346.4,
+          "first_sentence_audio_s": 2.77
+        }
+      ]
+    },
+    "as": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.136,
+      "rtf_p90": 0.165,
+      "rtf_max": 0.165,
+      "synth_ms_p50": 292.0,
+      "first_sentence_render_ms_p50": 276.8,
+      "runs": [
+        {
+          "text": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+          "synth_ms": 325.0,
+          "audio_s": 2.34,
+          "rtf": 0.139,
+          "first_sentence_render_ms": 276.8,
+          "first_sentence_audio_s": 2.59
+        },
+        {
+          "text": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+          "synth_ms": 292.0,
+          "audio_s": 2.34,
+          "rtf": 0.125,
+          "first_sentence_render_ms": 653.5,
+          "first_sentence_audio_s": 2.61
+        },
+        {
+          "text": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+          "synth_ms": 351.2,
+          "audio_s": 2.12,
+          "rtf": 0.165,
+          "first_sentence_render_ms": 273.4,
+          "first_sentence_audio_s": 2.32
+        },
+        {
+          "text": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+          "synth_ms": 271.6,
+          "audio_s": 2.12,
+          "rtf": 0.128,
+          "first_sentence_render_ms": 280.4,
+          "first_sentence_audio_s": 2.4
+        },
+        {
+          "text": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+          "synth_ms": 229.1,
+          "audio_s": 1.69,
+          "rtf": 0.136,
+          "first_sentence_render_ms": 246.3,
+          "first_sentence_audio_s": 1.89
+        },
+        {
+          "text": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+          "synth_ms": 227.0,
+          "audio_s": 1.69,
+          "rtf": 0.135,
+          "first_sentence_render_ms": 271.6,
+          "first_sentence_audio_s": 1.92
+        }
+      ]
+    },
+    "en": {
+      "backend": "tiny",
+      "sample_rate": 24000,
+      "n": 6,
+      "rtf_p50": 0.148,
+      "rtf_p90": 0.201,
+      "rtf_max": 0.201,
+      "synth_ms_p50": 299.0,
+      "first_sentence_render_ms_p50": 313.4,
+      "runs": [
+        {
+          "text": "My order number is one two three.",
+          "synth_ms": 299.0,
+          "audio_s": 2.21,
+          "rtf": 0.135,
+          "first_sentence_render_ms": 271.9,
+          "first_sentence_audio_s": 2.45
+        },
+        {
+          "text": "My order number is one two three.",
+          "synth_ms": 231.5,
+          "audio_s": 2.21,
+          "rtf": 0.105,
+          "first_sentence_render_ms": 264.5,
+          "first_sentence_audio_s": 2.47
+        },
+        {
+          "text": "Delivery will happen before tomorrow evening.",
+          "synth_ms": 298.4,
+          "audio_s": 2.55,
+          "rtf": 0.117,
+          "first_sentence_render_ms": 443.1,
+          "first_sentence_audio_s": 2.75
+        },
+        {
+          "text": "Delivery will happen before tomorrow evening.",
+          "synth_ms": 376.1,
+          "audio_s": 2.55,
+          "rtf": 0.148,
+          "first_sentence_render_ms": 313.4,
+          "first_sentence_audio_s": 2.83
+        },
+        {
+          "text": "My address is in Delhi.",
+          "synth_ms": 258.4,
+          "audio_s": 1.67,
+          "rtf": 0.154,
+          "first_sentence_render_ms": 329.7,
+          "first_sentence_audio_s": 1.89
+        },
+        {
+          "text": "My address is in Delhi.",
+          "synth_ms": 337.2,
+          "audio_s": 1.67,
+          "rtf": 0.201,
+          "first_sentence_render_ms": 290.9,
+          "first_sentence_audio_s": 1.92
+        }
+      ]
+    }
+  }
+}

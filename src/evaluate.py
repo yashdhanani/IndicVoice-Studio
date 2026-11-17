@@ -566,6 +566,11 @@ def main(argv: list[str] | None = None) -> int:
                 ("B", entries[mid:], ["streaming", "block"]),
             ):
                 sub = out.with_name(out.stem + f"_order{group}.json")
+                # audio_file is relative to the original manifest's directory;
+                # make it absolute so the sub-manifest can live beside --out
+                subset = [dict(e, audio_file=str(
+                    (manifest_path.parent / e["audio_file"]).resolve()))
+                    for e in subset]
                 sub.write_text(json.dumps(subset, ensure_ascii=False), encoding="utf-8")
                 for mode in modes:
                     group_rows = evaluate_manifest(sub, args.backend,

@@ -70,6 +70,7 @@ and is not included in `asr_ms`/E2E — true EOU-to-first-audio is ~260 ms highe
 - D20 `AudioSink.is_speaking` is wall-clock estimated from emit time, not client playback; network jitter skews the echo gate/barge-in window slightly.
 - D21 hi/mr and bn/as are indistinguishable by script; session default wins ties (documented behavior, but a Marathi caller in a hi-default session stays on the Hindi ASR).
 - D22 **(resolved, Hardening V1 B3)** `web/app.js` rendered the server-provided `v.backend` string from `/health` through an `innerHTML` template — a spoofed/compromised health response could inject HTML. Fixed to `textContent`; pinned by `tests/test_xss.py`.
+- D23 **(resolved, Hardening V1 E)** the counterbalanced A/B branch in `src/evaluate.py` wrote per-order sub-manifests next to `--out` while keeping `audio_file` paths relative to the *source* manifest directory → `FileNotFoundError` when `--out` pointed outside `eval_data/`. Fixed by rewriting sub-manifest audio paths to absolute; pinned by `tests/test_evaluate_ab.py`. Found by executing the re-run, not by inspection.
 
 ## 3. Accuracy findings (measured, n=3/language — small sample, expand per Phase 6)
 

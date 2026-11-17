@@ -1,0 +1,2035 @@
+{
+  "turns": [
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\hi_01.wav",
+      "language": "hi",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "मेरा ऑर्डर नंबर एक दो तीन है।",
+      "hypothesis": "मेरा ऑर्डर नंबर एक दो तीन है",
+      "reply": "",
+      "asr_ms": 208.0,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 208.0,
+      "audio_seconds": 0.0,
+      "cer": 0.043,
+      "wer": 0.143,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\hi_02.wav",
+      "language": "hi",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "कल शाम तक डिलीवरी हो जाएगी।",
+      "hypothesis": "कल शाम तक डिलीवरी हो जाएगी",
+      "reply": "",
+      "asr_ms": 204.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 204.5,
+      "audio_seconds": 0.0,
+      "cer": 0.045,
+      "wer": 0.167,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\hi_03.wav",
+      "language": "hi",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "मेरा पता दिल्ली में है।",
+      "hypothesis": "मेरा पता दिल्ली में है",
+      "reply": "",
+      "asr_ms": 90.0,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 90.0,
+      "audio_seconds": 0.0,
+      "cer": 0.053,
+      "wer": 0.2,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\gu_01.wav",
+      "language": "gu",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "મારો ઓર્ડર નંબર એક બે ત્રણ છે.",
+      "hypothesis": "મારો ઓર્ડર નંબર એક બે ત્રણ છે",
+      "reply": "",
+      "asr_ms": 852.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 852.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\gu_02.wav",
+      "language": "gu",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+      "hypothesis": "કાલે સાંજ સુધીમાં ડિલીિવરી થાઈ જશે",
+      "reply": "",
+      "asr_ms": 798.4,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 798.4,
+      "audio_seconds": 0.0,
+      "cer": 0.074,
+      "wer": 0.333,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\gu_03.wav",
+      "language": "gu",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "મારું સરનામું અમદાવાદમાં છે.",
+      "hypothesis": "મારું સરનામું અમદાવાદમાં છે",
+      "reply": "",
+      "asr_ms": 696.6,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 696.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\mr_01.wav",
+      "language": "mr",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+      "hypothesis": "माझा ऑर्डर नंबर एक दोन तीन आहे",
+      "reply": "",
+      "asr_ms": 1086.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1086.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\mr_02.wav",
+      "language": "mr",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल.",
+      "hypothesis": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल",
+      "reply": "",
+      "asr_ms": 938.7,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 938.7,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\mr_03.wav",
+      "language": "mr",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "माझा पत्ता पुण्यात आहे.",
+      "hypothesis": "माझा पत्ता पुण्यात आहे",
+      "reply": "",
+      "asr_ms": 669.6,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 669.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\bn_01.wav",
+      "language": "bn",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "আমার অর্ডার নম্বর এক দুই তিন।",
+      "hypothesis": "আমার অর্ডার নম্বর এক দুই তিন",
+      "reply": "",
+      "asr_ms": 796.0,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 796.0,
+      "audio_seconds": 0.0,
+      "cer": 0.042,
+      "wer": 0.167,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\bn_02.wav",
+      "language": "bn",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে।",
+      "hypothesis": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে",
+      "reply": "",
+      "asr_ms": 678.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 678.5,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.2,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\bn_03.wav",
+      "language": "bn",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "আমার ঠিকানা কলকাতায়।",
+      "hypothesis": "আমার ঠিকানা কলকাতায়",
+      "reply": "",
+      "asr_ms": 536.3,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 536.3,
+      "audio_seconds": 0.0,
+      "cer": 0.053,
+      "wer": 0.333,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ta_01.wav",
+      "language": "ta",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று.",
+      "hypothesis": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று",
+      "reply": "",
+      "asr_ms": 666.7,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 666.7,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ta_02.wav",
+      "language": "ta",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "நாளை மாலைக்குள் டெலிவரி ஆகும்.",
+      "hypothesis": "நாளை மாலைக்குள் டெலிவரி ஆகும்",
+      "reply": "",
+      "asr_ms": 673.6,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 673.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ta_03.wav",
+      "language": "ta",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "என் முகவரி சென்னையில் உள்ளது.",
+      "hypothesis": "என் முகவரி சென்னையில் உள்ளது",
+      "reply": "",
+      "asr_ms": 598.2,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 598.2,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\te_01.wav",
+      "language": "te",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు.",
+      "hypothesis": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు",
+      "reply": "",
+      "asr_ms": 684.2,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 684.2,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\te_02.wav",
+      "language": "te",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది.",
+      "hypothesis": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది",
+      "reply": "",
+      "asr_ms": 734.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 734.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\te_03.wav",
+      "language": "te",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "నా చిరునామా హైదరాబాద్‌లో ఉంది.",
+      "hypothesis": "నా చిరునామా హైదరాబాద్ లో ఉంది",
+      "reply": "",
+      "asr_ms": 652.6,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 652.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\hi_01.wav",
+      "language": "hi",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "मेरा ऑर्डर नंबर एक दो तीन है।",
+      "hypothesis": "मेरा ऑर्डर नंबर एक दो तीन है",
+      "reply": "",
+      "asr_ms": 0.1,
+      "asr_strategy": "speculative",
+      "partials": 6,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 0.1,
+      "audio_seconds": 0.0,
+      "cer": 0.043,
+      "wer": 0.143,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\hi_02.wav",
+      "language": "hi",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "कल शाम तक डिलीवरी हो जाएगी।",
+      "hypothesis": "कल शाम तक डिलीवरी हो जाएगी",
+      "reply": "",
+      "asr_ms": 92.4,
+      "asr_strategy": "speculative",
+      "partials": 6,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 92.4,
+      "audio_seconds": 0.0,
+      "cer": 0.045,
+      "wer": 0.167,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\hi_03.wav",
+      "language": "hi",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "मेरा पता दिल्ली में है।",
+      "hypothesis": "मेरा पता दिल्ली में है",
+      "reply": "",
+      "asr_ms": 0.1,
+      "asr_strategy": "speculative",
+      "partials": 4,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 0.1,
+      "audio_seconds": 0.0,
+      "cer": 0.053,
+      "wer": 0.2,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\gu_01.wav",
+      "language": "gu",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "મારો ઓર્ડર નંબર એક બે ત્રણ છે.",
+      "hypothesis": "મારો ઓર્ડર નંબર એક બે ત્રણ છે",
+      "reply": "",
+      "asr_ms": 826.3,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 826.3,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\gu_02.wav",
+      "language": "gu",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+      "hypothesis": "કાલે સાંજ સુધીમાં ડિલીિવરી થાઈ જશે",
+      "reply": "",
+      "asr_ms": 645.4,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 645.4,
+      "audio_seconds": 0.0,
+      "cer": 0.074,
+      "wer": 0.333,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\gu_03.wav",
+      "language": "gu",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "મારું સરનામું અમદાવાદમાં છે.",
+      "hypothesis": "મારું સરનામું અમદાવાદમાં છે",
+      "reply": "",
+      "asr_ms": 681.3,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 681.3,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\mr_01.wav",
+      "language": "mr",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+      "hypothesis": "माझा ऑर्डर नंबर एक दोन तीन आहे",
+      "reply": "",
+      "asr_ms": 1015.3,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1015.3,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\mr_02.wav",
+      "language": "mr",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल.",
+      "hypothesis": "उद्या संध्याकाळपर्यंत डिलिव्हरी होईल",
+      "reply": "",
+      "asr_ms": 953.1,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 953.1,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\mr_03.wav",
+      "language": "mr",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "माझा पत्ता पुण्यात आहे.",
+      "hypothesis": "माझा पत्ता पुण्यात आहे",
+      "reply": "",
+      "asr_ms": 625.7,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 625.7,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\bn_01.wav",
+      "language": "bn",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "আমার অর্ডার নম্বর এক দুই তিন।",
+      "hypothesis": "আমার অর্ডার নম্বর এক দুই তিন",
+      "reply": "",
+      "asr_ms": 812.3,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 812.3,
+      "audio_seconds": 0.0,
+      "cer": 0.042,
+      "wer": 0.167,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\bn_02.wav",
+      "language": "bn",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে।",
+      "hypothesis": "কাল সন্ধ্যার মধ্যে ডেলিভারি হবে",
+      "reply": "",
+      "asr_ms": 612.5,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 612.5,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.2,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\bn_03.wav",
+      "language": "bn",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "আমার ঠিকানা কলকাতায়।",
+      "hypothesis": "আমার ঠিকানা কলকাতায়",
+      "reply": "",
+      "asr_ms": 532.0,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 532.0,
+      "audio_seconds": 0.0,
+      "cer": 0.053,
+      "wer": 0.333,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ta_01.wav",
+      "language": "ta",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று.",
+      "hypothesis": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று",
+      "reply": "",
+      "asr_ms": 633.4,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 633.4,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ta_02.wav",
+      "language": "ta",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "நாளை மாலைக்குள் டெலிவரி ஆகும்.",
+      "hypothesis": "நாளை மாலைக்குள் டெலிவரி ஆகும்",
+      "reply": "",
+      "asr_ms": 803.7,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 803.7,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ta_03.wav",
+      "language": "ta",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "என் முகவரி சென்னையில் உள்ளது.",
+      "hypothesis": "என் முகவரி சென்னையில் உள்ளது",
+      "reply": "",
+      "asr_ms": 485.5,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 485.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\te_01.wav",
+      "language": "te",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు.",
+      "hypothesis": "నా ఆర్డర్ నంబర్ ఒకటి రెండు మూడు",
+      "reply": "",
+      "asr_ms": 908.6,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 908.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\te_02.wav",
+      "language": "te",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది.",
+      "hypothesis": "రేపు సాయంత్రం వరకు డెలివరీ అవుతుంది",
+      "reply": "",
+      "asr_ms": 1040.2,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1040.2,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\te_03.wav",
+      "language": "te",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "నా చిరునామా హైదరాబాద్‌లో ఉంది.",
+      "hypothesis": "నా చిరునామా హైదరాబాద్ లో ఉంది",
+      "reply": "",
+      "asr_ms": 651.9,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 651.9,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "A"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\kn_01.wav",
+      "language": "kn",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು.",
+      "hypothesis": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು",
+      "reply": "",
+      "asr_ms": 870.6,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 870.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\kn_02.wav",
+      "language": "kn",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ.",
+      "hypothesis": "ನಾೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ",
+      "reply": "",
+      "asr_ms": 2077.3,
+      "asr_strategy": "full",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 2077.3,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.25,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\kn_03.wav",
+      "language": "kn",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ.",
+      "hypothesis": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ",
+      "reply": "",
+      "asr_ms": 722.4,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 722.4,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ml_01.wav",
+      "language": "ml",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്.",
+      "hypothesis": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്",
+      "reply": "",
+      "asr_ms": 1017.6,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1017.6,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ml_02.wav",
+      "language": "ml",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും.",
+      "hypothesis": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും",
+      "reply": "",
+      "asr_ms": 956.4,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 956.4,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ml_03.wav",
+      "language": "ml",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+      "hypothesis": "എറെ വിലാസം കൊച്ചിയിലാണ്",
+      "reply": "",
+      "asr_ms": 509.8,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 509.8,
+      "audio_seconds": 0.0,
+      "cer": 0.087,
+      "wer": 0.333,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\pa_01.wav",
+      "language": "pa",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ।",
+      "hypothesis": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ",
+      "reply": "",
+      "asr_ms": 1037.3,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1037.3,
+      "audio_seconds": 0.0,
+      "cer": 0.042,
+      "wer": 0.143,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\pa_02.wav",
+      "language": "pa",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ।",
+      "hypothesis": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ",
+      "reply": "",
+      "asr_ms": 780.6,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 780.6,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.167,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\pa_03.wav",
+      "language": "pa",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ।",
+      "hypothesis": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ",
+      "reply": "",
+      "asr_ms": 525.7,
+      "asr_strategy": "speculative",
+      "partials": 3,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 525.7,
+      "audio_seconds": 0.0,
+      "cer": 0.048,
+      "wer": 0.2,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\or_01.wav",
+      "language": "or",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ମୋ ଅର୍ଡର ନମ୍ବର ଏକ ଦୁଇ ତିନି।",
+      "hypothesis": "ମୋ ଅର୍ଡ଼ ନମ୍ବର୍ ଏକ ଦୁଇ ତିନି",
+      "reply": "",
+      "asr_ms": 828.4,
+      "asr_strategy": "speculative",
+      "partials": 4,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 828.4,
+      "audio_seconds": 0.0,
+      "cer": 0.136,
+      "wer": 0.5,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\or_02.wav",
+      "language": "or",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ।",
+      "hypothesis": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ",
+      "reply": "",
+      "asr_ms": 684.4,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 684.4,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.2,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\or_03.wav",
+      "language": "or",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "ମୋ ଠିକଣା ଭୁବନେଶ୍ୱରରେ ଅଛି।",
+      "hypothesis": "ମୋ ଠିକଣ ଭୁବନେଶ୍ୱରରେ ଅଛି",
+      "reply": "",
+      "asr_ms": 1173.3,
+      "asr_strategy": "speculative",
+      "partials": 3,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1173.3,
+      "audio_seconds": 0.0,
+      "cer": 0.091,
+      "wer": 0.5,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\as_01.wav",
+      "language": "as",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+      "hypothesis": "মোর অর্ডার নম্বর এক দুই তিন",
+      "reply": "",
+      "asr_ms": 691.1,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 691.1,
+      "audio_seconds": 0.0,
+      "cer": 0.25,
+      "wer": 0.667,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\as_02.wav",
+      "language": "as",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+      "hypothesis": "কাইল সন্ধ্যিার ভিতরত ডেলিভারি হব",
+      "reply": "",
+      "asr_ms": 739.3,
+      "asr_strategy": "speculative",
+      "partials": 2,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 739.3,
+      "audio_seconds": 0.0,
+      "cer": 0.267,
+      "wer": 1.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\as_03.wav",
+      "language": "as",
+      "mode": "streaming",
+      "backend": "indic",
+      "reference": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+      "hypothesis": "মোর ঠিকোনা গুয়াহাটিত আছে",
+      "reply": "",
+      "asr_ms": 505.1,
+      "asr_strategy": "speculative",
+      "partials": 1,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 505.1,
+      "audio_seconds": 0.0,
+      "cer": 0.286,
+      "wer": 1.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\en_01.wav",
+      "language": "en",
+      "mode": "streaming",
+      "backend": "groq",
+      "reference": "My order number is one two three.",
+      "hypothesis": "My order number is 123.",
+      "reply": "",
+      "asr_ms": 585.7,
+      "asr_strategy": "cloud",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 585.7,
+      "audio_seconds": 0.0,
+      "cer": 0.423,
+      "wer": 0.429,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\en_02.wav",
+      "language": "en",
+      "mode": "streaming",
+      "backend": "groq",
+      "reference": "Delivery will happen before tomorrow evening.",
+      "hypothesis": "Delivery will happen before tomorrow evening.",
+      "reply": "",
+      "asr_ms": 435.5,
+      "asr_strategy": "cloud",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 435.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\en_03.wav",
+      "language": "en",
+      "mode": "streaming",
+      "backend": "groq",
+      "reference": "My address is in Delhi.",
+      "hypothesis": "My address is in Delhi.",
+      "reply": "",
+      "asr_ms": 405.4,
+      "asr_strategy": "cloud",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 405.4,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\kn_01.wav",
+      "language": "kn",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು.",
+      "hypothesis": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು",
+      "reply": "",
+      "asr_ms": 992.3,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 992.3,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\kn_02.wav",
+      "language": "kn",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ.",
+      "hypothesis": "ನಾೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ",
+      "reply": "",
+      "asr_ms": 916.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 916.5,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.25,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\kn_03.wav",
+      "language": "kn",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ.",
+      "hypothesis": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ",
+      "reply": "",
+      "asr_ms": 698.9,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 698.9,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ml_01.wav",
+      "language": "ml",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്.",
+      "hypothesis": "എന്റെ ഓർഡർ നമ്പർ ഒന്ന് രണ്ട് മൂന്ന്",
+      "reply": "",
+      "asr_ms": 1000.5,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 1000.5,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ml_02.wav",
+      "language": "ml",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും.",
+      "hypothesis": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും",
+      "reply": "",
+      "asr_ms": 828.0,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 828.0,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\ml_03.wav",
+      "language": "ml",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+      "hypothesis": "എറെ വിലാസം കൊച്ചിയിലാണ്",
+      "reply": "",
+      "asr_ms": 633.1,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 633.1,
+      "audio_seconds": 0.0,
+      "cer": 0.087,
+      "wer": 0.333,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\pa_01.wav",
+      "language": "pa",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ।",
+      "hypothesis": "ਮੇਰਾ ਆਰਡਰ ਨੰਬਰ ਇੱਕ ਦੋ ਤਿੰਨ ਹੈ",
+      "reply": "",
+      "asr_ms": 926.2,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 926.2,
+      "audio_seconds": 0.0,
+      "cer": 0.042,
+      "wer": 0.143,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\pa_02.wav",
+      "language": "pa",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ।",
+      "hypothesis": "ਕੱਲ੍ਹ ਸ਼ਾਮ ਤੱਕ ਡਿਲੀਵਰੀ ਹੋ ਜਾਵੇਗੀ",
+      "reply": "",
+      "asr_ms": 714.0,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 714.0,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.167,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\pa_03.wav",
+      "language": "pa",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ।",
+      "hypothesis": "ਮੇਰਾ ਪਤਾ ਲੁਧਿਆਣਾ ਵਿੱਚ ਹੈ",
+      "reply": "",
+      "asr_ms": 586.3,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 586.3,
+      "audio_seconds": 0.0,
+      "cer": 0.048,
+      "wer": 0.2,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\or_01.wav",
+      "language": "or",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ମୋ ଅର୍ଡର ନମ୍ବର ଏକ ଦୁଇ ତିନି।",
+      "hypothesis": "ମୋ ଅର୍ଡ଼ ନମ୍ବର୍ ଏକ ଦୁଇ ତିନି",
+      "reply": "",
+      "asr_ms": 742.7,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 742.7,
+      "audio_seconds": 0.0,
+      "cer": 0.136,
+      "wer": 0.5,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\or_02.wav",
+      "language": "or",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ।",
+      "hypothesis": "କାଲି ସନ୍ଧ୍ୟା ସୁଦ୍ଧା ଡେଲିଭରି ହେବ",
+      "reply": "",
+      "asr_ms": 750.7,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 750.7,
+      "audio_seconds": 0.0,
+      "cer": 0.036,
+      "wer": 0.2,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\or_03.wav",
+      "language": "or",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "ମୋ ଠିକଣା ଭୁବନେଶ୍ୱରରେ ଅଛି।",
+      "hypothesis": "ମୋ ଠିକଣ ଭୁବନେଶ୍ୱରରେ ଅଛି",
+      "reply": "",
+      "asr_ms": 678.7,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 678.7,
+      "audio_seconds": 0.0,
+      "cer": 0.091,
+      "wer": 0.5,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\as_01.wav",
+      "language": "as",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+      "hypothesis": "মোর অর্ডার নম্বর এক দুই তিন",
+      "reply": "",
+      "asr_ms": 844.9,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 844.9,
+      "audio_seconds": 0.0,
+      "cer": 0.25,
+      "wer": 0.667,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\as_02.wav",
+      "language": "as",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+      "hypothesis": "কাইল সন্ধ্যিার ভিতরত ডেলিভারি হব",
+      "reply": "",
+      "asr_ms": 888.7,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 888.7,
+      "audio_seconds": 0.0,
+      "cer": 0.267,
+      "wer": 1.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\as_03.wav",
+      "language": "as",
+      "mode": "block",
+      "backend": "indic",
+      "reference": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+      "hypothesis": "মোর ঠিকোনা গুয়াহাটিত আছে",
+      "reply": "",
+      "asr_ms": 807.9,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 807.9,
+      "audio_seconds": 0.0,
+      "cer": 0.286,
+      "wer": 1.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\en_01.wav",
+      "language": "en",
+      "mode": "block",
+      "backend": "groq",
+      "reference": "My order number is one two three.",
+      "hypothesis": "My order number is 123.",
+      "reply": "",
+      "asr_ms": 512.8,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 512.8,
+      "audio_seconds": 0.0,
+      "cer": 0.423,
+      "wer": 0.429,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\en_02.wav",
+      "language": "en",
+      "mode": "block",
+      "backend": "groq",
+      "reference": "Delivery will happen before tomorrow evening.",
+      "hypothesis": "Delivery will happen before tomorrow evening.",
+      "reply": "",
+      "asr_ms": 420.8,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 420.8,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    },
+    {
+      "audio_file": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\eval_data\\en_03.wav",
+      "language": "en",
+      "mode": "block",
+      "backend": "groq",
+      "reference": "My address is in Delhi.",
+      "hypothesis": "My address is in Delhi.",
+      "reply": "",
+      "asr_ms": 424.1,
+      "asr_strategy": "block",
+      "partials": 0,
+      "llm_ttft_ms": 0.0,
+      "tts_ttfa_ms": 0.0,
+      "e2e_ms": 424.1,
+      "audio_seconds": 0.0,
+      "cer": 0.0,
+      "wer": 0.0,
+      "order_group": "B"
+    }
+  ],
+  "summary": {
+    "hi/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.047,
+      "wer": 0.17,
+      "asr_ms": {
+        "n": 3,
+        "p50": 204.5,
+        "p95": 208.0
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 204.5,
+        "p95": 208.0
+      }
+    },
+    "gu/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.025,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 798.4,
+        "p95": 852.5
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 798.4,
+        "p95": 852.5
+      }
+    },
+    "mr/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 938.7,
+        "p95": 1086.5
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 938.7,
+        "p95": 1086.5
+      }
+    },
+    "bn/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.044,
+      "wer": 0.233,
+      "asr_ms": {
+        "n": 3,
+        "p50": 678.5,
+        "p95": 796.0
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 678.5,
+        "p95": 796.0
+      }
+    },
+    "ta/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 666.7,
+        "p95": 673.6
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 666.7,
+        "p95": 673.6
+      }
+    },
+    "te/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 684.2,
+        "p95": 734.5
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 684.2,
+        "p95": 734.5
+      }
+    },
+    "hi/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.047,
+      "wer": 0.17,
+      "asr_ms": {
+        "n": 3,
+        "p50": 0.1,
+        "p95": 92.4
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 0.1,
+        "p95": 92.4
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "gu/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.025,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 681.3,
+        "p95": 826.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 681.3,
+        "p95": 826.3
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "mr/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 953.1,
+        "p95": 1015.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 953.1,
+        "p95": 1015.3
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "bn/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.044,
+      "wer": 0.233,
+      "asr_ms": {
+        "n": 3,
+        "p50": 612.5,
+        "p95": 812.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 612.5,
+        "p95": 812.3
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "ta/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 633.4,
+        "p95": 803.7
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 633.4,
+        "p95": 803.7
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "te/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.0,
+      "wer": 0.0,
+      "asr_ms": {
+        "n": 3,
+        "p50": 908.6,
+        "p95": 1040.2
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 908.6,
+        "p95": 1040.2
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "kn/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.012,
+      "wer": 0.083,
+      "asr_ms": {
+        "n": 3,
+        "p50": 870.6,
+        "p95": 2077.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 870.6,
+        "p95": 2077.3
+      },
+      "strategies": {
+        "speculative": 2,
+        "full": 1
+      }
+    },
+    "ml/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.029,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 956.4,
+        "p95": 1017.6
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 956.4,
+        "p95": 1017.6
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "pa/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.042,
+      "wer": 0.17,
+      "asr_ms": {
+        "n": 3,
+        "p50": 780.6,
+        "p95": 1037.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 780.6,
+        "p95": 1037.3
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "or/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.088,
+      "wer": 0.4,
+      "asr_ms": {
+        "n": 3,
+        "p50": 828.4,
+        "p95": 1173.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 828.4,
+        "p95": 1173.3
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "as/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.268,
+      "wer": 0.889,
+      "asr_ms": {
+        "n": 3,
+        "p50": 691.1,
+        "p95": 739.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 691.1,
+        "p95": 739.3
+      },
+      "strategies": {
+        "speculative": 3
+      }
+    },
+    "en/streaming": {
+      "n": 3,
+      "mode": "streaming",
+      "cer": 0.141,
+      "wer": 0.143,
+      "asr_ms": {
+        "n": 3,
+        "p50": 435.5,
+        "p95": 585.7
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 435.5,
+        "p95": 585.7
+      },
+      "strategies": {
+        "cloud": 3
+      }
+    },
+    "kn/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.012,
+      "wer": 0.083,
+      "asr_ms": {
+        "n": 3,
+        "p50": 916.5,
+        "p95": 992.3
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 916.5,
+        "p95": 992.3
+      }
+    },
+    "ml/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.029,
+      "wer": 0.111,
+      "asr_ms": {
+        "n": 3,
+        "p50": 828.0,
+        "p95": 1000.5
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 828.0,
+        "p95": 1000.5
+      }
+    },
+    "pa/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.042,
+      "wer": 0.17,
+      "asr_ms": {
+        "n": 3,
+        "p50": 714.0,
+        "p95": 926.2
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 714.0,
+        "p95": 926.2
+      }
+    },
+    "or/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.088,
+      "wer": 0.4,
+      "asr_ms": {
+        "n": 3,
+        "p50": 742.7,
+        "p95": 750.7
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 742.7,
+        "p95": 750.7
+      }
+    },
+    "as/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.268,
+      "wer": 0.889,
+      "asr_ms": {
+        "n": 3,
+        "p50": 844.9,
+        "p95": 888.7
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 844.9,
+        "p95": 888.7
+      }
+    },
+    "en/block": {
+      "n": 3,
+      "mode": "block",
+      "cer": 0.141,
+      "wer": 0.143,
+      "asr_ms": {
+        "n": 3,
+        "p50": 424.1,
+        "p95": 512.8
+      },
+      "llm_ttft_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "tts_ttfa_ms": {
+        "n": 3,
+        "p50": 0.0,
+        "p95": 0.0
+      },
+      "e2e_ms": {
+        "n": 3,
+        "p50": 424.1,
+        "p95": 512.8
+      }
+    }
+  }
+}

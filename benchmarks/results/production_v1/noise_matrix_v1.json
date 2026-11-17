@@ -1,0 +1,298 @@
+{
+  "benchmark": "noise_matrix_v1",
+  "date": "2026-11-17T14:43:20",
+  "note": "synthetic low-pass noise on TTS-synthesized clips; relative degradation only, NOT real-world acoustic validation",
+  "conditions": [
+    "clean",
+    "snr20",
+    "snr10",
+    "snr5"
+  ],
+  "per_lang": {
+    "hi": {
+      "backend": "indic",
+      "mean_cer": {
+        "clean": 0.047,
+        "snr20": 0.065,
+        "snr10": 0.047,
+        "snr5": 0.047
+      },
+      "rows": [
+        {
+          "clip": "hi_01.wav",
+          "condition": "clean",
+          "cer": 0.043,
+          "asr_ms": 236.4,
+          "hyp": "मेरा ऑर्डर नंबर एक दो तीन है"
+        },
+        {
+          "clip": "hi_01.wav",
+          "condition": "snr20",
+          "cer": 0.043,
+          "asr_ms": 229.7,
+          "hyp": "मेरा ऑर्डर नंबर एक दो तीन है"
+        },
+        {
+          "clip": "hi_01.wav",
+          "condition": "snr10",
+          "cer": 0.043,
+          "asr_ms": 244.3,
+          "hyp": "मेरा ऑर्डर नंबर एक दो तीन है"
+        },
+        {
+          "clip": "hi_01.wav",
+          "condition": "snr5",
+          "cer": 0.043,
+          "asr_ms": 241.7,
+          "hyp": "मेरा ऑर्डर नंबर एक दो तीन है"
+        },
+        {
+          "clip": "hi_02.wav",
+          "condition": "clean",
+          "cer": 0.045,
+          "asr_ms": 191.2,
+          "hyp": "कल शाम तक डिलीवरी हो जाएगी"
+        },
+        {
+          "clip": "hi_02.wav",
+          "condition": "snr20",
+          "cer": 0.045,
+          "asr_ms": 137.7,
+          "hyp": "कल शाम तक डिलीवरी हो जाएगी"
+        },
+        {
+          "clip": "hi_02.wav",
+          "condition": "snr10",
+          "cer": 0.045,
+          "asr_ms": 162.7,
+          "hyp": "कल शाम तक डिलीवरी हो जाएगी"
+        },
+        {
+          "clip": "hi_02.wav",
+          "condition": "snr5",
+          "cer": 0.045,
+          "asr_ms": 317.1,
+          "hyp": "कल शाम तक डिलीवरी हो जाएगी"
+        },
+        {
+          "clip": "hi_03.wav",
+          "condition": "clean",
+          "cer": 0.053,
+          "asr_ms": 238.2,
+          "hyp": "मेरा पता दिल्ली में है"
+        },
+        {
+          "clip": "hi_03.wav",
+          "condition": "snr20",
+          "cer": 0.105,
+          "asr_ms": 130.0,
+          "hyp": "मरा पता दिल्ली में है"
+        },
+        {
+          "clip": "hi_03.wav",
+          "condition": "snr10",
+          "cer": 0.053,
+          "asr_ms": 243.3,
+          "hyp": "मेरा पता दिल्ली में है"
+        },
+        {
+          "clip": "hi_03.wav",
+          "condition": "snr5",
+          "cer": 0.053,
+          "asr_ms": 218.4,
+          "hyp": "मेरा पता दिल्ली में है"
+        }
+      ]
+    },
+    "gu": {
+      "backend": "indic",
+      "mean_cer": {
+        "clean": 0.025,
+        "snr20": 0.025,
+        "snr10": 0.012,
+        "snr5": 0.037
+      },
+      "rows": [
+        {
+          "clip": "gu_01.wav",
+          "condition": "clean",
+          "cer": 0.0,
+          "asr_ms": 1061.1,
+          "hyp": "મારો ઓર્ડર નંબર એક બે ત્રણ છે"
+        },
+        {
+          "clip": "gu_01.wav",
+          "condition": "snr20",
+          "cer": 0.0,
+          "asr_ms": 1029.1,
+          "hyp": "મારો ઓર્ડર નંબર એક બે ત્રણ છે"
+        },
+        {
+          "clip": "gu_01.wav",
+          "condition": "snr10",
+          "cer": 0.0,
+          "asr_ms": 1004.2,
+          "hyp": "મારો ઓર્ડર નંબર એક બે ત્રણ છે"
+        },
+        {
+          "clip": "gu_01.wav",
+          "condition": "snr5",
+          "cer": 0.0,
+          "asr_ms": 1223.8,
+          "hyp": "મારો ઓર્ડર નંબર એક બે ત્રણ છે"
+        },
+        {
+          "clip": "gu_02.wav",
+          "condition": "clean",
+          "cer": 0.074,
+          "asr_ms": 776.3,
+          "hyp": "કાલે સાંજ સુધીમાં ડિલીિવરી થાઈ જશે"
+        },
+        {
+          "clip": "gu_02.wav",
+          "condition": "snr20",
+          "cer": 0.074,
+          "asr_ms": 808.8,
+          "hyp": "કાલે સાંજ સુધીમાં ડિલીિવરી થાઈ જશે"
+        },
+        {
+          "clip": "gu_02.wav",
+          "condition": "snr10",
+          "cer": 0.037,
+          "asr_ms": 834.1,
+          "hyp": "કાલે સાંજ સુધીમાં ડિલીિવરી થઈ જશે"
+        },
+        {
+          "clip": "gu_02.wav",
+          "condition": "snr5",
+          "cer": 0.111,
+          "asr_ms": 867.9,
+          "hyp": "કાલે સાંજ સુધીમાં ડિલવરી થાય જશે"
+        },
+        {
+          "clip": "gu_03.wav",
+          "condition": "clean",
+          "cer": 0.0,
+          "asr_ms": 708.6,
+          "hyp": "મારું સરનામું અમદાવાદમાં છે"
+        },
+        {
+          "clip": "gu_03.wav",
+          "condition": "snr20",
+          "cer": 0.0,
+          "asr_ms": 691.3,
+          "hyp": "મારું સરનામું અમદાવાદમાં છે"
+        },
+        {
+          "clip": "gu_03.wav",
+          "condition": "snr10",
+          "cer": 0.0,
+          "asr_ms": 1125.2,
+          "hyp": "મારું સરનામું અમદાવાદમાં છે"
+        },
+        {
+          "clip": "gu_03.wav",
+          "condition": "snr5",
+          "cer": 0.0,
+          "asr_ms": 776.1,
+          "hyp": "મારું સરનામું અમદાવાદમાં છે"
+        }
+      ]
+    },
+    "kn": {
+      "backend": "indic",
+      "mean_cer": {
+        "clean": 0.012,
+        "snr20": 0.0,
+        "snr10": 0.0,
+        "snr5": 0.0
+      },
+      "rows": [
+        {
+          "clip": "kn_01.wav",
+          "condition": "clean",
+          "cer": 0.0,
+          "asr_ms": 1186.7,
+          "hyp": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು"
+        },
+        {
+          "clip": "kn_01.wav",
+          "condition": "snr20",
+          "cer": 0.0,
+          "asr_ms": 889.9,
+          "hyp": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು"
+        },
+        {
+          "clip": "kn_01.wav",
+          "condition": "snr10",
+          "cer": 0.0,
+          "asr_ms": 1035.5,
+          "hyp": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು"
+        },
+        {
+          "clip": "kn_01.wav",
+          "condition": "snr5",
+          "cer": 0.0,
+          "asr_ms": 934.3,
+          "hyp": "ನನ್ನ ಆರ್ಡರ್ ನಂಬರ್ ಒಂದು ಎರಡು ಮೂರು"
+        },
+        {
+          "clip": "kn_02.wav",
+          "condition": "clean",
+          "cer": 0.036,
+          "asr_ms": 949.8,
+          "hyp": "ನಾೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ"
+        },
+        {
+          "clip": "kn_02.wav",
+          "condition": "snr20",
+          "cer": 0.0,
+          "asr_ms": 1433.8,
+          "hyp": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ"
+        },
+        {
+          "clip": "kn_02.wav",
+          "condition": "snr10",
+          "cer": 0.0,
+          "asr_ms": 1487.3,
+          "hyp": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ"
+        },
+        {
+          "clip": "kn_02.wav",
+          "condition": "snr5",
+          "cer": 0.0,
+          "asr_ms": 1427.1,
+          "hyp": "ನಾಳೆ ಸಂಜೆಯೊಳಗೆ ಡೆಲಿವರಿ ಆಗುತ್ತದೆ"
+        },
+        {
+          "clip": "kn_03.wav",
+          "condition": "clean",
+          "cer": 0.0,
+          "asr_ms": 1014.2,
+          "hyp": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ"
+        },
+        {
+          "clip": "kn_03.wav",
+          "condition": "snr20",
+          "cer": 0.0,
+          "asr_ms": 1029.9,
+          "hyp": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ"
+        },
+        {
+          "clip": "kn_03.wav",
+          "condition": "snr10",
+          "cer": 0.0,
+          "asr_ms": 925.8,
+          "hyp": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ"
+        },
+        {
+          "clip": "kn_03.wav",
+          "condition": "snr5",
+          "cer": 0.0,
+          "asr_ms": 814.8,
+          "hyp": "ನನ್ನ ವಿಳಾಸ ಬೆಂಗಳೂರಿನಲ್ಲಿದೆ"
+        }
+      ]
+    }
+  }
+}
