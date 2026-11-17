@@ -30,6 +30,7 @@ import base64
 import hmac
 import json
 import math
+import os
 import queue
 import secrets
 import sys
@@ -37,6 +38,7 @@ import threading
 import time
 import urllib.parse
 from collections import deque
+from contextlib import asynccontextmanager
 from pathlib import Path
 
 import numpy as np
@@ -128,6 +130,43 @@ def _consume_ticket(ticket: str) -> bool:
 
 
 _LOCAL_HOSTS = {"127.0.0.1", "::1", "localhost"}
+
+
+def _process_rss_mb() -> float | None:
+    """Working set of the current interpreter, for operational metrics."""
+    if sys.platform == "win32":
+        import ctypes
+        from ctypes import wintypes
+
+        class PMC(ctypes.Structure):
+            _fields_ = [
+                ("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD),
+                ("PeakWorkingSetSize", ctypes.c_size_t),
+                ("WorkingSetSize", ctypes.c_size_t),
+                ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
+                ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
+                ("PagefileUsage", ctypes.c_size_t),
+                ("PeakPagefileUsage", ctypes.c_size_t),
+            ]
+        handle = ctypes.windll.kernel32.OpenProcess(0x0400 | 0x0010, False, os.getpid())
+        if not handle:
+            return None
+        try:
+            pmc = PMC()
+            pmc.cb = ctypes.sizeof(pmc)
+            ok = ctypes.windll.psapi.GetProcessMemoryInfo(handle, ctypes.byref(pmc), pmc.cb)
+            return round(pmc.WorkingSetSize / (1024 * 1024), 1) if ok else None
+        finally:
+            ctypes.windll.kernel32.CloseHandle(handle)
+    try:
+        for line in Path(f"/proc/{os.getpid()}/status").read_text().splitlines():
+            if line.startswith("VmRSS:"):
+                return round(int(line.split()[1]) / 1024.0, 1)
+    except OSError:
+        return None
+    return None
 
 #: inbound caps: 2 s of 16 kHz PCM16 per voice frame; telephony gateways send
 #: 20 ms mu-law frames, so anything near these sizes is abusive or broken
@@ -667,10 +706,41 @@ def create_app(
     against module globals, and a function-local import makes FastAPI treat
     ``ws`` as a required query parameter (rejecting every handshake with 403).
     """
-    app = FastAPI(title="IndicVoice call server")
+    async def _loop_lag_probe():
+        """Measure event-loop scheduling delay: how late a 0.1 s sleep wakes.
+
+        A growing delay means the loop is blocked (CPU-bound work on the loop
+        thread) and audio delivery will stutter. Decays toward the latest
+        sample so a transient spike does not pin the gauge forever.
+        """
+        loop = asyncio.get_running_loop()
+        interval = 0.1
+        while True:
+            t0 = loop.time()
+            await asyncio.sleep(interval)
+            delay_ms = max(0.0, (loop.time() - t0 - interval) * 1000.0)
+            app.state.loop_delay_ms = max(delay_ms, app.state.loop_delay_ms * 0.9)
+
+    @asynccontextmanager
+    async def lifespan(_app):
+        probe = asyncio.create_task(_loop_lag_probe())
+        try:
+            yield
+        finally:
+            probe.cancel()
+            try:
+                await probe
+            except asyncio.CancelledError:
+                pass
+
+    app = FastAPI(title="IndicVoice call server", lifespan=lifespan)
     #: live sessions per client IP; handlers run on one event loop, so a plain
     #: dict is safe (no await between the check and the increment)
     sessions_by_ip: dict[str, int] = {}
+    #: live CallSession objects, for read-only operational metrics (queue depths)
+    live_sessions: list = []
+    app.state.started_at = time.perf_counter()
+    app.state.loop_delay_ms = 0.0
 
     def _admit(ws, params: dict) -> str | None:
         """Handshake gates shared by both endpoints. Returns a close reason."""
@@ -695,6 +765,39 @@ def create_app(
     web_dir = Path(__file__).resolve().parent.parent / "web"
     if (web_dir / "index.html").exists():
         app.mount("/static", StaticFiles(directory=web_dir), name="static")
+
+    @app.get("/metrics")
+    async def metrics(token: str | None = None):
+        """Read-only operational metrics. No transcripts, audio, or client IPs.
+
+        Fail-closed: when a token is configured it must be presented; in
+        open-dev (localhost only) the endpoint is open like /health.
+        """
+        if config.ACCESS_TOKEN:
+            if not token or not hmac.compare_digest(token, config.ACCESS_TOKEN):
+                return JSONResponse({"error": "unauthorized"}, status_code=401)
+        loop = asyncio.get_running_loop()
+        executor = getattr(loop, "_default_executor", None)
+        asr_queue = executor._work_queue.qsize() if executor else 0
+        queues = [s.out.qsize() for s in live_sessions]
+        return JSONResponse({
+            "active_sessions": len(live_sessions),
+            "client_ips": len(sessions_by_ip),
+            "outbound_queue_total": sum(queues),
+            "outbound_queue_max": max(queues, default=0),
+            "asr_executor_queue": asr_queue,
+            "event_loop_delay_ms": round(app.state.loop_delay_ms, 2),
+            "uptime_s": round(time.perf_counter() - app.state.started_at, 1),
+            "rss_mb": _process_rss_mb(),
+            "caps": {
+                "max_sessions_per_ip": MAX_SESSIONS_PER_IP,
+                "max_outbound_queue": config.MAX_OUTBOUND_QUEUE,
+                "idle_timeout_s": config.SESSION_IDLE_SECONDS,
+                "max_session_s": config.MAX_SESSION_SECONDS,
+                "max_utterance_s": config.MAX_UTTERANCE_SECONDS,
+            },
+            "privacy": "counts and timings only; no transcripts, audio, or client IPs",
+        })
 
     @app.get("/health")
     async def health():
@@ -795,6 +898,7 @@ def create_app(
                     return
 
         asyncio.create_task(watchdog())
+        live_sessions.append(session)
         return session
 
     @app.websocket("/ws/voice")
@@ -828,6 +932,10 @@ def create_app(
         finally:
             session.close()
             _release(ws)
+            try:
+                live_sessions.remove(session)
+            except ValueError:
+                pass
 
     @app.websocket("/ws/telephony")
     async def telephony(ws: WebSocket):
@@ -875,6 +983,10 @@ def create_app(
         finally:
             session.close()
             _release(ws)
+            try:
+                live_sessions.remove(session)
+            except ValueError:
+                pass
 
     return app
 

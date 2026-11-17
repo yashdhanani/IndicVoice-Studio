@@ -1,0 +1,20 @@
+{
+  "host": "api.groq.com",
+  "method": "TCP connect + TLS handshake, NO inference",
+  "tcp_connect_ms_sorted": [
+    66.5,
+    68.9,
+    70.5,
+    70.6,
+    76.7
+  ],
+  "tls_handshake_ms_sorted": [
+    94.4,
+    96.7,
+    104.1,
+    172.7,
+    1253.5
+  ],
+  "median_tcp_plus_tls_ms": 174.6,
+  "note": "one TLS outlier (1253ms) = cold session variance; warm() reuses the socket during speech so first-turn handshake is hidden. ~70ms TCP RTT is the per-request network floor to the LLM/ASR cloud."
+}

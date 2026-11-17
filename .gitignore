@@ -36,6 +36,9 @@ evaluation/human_voice_quality/private/
 # visual QA screenshots (regenerate with eval/shoot.mjs)
 eval/shots/
 
+# speak_check smoke/run output (regenerate with eval/speak_check.py)
+eval/_smoke_speak/
+
 # synthesised starter recordings (regenerate with --make-manifest)
 eval_data/*.wav
 

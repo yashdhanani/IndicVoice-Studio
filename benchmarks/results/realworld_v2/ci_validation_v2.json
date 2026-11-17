@@ -1,0 +1,62 @@
+{
+  "phase": "H",
+  "benchmark": "ci_validation_v2",
+  "generated": "2026-11-17",
+  "github_execution": "NOT TESTED",
+  "github_execution_reason": "No git remote configured and no gh CLI available in this environment; a GitHub Actions run cannot be triggered or observed. Activation instructions are provided in docs/INDICVOICE_GITHUB_CI_VALIDATION.md.",
+  "local_fast_tier_simulation": {
+    "status": "PASS (automated, local simulation)",
+    "method": "python -m unittest discover -s tests with INDICVOICE_MODELS_DIR pointed at a nonexistent directory and INDICVOICE_TOKEN empty, so model-backed tests skip on file-existence checks before importing any heavy library.",
+    "command": "INDICVOICE_MODELS_DIR=<nonexistent> INDICVOICE_TOKEN= python -m unittest discover -s tests -v",
+    "tests_run": 107,
+    "passed": 106,
+    "skipped": 1,
+    "errors": 0,
+    "failures": 0,
+    "skipped_detail": [
+      "test_ws_server.WSTests setUpClass: local hi models / starter WAVs not present"
+    ],
+    "caveat": "Simulation used the full development venv with models hidden, not a clean requirements-ci install. cryptography is present in this venv, so test_lan_tls_check.InspectCertTests ran here; on the real fast tier (requirements-ci.txt has no cryptography) those tests skip themselves via skipUnless. The simulation is therefore a faithful superset of fast-tier behaviour.",
+    "log": "ci_fast_tier_sim.log"
+  },
+  "workflow_audit": {
+    "file": ".github/workflows/ci.yml",
+    "triggers": ["push", "pull_request", "workflow_dispatch"],
+    "fast_tier": {
+      "runs_on": "ubuntu-latest",
+      "python": "3.13",
+      "timeout_minutes": 15,
+      "deps": "requirements-ci.txt",
+      "model_free": true,
+      "cloud_key_free": true,
+      "steps": ["checkout", "setup-python", "libportaudio2", "pip install -r requirements-ci.txt", "unittest discover -s tests", "benchmarks/validate_dataset.py"],
+      "env": {"PYTHONIOENCODING": "utf-8"}
+    },
+    "model_tier": {
+      "gate": "if: github.event_name == 'workflow_dispatch' (manual only)",
+      "runs_on": "ubuntu-latest",
+      "python": "3.13",
+      "timeout_minutes": 40,
+      "deps": "requirements.txt",
+      "models": "python -m src.download_models --langs hi en --vad",
+      "paid_cloud": false,
+      "note": "Downloads free local models; no inference API keys are referenced anywhere in the workflow."
+    }
+  },
+  "requirements_ci_audit": {
+    "file": "requirements-ci.txt",
+    "packages": ["numpy==2.5.5", "scipy==1.18.1", "fastapi==0.163.1", "uvicorn==0.54.0", "websockets==17.4", "aiohttp>=3.9", "sounddevice==0.5.6"],
+    "intentionally_absent": ["torch", "sherpa-onnx", "onnxruntime", "groq", "cryptography", "transformers"],
+    "heavy_imports_lazy": true,
+    "heavy_import_evidence": [
+      "src/asr_ctc.py:29 import onnxruntime (function-local)",
+      "src/config.py:143 import onnxruntime (function-local)",
+      "src/sts_pipeline.py:73,804 import sherpa_onnx (function-local)",
+      "src/tts_engine.py:201,297,377 import sherpa_onnx (function-local)",
+      "src/tls_cert.py:38-41 from cryptography (function-local)"
+    ],
+    "module_level_third_party": ["numpy", "scipy", "fastapi", "sounddevice"],
+    "secrets_in_ci": "none; only PYTHONIOENCODING is set"
+  },
+  "acceptance_gate_ci": "PARTIAL — fast tier proven model-free/key-free locally (106 pass / 1 skip); GitHub-hosted execution NOT TESTED (no remote)."
+}
