@@ -1,0 +1,42 @@
+{
+  "phase": "I",
+  "benchmark": "security_revalidation_v2",
+  "generated": "2026-11-17",
+  "scope": "safe, local-only inspection + model-free regression tests; no external scanning, no exploitation",
+  "new_regression_tests": {
+    "file": "tests/test_security_revalidate.py",
+    "count": 20,
+    "result": "PASS (automated)",
+    "groups": {
+      "AuthorisedTests": 6,
+      "TicketTests": 4,
+      "OriginTests": 4,
+      "FrameCapTests": 1,
+      "BindSecurityTests": 3,
+      "LogRedactionTests": 2
+    }
+  },
+  "controls": [
+    {"control": "Fail-closed token auth", "status": "PASS (automated)", "evidence": "_authorised returns False for missing/wrong/empty token when ACCESS_TOKEN set; tests AuthorisedTests"},
+    {"control": "Constant-time token compare", "status": "PASS — code verified", "evidence": "hmac.compare_digest used in _authorised (call_server.py:103), /auth/ticket (:847), /metrics (:777)"},
+    {"control": "Credential transport", "status": "PASS (automated)", "evidence": "POST /auth/ticket takes Bearer header (not URL); returns single-use ?ticket=; legacy ?token= documented as visible in URL/logs"},
+    {"control": "Single-use expiring tickets", "status": "PASS (automated)", "evidence": "_consume_ticket pops on first use; expiry enforced; stale purged on issue; 192-bit secrets.token_urlsafe(24); TicketTests + test_ws_server"},
+    {"control": "Origin allowlisting", "status": "PASS (automated)", "evidence": "_origin_ok parses hostname; localhost/allowlist only; localhost.evil.com rejected; no-Origin allowed for non-browser; OriginTests"},
+    {"control": "XSS / injection sinks", "status": "PASS (automated)", "evidence": "test_xss (6 tests): browser client uses textContent not innerHTML; server fallback page safe; no other sinks"},
+    {"control": "Inbound frame caps", "status": "PASS (automated)", "evidence": "64KB voice frame, 64KB telephony text, 32KB payload chars; oversized closes 1009 (test_ws_server); FrameCapTests guards values"},
+    {"control": "Per-IP session limit", "status": "PASS (automated)", "evidence": "MAX_SESSIONS_PER_IP=8; excess closes 4429; slots released on disconnect (test_ws_server)"},
+    {"control": "Idle watchdog / max duration", "status": "PASS (automated)", "evidence": "idle closes 4408; max session closes 4410 (test_ws_server)"},
+    {"control": "Insecure-bind refusal", "status": "PASS (automated)", "evidence": "_bind_security_error: non-localhost without token -> startup exit 1; BindSecurityTests + test_ws_server.test_main_refuses_insecure_bind"},
+    {"control": "TLS for phone access", "status": "PASS (automated, local)", "evidence": "check_lan_tls L1-L9 9/9 PASS (lan_tls_check_v2.json); self-signed cert SANs localhost/LAN; physical phone NOT TESTED"},
+    {"control": "Log redaction", "status": "PASS (automated)", "evidence": "uvicorn log_level=warning suppresses access logs (?token= URLs); startup banner prints <your-token> placeholder only; LogRedactionTests asserts token value never printed"},
+    {"control": "/metrics auth + privacy", "status": "PASS (automated)", "evidence": "token-gated fail-closed; counts/timings only, no transcripts/audio/IPs; test_metrics (3 tests)"},
+    {"control": "ASR-error survival", "status": "PASS (automated)", "evidence": "decode exception emits error event (stage=asr, message truncated 200 chars), socket usable next turn (test_ws_server D1)"},
+    {"control": "Dependency CVE scan", "status": "NOT TESTED", "evidence": "pip-audit not installed and no network audit authorized; requirements mostly pinned (sherpa-onnx==2.0.1, numpy==2.5.5, scipy==1.18.1, fastapi==0.163.1, uvicorn==0.54.0, websockets==17.4); onnxruntime>=1.20, cryptography>=42, aiohttp>=3.9 are floors. Run 'pip install pip-audit && pip-audit -r requirements.txt' to activate."}
+  ],
+  "considerations_not_vulnerabilities": [
+    "/health is unauthenticated by design (monitoring); exposes backend/model names and readiness, not secrets. Acceptable on localhost; for public deployment consider gating or minimizing.",
+    "ASR error events send str(exc)[:200] to the connected caller; cloud SDK errors do not include API keys, but truncation limits any accidental detail.",
+    "Tickets are single-process in-memory; a multi-worker deployment needs a shared store (documented in DEPLOYMENT_V1)."
+  ],
+  "acceptance_gate_security": "PASS (automated, local) for auth/origin/limits/TLS/log-redaction/XSS; dependency CVE scan NOT TESTED. No control was weakened."
+}

@@ -70,7 +70,8 @@ class CPUSampler:
     def _read(self):
         if sys.platform == "win32":
             idle, kernel, user = self._ft(), self._ft(), self._ft()
-            if not self._get(ctypes.byref(idle), ctypes.byref(kernel), ctypes.byref(user)):
+            byref = self._ctypes.byref
+            if not self._get(byref(idle), byref(kernel), byref(user)):
                 return None
             conv = lambda f: (f.hi << 32) | f.lo  # noqa: E731
             # kernel time includes idle time on Windows

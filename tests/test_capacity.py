@@ -5,6 +5,7 @@ capacity recommendation, gauge peak extraction) without starting a server or
 loading any model.
 """
 import sys
+import time
 import unittest
 from pathlib import Path
 
@@ -12,7 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT / "benchmarks"))
 
 from run_capacity import (  # noqa: E402
-    MetricsPoller, capacity_recommendation, cleanup_ok,
+    CPUSampler, MetricsPoller, capacity_recommendation, cleanup_ok,
 )
 
 
@@ -89,6 +90,27 @@ class MetricsPeaksTests(unittest.TestCase):
         mp = MetricsPoller.__new__(MetricsPoller)
         mp.series = []
         self.assertFalse(mp.peaks()["available"])
+
+
+class CPUSamplerTests(unittest.TestCase):
+    def test_read_returns_valid_counters(self):
+        # regression: _read must not raise NameError (ctypes was local to __init__)
+        s = CPUSampler(interval=0.05)
+        reading = s._read()
+        self.assertIsNotNone(reading)
+        idle, total = reading
+        self.assertGreaterEqual(total, 0)
+        self.assertGreaterEqual(idle, 0)
+        self.assertLessEqual(idle, total)
+
+    def test_sampler_produces_samples(self):
+        with CPUSampler(interval=0.05) as s:
+            time.sleep(0.2)
+        self.assertTrue(s.samples)
+        for _, pct in s.samples:
+            self.assertGreaterEqual(pct, 0.0)
+            self.assertLessEqual(pct, 100.0)
+        self.assertTrue(s.summary()["available"])
 
 
 if __name__ == "__main__":
