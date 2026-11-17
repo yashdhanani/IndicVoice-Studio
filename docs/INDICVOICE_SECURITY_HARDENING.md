@@ -148,7 +148,8 @@ no cloud calls, no paid inference:
 - `tests/test_streaming_stt.py::test_max_buffer_cap`: utterance buffer cap.
 
 **Full suite result: 71/71 PASS in 136.0 s** (was 56 before Phase B; no
-existing test was weakened or removed).
+existing test was weakened or removed). Phase E later added the D23
+regression test — the current suite is **72 tests** (see changelog).
 
 ## Close-code contract
 

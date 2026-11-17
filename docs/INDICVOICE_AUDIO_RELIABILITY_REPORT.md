@@ -16,7 +16,7 @@ acoustics, mic hardware, or carrier networks.
 
 | Scenario | Evidence | Status |
 |---|---|---|
-| Browser-style turn: 16 kHz PCM16 frames at real-time pace → transcript → reply audio | `tests/test_ws_server.py::test_streaming_turn_end_to_end`, `test_block_turn_end_to_end` (71-test suite) | PASS |
+| Browser-style turn: 16 kHz PCM16 frames at real-time pace → transcript → reply audio | `tests/test_ws_server.py::test_streaming_turn_end_to_end`, `test_block_turn_end_to_end` (72-test suite) | PASS |
 | Telephony μ-law path: 20 ms/160-byte frames in, 20 ms frames out | `test_telephony_mulaw_turn` | PASS |
 | ASR failure does not drop the call; next turn works | `test_asr_error_does_not_drop_call` | PASS |
 | Endpoint silence handling incl. pause-heavy utterance (staleness guard) | `tests/test_streaming_stt.py` quiet-resume test; live smoke `benchmarks/results/smoke_live_hi.md` | PASS |
