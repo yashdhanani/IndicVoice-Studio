@@ -52,6 +52,11 @@ also exits 0 (reports the honest 0/240 corpus state).
 Evidence: `benchmarks/results/realworld_v2/ci_validation_v2.json` and
 `ci_fast_tier_sim.log`.
 
+**Suite growth note:** the 107-test count above was the suite at Phase H time.
+Phases I/J/K subsequently added security (20), pilot-monitor (12) and CPU-sampler
+(2) tests; the final fast-tier simulation is **141 tests — OK (skipped=1)**,
+recorded in `ci_fast_tier_final.log`. The model-free/key-free property is unchanged.
+
 **Caveat (honest):** the simulation used the full development venv with the model
 directory hidden, not a clean `requirements-ci` install. `cryptography` is present
 in this venv, so `test_lan_tls_check.InspectCertTests` ran here; on the real fast

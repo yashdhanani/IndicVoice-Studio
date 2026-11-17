@@ -1,0 +1,45 @@
+{
+  "phase": "K",
+  "benchmark": "realworld_v2_final",
+  "generated": "2026-11-17",
+  "verdict": "NOT ready for public production traffic; safe for a controlled, authenticated, single-session internal pilot on trusted hardware with monitoring.",
+  "scorecard_method": "evidence-based validation readiness (0-100, equal weight), NOT implementation completeness; NOT TESTED physical/human/remote items scored low deliberately",
+  "scorecard": [
+    {"category": "code_integrity", "score": 90},
+    {"category": "asr_accuracy", "score": 55},
+    {"category": "tts_quality", "score": 45},
+    {"category": "llm_quality", "score": 50},
+    {"category": "e2e_latency", "score": 40},
+    {"category": "browser_audio", "score": 30},
+    {"category": "telephony", "score": 55},
+    {"category": "security", "score": 80},
+    {"category": "observability", "score": 65},
+    {"category": "concurrency", "score": 60},
+    {"category": "ci", "score": 55},
+    {"category": "deployment", "score": 50},
+    {"category": "evaluation_maturity", "score": 75}
+  ],
+  "scorecard_total_equal_weight": 58,
+  "v1_reference_score": 63,
+  "v1_reference_note": "V1 used a different 9-category weighted scale rewarding implementation; V2 scores evidence-based validation readiness, so the lower number is honest weighting, not a product regression.",
+  "acceptance_gates": [
+    {"gate": "code_integrity", "status": "PASS (automated)"},
+    {"gate": "security", "status": "PASS (automated, local)", "note": "dependency CVE scan NOT TESTED"},
+    {"gate": "real_audio", "status": "NOT TESTED", "note": "0/240 recordings; tooling ready"},
+    {"gate": "multilingual_quality", "status": "PARTIAL", "note": "synthetic parity 12/12; human naturalness + real-audio accuracy NOT TESTED"},
+    {"gate": "performance", "status": "PARTIAL", "note": "300-500ms E2E target not met; capacity CPU-constrained"},
+    {"gate": "ci", "status": "PARTIAL", "note": "fast tier proven locally; GitHub NOT TESTED"},
+    {"gate": "pilot", "status": "PARTIAL / NOT TESTED", "note": "guide+tooling ready; actual pilot NOT TESTED"}
+  ],
+  "regression": {
+    "model_tier": {"tests": 161, "result": "OK", "failures": 0, "errors": 0, "skipped": 0, "log": "full_regression_v2.log", "duration_s": 139.954},
+    "fast_tier": {"tests": 141, "result": "OK", "skipped": 1, "log": "ci_fast_tier_final.log", "model_free": true, "cloud_key_free": true},
+    "v1_baseline_tests": 72,
+    "test_files": 14,
+    "weakened_or_removed": 0
+  },
+  "preserved": ["12 language routes", "conservative ASR fallback", "streaming rollback switches (?streaming=0, --no-streaming, git revert)", "all security controls", "all prior tests"],
+  "not_tested": ["real recordings (0/240)", "human listening study", "physical microphone (17 scenarios)", "physical phone/telephony gateway", "GitHub-hosted CI run", "public-host/proxy deployment", "dependency CVE scan", "actual controlled pilot", "multi-session performance on suitable hardware"],
+  "git_chain": ["4a8156a", "fca6aab", "67a9054", "fa7886a", "ebb6082", "252dc6a"],
+  "working_tree_note": "Uncommitted concurrent modifications to eval/speak_check.py and its run outputs were observed (not produced by this engagement) and left untouched; excluded from this engagement's commits."
+}
