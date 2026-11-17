@@ -29,5 +29,8 @@ certs/
 eval/audio/
 evaluation/dataset/audio/
 
+# visual QA screenshots (regenerate with eval/shoot.mjs)
+eval/shots/
+
 # synthesised starter recordings (regenerate with --make-manifest)
 eval_data/*.wav
