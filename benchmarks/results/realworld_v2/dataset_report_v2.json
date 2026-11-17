@@ -1,0 +1,202 @@
+{
+  "manifest": "C:\\Users\\Dell\\OneDrive\\Desktop\\Voice model\\evaluation\\dataset_manifest.jsonl",
+  "target_total": 240,
+  "collected_total": 0,
+  "complete": false,
+  "invalid_entries": [],
+  "per_lang": {
+    "hi": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "bn": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "ta": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "te": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "kn": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "ml": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "mr": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "gu": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "pa": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "or": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "as": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    },
+    "en": {
+      "target": 20,
+      "collected": 0,
+      "rejected": 0,
+      "not_collected": 20,
+      "distinct_speakers": 0,
+      "speaker_target": 5,
+      "transcript_verified": 0,
+      "noise_coverage": {},
+      "domain_coverage": {},
+      "duration_s": {
+        "min": null,
+        "p50": null,
+        "max": null
+      }
+    }
+  },
+  "note": "Actual counts only. NOT_COLLECTED slots are never filled with synthetic audio."
+}

@@ -7,7 +7,7 @@ are reported as missing -- this tool never creates audio or reference text.
 
 Usage:
     python benchmarks/validate_dataset.py
-    python benchmarks/validate_dataset.py --manifest evaluation/dataset/dataset_manifest.jsonl
+    python benchmarks/validate_dataset.py --manifest evaluation/dataset_manifest.jsonl
     python benchmarks/validate_dataset.py --require-complete   # gate: all 240 collected
     python benchmarks/validate_dataset.py --out benchmarks/results/production_v1/dataset_validation.json
 
@@ -77,6 +77,13 @@ def validate_entry(entry: dict, root: Path) -> list[str]:
         date.fromisoformat(str(entry["collected_at"]))
     except (ValueError, TypeError):
         problems.append("collected_at must be an ISO date (YYYY-MM-DD)")
+    # V2 metadata fields (optional for pre-V2 entries, checked when present)
+    if entry.get("sample_rate") is not None and entry["sample_rate"] != 16000:
+        problems.append("sample_rate metadata must be 16000 for canonical audio")
+    if entry.get("transcript_verified") is not None and not isinstance(entry["transcript_verified"], bool):
+        problems.append("transcript_verified must be a boolean")
+    if entry.get("transcript_verified") is True and not entry.get("transcript_verified_by"):
+        problems.append("transcript_verified=true needs a pseudonymous transcript_verified_by")
 
     path = root / entry["audio_path"]
     if not path.exists():
@@ -105,7 +112,7 @@ def validate_entry(entry: dict, root: Path) -> list[str]:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--manifest",
-                        default=str(ROOT / "evaluation" / "dataset" / "dataset_manifest.jsonl"))
+                        default=str(ROOT / "evaluation" / "dataset_manifest.jsonl"))
     parser.add_argument("--require-complete", action="store_true",
                         help="exit 2 unless every slot is COLLECTED and valid")
     parser.add_argument("--out", default=None, help="write the JSON report here")

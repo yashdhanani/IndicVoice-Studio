@@ -3,10 +3,16 @@
 Target: **240 real human utterances — 20 per language × 12 languages**
 (hi, bn, ta, te, kn, ml, mr, gu, pa, or, as, en).
 
-Status today: **0 / 240 collected.** Every slot in `dataset_manifest.jsonl`
-is `NOT_COLLECTED`. The existing `eval_data/*.wav` clips are TTS-synthesized
-starters and must **never** be counted toward this dataset or reported as
-real-recording results.
+Status today: **0 / 240 collected.** Every slot in
+`evaluation/dataset_manifest.jsonl` (moved to the V2 canonical location;
+schema: `evaluation/dataset_schema.json`) is `NOT_COLLECTED`. The existing
+`eval_data/*.wav` clips are TTS-synthesized starters and must **never** be
+counted toward this dataset or reported as real-recording results.
+
+Full recording protocol: `evaluation/recording_guide.md`. Ingestion is
+automated by `benchmarks/ingest_dataset.py` (validation, optional format
+conversion with original preservation, duplicate/clipping/silence detection,
+manifest update); status reporting by `benchmarks/dataset_report.py`.
 
 ## Privacy and consent (non-negotiable)
 
@@ -46,14 +52,24 @@ speaker should say something natural in that category, in their own words.
 2. One utterance per file, 0.5–60 s, with ~0.3 s of leading/trailing silence.
 3. For noise slots, record in the actual environment (or play calibrated
    office/street noise at ~55–65 dB while speaking); note the condition.
-4. Save to `evaluation/dataset/audio/<lang>/<id>.wav` exactly as the
-   manifest's `audio_path` specifies.
+4. Ingest with the tool (validates, converts if needed, fills the slot):
+   ```bash
+   .venv313/Scripts/python.exe benchmarks/ingest_dataset.py \
+     --audio rec.wav --lang hi --speaker spk_hi_01 \
+     --reference "मेरा ऑर्डर कहाँ तक पहुँचा?" \
+     --noise clean --device phone --consent --convert
+   ```
+   Manual alternative: save to `evaluation/dataset/audio/<lang>/<id>.wav`
+   exactly as the manifest's `audio_path` specifies.
 5. Transcribe **verbatim** in the native script (English in Latin script),
    including code-mixed English words. Do not normalize numbers or punctuation
    beyond standard orthography — the metrics pipeline normalizes separately.
-6. Update the manifest entry: `status: "COLLECTED"`, `reference_text`,
-   `speaker_id`, `consent: true`, `device`, `duration_s`, `collected_at`
-   (ISO date), optional `notes`.
+   **Never use an ASR hypothesis as the reference.** A second native/fluent
+   speaker verifies it, then record the assertion:
+   `python benchmarks/ingest_dataset.py verify --id hi_001 --verifier spk_hi_02`.
+6. The ingest tool updates the manifest entry (`status: "COLLECTED"`,
+   reference, speaker, consent, device, duration, date, script, sample rate,
+   `transcript_verified: false` until step 5, audio SHA-256).
 
 ## Schema (one JSON object per line)
 
@@ -73,6 +89,12 @@ speaker should say something natural in that category, in their own words.
 | `target_speaker_group` | int | 1–5, spreads slots across speakers |
 | `collected_at` | string\|null | ISO date when collected |
 | `notes` | string\|null | required for `REJECTED` entries |
+| `script` | string\|null | writing system of the reference (V2) |
+| `sample_rate` | int\|null | 16000 for canonical audio (V2) |
+| `environment` | string\|null | free-text recording environment (V2) |
+| `transcript_verified` | bool\|null | human verification assertion (V2) |
+| `transcript_verified_by` | string\|null | pseudonymous verifier (V2) |
+| `audio_sha256` | string\|null | canonical PCM hash, duplicate detection (V2) |
 
 ## Validation
 

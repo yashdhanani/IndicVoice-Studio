@@ -28,6 +28,9 @@ certs/
 # evaluation recordings (may contain real voices)
 eval/audio/
 evaluation/dataset/audio/
+evaluation/dataset/originals/
+evaluation/human_voice_quality/audio/
+evaluation/human_voice_quality/responses/
 
 # visual QA screenshots (regenerate with eval/shoot.mjs)
 eval/shots/

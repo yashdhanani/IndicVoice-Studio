@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "IndicVoice evaluation dataset manifest entry",
+  "description": "One JSONL line per recording slot. COLLECTED entries must describe genuine human speech with consent; NOT_COLLECTED slots carry nulls and are never padded with synthetic audio.",
+  "type": "object",
+  "required": ["id", "lang", "audio_path", "status", "reference_text", "speaker_id", "consent", "noise_condition", "device", "duration_s", "domain", "collected_at"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {"type": "string", "pattern": "^(hi|gu|mr|bn|ta|te|kn|ml|pa|or|as|en)_[0-9]{3}$"},
+    "lang": {"enum": ["hi", "gu", "mr", "bn", "ta", "te", "kn", "ml", "pa", "or", "as", "en"]},
+    "audio_path": {"type": "string", "description": "Repo-relative path to the canonical 16 kHz mono PCM16 WAV"},
+    "status": {"enum": ["NOT_COLLECTED", "COLLECTED", "REJECTED"]},
+    "reference_text": {"type": ["string", "null"], "description": "Human-written/verified transcript. NEVER an ASR hypothesis used as its own reference."},
+    "speaker_id": {"type": ["string", "null"], "description": "Pseudonymous identifier, e.g. spk_hi_01. No names, no contact data."},
+    "consent": {"type": ["boolean", "null"], "description": "true only after the speaker gave recorded informed consent (see recording_guide.md)"},
+    "noise_condition": {"enum": ["clean", "office", "street"]},
+    "device": {"enum": ["phone", "laptop", "headset", "other", null]},
+    "duration_s": {"type": ["number", "null"], "minimum": 0.5, "maximum": 60.0},
+    "domain": {"type": "string"},
+    "prompt_hint": {"type": ["string", "null"]},
+    "target_speaker_group": {"type": ["integer", "null"], "minimum": 1, "maximum": 5},
+    "collected_at": {"type": ["string", "null"], "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "notes": {"type": ["string", "null"]},
+    "script": {"type": ["string", "null"], "description": "Writing system of the reference text, e.g. Devanagari, Bengali, Latin"},
+    "sample_rate": {"type": ["integer", "null"], "enum": [16000, null]},
+    "environment": {"type": ["string", "null"], "description": "Free-text recording environment, e.g. quiet room, kitchen with fan"},
+    "transcript_verified": {"type": ["boolean", "null"], "description": "true only after a native/fluent speaker checked the reference against the audio"},
+    "transcript_verified_by": {"type": ["string", "null"], "description": "Pseudonymous verifier ID"},
+    "audio_sha256": {"type": ["string", "null"], "description": "SHA-256 of canonical PCM bytes; duplicate detection"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "COLLECTED"}}},
+      "then": {
+        "properties": {
+          "reference_text": {"type": "string", "minLength": 1},
+          "speaker_id": {"type": "string", "minLength": 1},
+          "consent": {"const": true},
+          "device": {"enum": ["phone", "laptop", "headset", "other"]},
+          "duration_s": {"type": "number"},
+          "collected_at": {"type": "string"},
+          "sample_rate": {"const": 16000},
+          "transcript_verified": {"type": "boolean"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "NOT_COLLECTED"}}},
+      "then": {
+        "properties": {
+          "reference_text": {"type": "null"},
+          "speaker_id": {"type": "null"},
+          "consent": {"type": "null"},
+          "collected_at": {"type": "null"}
+        }
+      }
+    },
+    {
+      "if": {"properties": {"status": {"const": "REJECTED"}}},
+      "then": {"properties": {"notes": {"type": "string", "minLength": 1}}}
+    }
+  ]
+}
