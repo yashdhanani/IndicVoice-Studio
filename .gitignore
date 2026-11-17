@@ -34,3 +34,6 @@ eval/shots/
 
 # synthesised starter recordings (regenerate with --make-manifest)
 eval_data/*.wav
+
+# review bundles (regenerate with git archive HEAD)
+IndicVoice_review_bundle_*.zip
