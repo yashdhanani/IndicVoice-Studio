@@ -232,6 +232,39 @@ class ConfigKnobTests(unittest.TestCase):
         self.assertGreaterEqual(config.ASR_WORKERS, 1)
 
 
+class LatencyEventTests(unittest.TestCase):
+    """Phase C: llm_ttft_ms must measure request-start -> first token, not
+    speech-end -> first token (which includes the ASR->LLM handoff)."""
+
+    def _emit(self, marks, now=1001.0):
+        import types
+        from src import call_server
+        s = CallSession.__new__(CallSession)
+        s.out = queue.Queue(maxsize=16)
+        s.closed = False
+        s.mode = "browser"
+        s.agent = types.SimpleNamespace(marks=marks)
+        s._turn = {"asr_ms": 120.0, "t_speech_end": 1000.0}
+        with mock.patch.object(call_server.time, "perf_counter", return_value=now):
+            s._emit_audio(np.zeros(160, dtype=np.float32))
+        items = [s.out.get_nowait() for _ in range(s.out.qsize())]
+        return next(e for e in items
+                    if isinstance(e, dict) and e.get("type") == "latency")
+
+    def test_ttft_is_request_to_first_token(self):
+        lat = self._emit({"llm_request": 1000.2, "llm_first": 1000.7,
+                          "tts_start": 1000.8})
+        self.assertEqual(lat["llm_ttft_ms"], 500.0)
+        self.assertEqual(lat["llm_ms"], 700.0)
+        self.assertEqual(lat["tts_ms"], 200.0)
+        self.assertEqual(lat["first_audio_ms"], 1000.0)
+
+    def test_missing_request_mark_reports_none_not_fake(self):
+        lat = self._emit({"llm_first": 1000.7, "tts_start": 1000.8})
+        self.assertIsNone(lat["llm_ttft_ms"])
+        self.assertEqual(lat["llm_ms"], 700.0)
+
+
 class TinyThreadRoutingTests(unittest.TestCase):
     def test_tiny_loader_uses_knob_not_sherpa_arg_and_caches(self):
         import types

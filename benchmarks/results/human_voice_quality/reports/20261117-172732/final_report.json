@@ -1,0 +1,1688 @@
+{
+  "generated": "2026-11-17T11:57:32.051443+00:00",
+  "run": "20261117-172732",
+  "overview": {
+    "generated": "2026-11-17T11:57:31.968015+00:00",
+    "latest_run": {
+      "run": "speak_check_20261117-163551",
+      "generated": "2026-11-17 16:39:48",
+      "repeats": 3,
+      "n_renders": 108,
+      "clean": 89,
+      "statuses": {
+        "hi": "PARTIAL",
+        "gu": "PARTIAL",
+        "mr": "PASS (automated)",
+        "bn": "PASS (automated)",
+        "ta": "PASS (automated)",
+        "te": "PASS (automated)",
+        "kn": "PASS (automated)",
+        "ml": "PARTIAL",
+        "pa": "PASS (automated)",
+        "or": "PARTIAL",
+        "as": "PARTIAL",
+        "en": "PARTIAL"
+      },
+      "has_player": true
+    },
+    "matrix": [
+      {
+        "lang": "hi",
+        "name": "Hindi",
+        "status": "PARTIAL",
+        "n": 9,
+        "clean": 8,
+        "cer_clean_mean": 0.106,
+        "cer_clean_max": 0.955,
+        "rtf": 0.171,
+        "duration_mean_s": 2.161,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 1,
+        "script_miss": 0
+      },
+      {
+        "lang": "gu",
+        "name": "Gujarati",
+        "status": "PARTIAL",
+        "n": 9,
+        "clean": 8,
+        "cer_clean_mean": 0.021,
+        "cer_clean_max": 0.111,
+        "rtf": 0.19,
+        "duration_mean_s": 2.633,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 1,
+        "script_miss": 0
+      },
+      {
+        "lang": "mr",
+        "name": "Marathi",
+        "status": "PASS (automated)",
+        "n": 9,
+        "clean": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "rtf": 0.156,
+        "duration_mean_s": 2.88,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 0,
+        "script_miss": 0
+      },
+      {
+        "lang": "bn",
+        "name": "Bengali",
+        "status": "PASS (automated)",
+        "n": 9,
+        "clean": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "rtf": 0.169,
+        "duration_mean_s": 2.151,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 0,
+        "script_miss": 0
+      },
+      {
+        "lang": "ta",
+        "name": "Tamil",
+        "status": "PASS (automated)",
+        "n": 9,
+        "clean": 9,
+        "cer_clean_mean": 0.004,
+        "cer_clean_max": 0.034,
+        "rtf": 0.169,
+        "duration_mean_s": 2.21,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 0,
+        "script_miss": 0
+      },
+      {
+        "lang": "te",
+        "name": "Telugu",
+        "status": "PASS (automated)",
+        "n": 9,
+        "clean": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "rtf": 0.143,
+        "duration_mean_s": 2.591,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 0,
+        "script_miss": 0
+      },
+      {
+        "lang": "kn",
+        "name": "Kannada",
+        "status": "PASS (automated)",
+        "n": 9,
+        "clean": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "rtf": 0.143,
+        "duration_mean_s": 2.881,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 0,
+        "script_miss": 0
+      },
+      {
+        "lang": "ml",
+        "name": "Malayalam",
+        "status": "PARTIAL",
+        "n": 9,
+        "clean": 5,
+        "cer_clean_mean": 0.035,
+        "cer_clean_max": 0.087,
+        "rtf": 0.176,
+        "duration_mean_s": 2.216,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 4,
+        "script_miss": 0
+      },
+      {
+        "lang": "pa",
+        "name": "Punjabi",
+        "status": "PASS (automated)",
+        "n": 9,
+        "clean": 9,
+        "cer_clean_mean": 0.018,
+        "cer_clean_max": 0.074,
+        "rtf": 0.132,
+        "duration_mean_s": 2.718,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 0,
+        "script_miss": 0
+      },
+      {
+        "lang": "or",
+        "name": "Odia",
+        "status": "PARTIAL",
+        "n": 9,
+        "clean": 8,
+        "cer_clean_mean": 0.027,
+        "cer_clean_max": 0.048,
+        "rtf": 0.184,
+        "duration_mean_s": 2.641,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 1,
+        "script_miss": 0
+      },
+      {
+        "lang": "as",
+        "name": "Assamese",
+        "status": "PARTIAL",
+        "n": 9,
+        "clean": 0,
+        "cer_clean_mean": 0.258,
+        "cer_clean_max": 0.3,
+        "rtf": 0.18,
+        "duration_mean_s": 2.292,
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "word_miss": 9,
+        "script_miss": 0
+      },
+      {
+        "lang": "en",
+        "name": "English",
+        "status": "PARTIAL",
+        "n": 9,
+        "clean": 6,
+        "cer_clean_mean": 0.141,
+        "cer_clean_max": 0.423,
+        "rtf": 0.173,
+        "duration_mean_s": 2.389,
+        "tts_backend": "tiny",
+        "asr_backend": "whisper",
+        "word_miss": 3,
+        "script_miss": 0
+      }
+    ],
+    "gates": {
+      "min_duration_s": 0.4,
+      "min_rms_dbfs": -35.0,
+      "min_voiced_frac": 0.3,
+      "max_clip_frac": 0.002,
+      "min_voice_band_ratio": 0.7,
+      "max_cer_clean": 0.15,
+      "max_wer_clean": 0.3
+    },
+    "dataset": {
+      "total_slots": 240,
+      "collected": 0,
+      "verified": 0,
+      "per_lang": {
+        "hi": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "gu": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "mr": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "bn": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "ta": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "te": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "kn": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "ml": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "pa": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "or": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "as": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        },
+        "en": {
+          "slots": 20,
+          "collected": 0,
+          "verified": 0,
+          "speakers": 0,
+          "validation_problems": [],
+          "status": "NOT TESTED"
+        }
+      },
+      "human_dataset_status": "NOT TESTED"
+    },
+    "listening": {
+      "packages": [
+        {
+          "id": "v2",
+          "label": "V2 blind set (6 types × 12 langs)",
+          "n_samples": 96,
+          "dimensions": [
+            "pronunciation",
+            "intelligibility",
+            "naturalness",
+            "prosody",
+            "rhythm",
+            "pauses",
+            "sentence_endings",
+            "question_intonation",
+            "conversational_feel",
+            "overall"
+          ],
+          "dir": "evaluation\\human_voice_quality"
+        }
+      ],
+      "n_response_files": 3,
+      "n_listeners": 1,
+      "status": "PARTIAL",
+      "metric_label": "mean listener rating (5-point) — NOT ITU-T MOS"
+    },
+    "baselines": [
+      {
+        "run": "20261117-165721",
+        "generated": "2026-11-17 16:57:21",
+        "head": "fc6d0b3bdc51f6f67bf873da8a8db0a8b3e6d1d5",
+        "tests": "PASS (automated)"
+      }
+    ],
+    "tests": {
+      "status": "PASS (automated)",
+      "tests_run": 161,
+      "skipped": 0,
+      "failure_summary": null,
+      "log": "eval\\_regression_now.log",
+      "tail": [
+        "test_index_html_uses_textcontent_not_innerhtml (tests.test_xss.TestServerFallbackPage.test_index_html_uses_textcontent_not_innerhtml) ... ok",
+        "",
+        "----------------------------------------------------------------------",
+        "Ran 161 tests in 140.024s",
+        "",
+        "OK"
+      ]
+    },
+    "human_evaluation": "PARTIAL",
+    "mos": "NOT TESTED",
+    "notes": [
+      "Round-trip evidence is synthetic TTS→ASR, not human speech evaluation.",
+      "WER/CER measure intelligibility of renders, never TTS naturalness.",
+      "Human dataset 0/240 collected means every human metric is NOT TESTED."
+    ]
+  },
+  "languages": [
+    {
+      "lang": "hi",
+      "name": "Hindi",
+      "script": "Devanagari",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PARTIAL",
+      "phonetic_checks": [
+        "Aspirated vs unaspirated consonants (क/ख, ग/घ, च/छ, त/थ, प/फ)",
+        "Retroflex vs dental distinction (ट/त, ड/द, ण/न)",
+        "Natural schwa deletion (e.g. समझ, not सम-झ-अ)",
+        "Sentence-final falling intonation on statements",
+        "Question intonation on क्या-questions"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [
+        {
+          "sentence": 1,
+          "take": 1,
+          "wav": "audio/hi_01_r1.wav",
+          "status": "PARTIAL",
+          "reference": "मेरा ऑर्डर नंबर एक दो तीन है।",
+          "hypothesis": "म",
+          "cer_clean": 0.955,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        }
+      ],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 8,
+        "cer_clean_mean": 0.106,
+        "cer_clean_max": 0.955,
+        "wer_clean_mean": 0.111,
+        "render_rtf_mean": 0.171,
+        "duration_mean_s": 2.161,
+        "hf_share_max": 0.0211,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "gu",
+      "name": "Gujarati",
+      "script": "Gujarati",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PARTIAL",
+      "phonetic_checks": [
+        "Vowel length (ઇ/ઈ, ઉ/ઊ)",
+        "Nasalization (અં, અઁ)",
+        "Retroflex consonants (ટ, ડ, ણ)",
+        "Native conversational rhythm",
+        "Gujarati–English code-mixing (ઈમેલ, બુકિંગ)"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [
+        {
+          "sentence": 2,
+          "take": 2,
+          "wav": "audio/gu_02_r2.wav",
+          "status": "PARTIAL",
+          "reference": "કાલે સાંજ સુધીમાં ડિલિવરી થઈ જશે.",
+          "hypothesis": "કાલે સાંજ સુધીમાંડીલીવરી થાઈ જશે",
+          "cer_clean": 0.111,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        }
+      ],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 8,
+        "cer_clean_mean": 0.021,
+        "cer_clean_max": 0.111,
+        "wer_clean_mean": 0.093,
+        "render_rtf_mean": 0.19,
+        "duration_mean_s": 2.633,
+        "hf_share_max": 0.0255,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "mr",
+      "name": "Marathi",
+      "script": "Devanagari",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PASS (automated)",
+      "phonetic_checks": [
+        "Retroflex vs dental (ट/त, ड/द, ण/न)",
+        "Syllable stress and rhythm",
+        "Natural Marathi sentence patterns",
+        "Schwa handling distinct from Hindi"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "wer_clean_mean": 0.0,
+        "render_rtf_mean": 0.156,
+        "duration_mean_s": 2.88,
+        "hf_share_max": 0.0195,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "bn",
+      "name": "Bengali",
+      "script": "Bengali",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PASS (automated)",
+      "phonetic_checks": [
+        "Vowel realization (অ/আ, ই/ঈ)",
+        "Consonant clusters (ক্ষ, জ্ঞ)",
+        "Bengali intonation contours",
+        "Regional pronunciation variation"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "wer_clean_mean": 0.0,
+        "render_rtf_mean": 0.169,
+        "duration_mean_s": 2.151,
+        "hf_share_max": 0.0274,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "ta",
+      "name": "Tamil",
+      "script": "Tamil",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PASS (automated)",
+      "phonetic_checks": [
+        "Retroflex / dental / alveolar distinction (ட/த/ற)",
+        "Vowel length (அ/ஆ, இ/ஈ)",
+        "Natural conversational intonation",
+        "No voiced-stop aspiration contrasts (unlike Hindi)"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 9,
+        "cer_clean_mean": 0.004,
+        "cer_clean_max": 0.034,
+        "wer_clean_mean": 0.019,
+        "render_rtf_mean": 0.169,
+        "duration_mean_s": 2.21,
+        "hf_share_max": 0.015,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "te",
+      "name": "Telugu",
+      "script": "Telugu",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PASS (automated)",
+      "phonetic_checks": [
+        "Long vs short vowels (అ/ఆ, ఇ/ఈ)",
+        "Consonant articulation clarity",
+        "Native Telugu rhythm",
+        "Common conversational word pronunciation"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "wer_clean_mean": 0.0,
+        "render_rtf_mean": 0.143,
+        "duration_mean_s": 2.591,
+        "hf_share_max": 0.0975,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "kn",
+      "name": "Kannada",
+      "script": "Kannada",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PASS (automated)",
+      "phonetic_checks": [
+        "Retroflex consonants (ಟ, ಡ, ಣ)",
+        "Phoneme realization accuracy",
+        "Word boundaries and intonation",
+        "Native conversational flow"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 9,
+        "cer_clean_mean": 0.0,
+        "cer_clean_max": 0.0,
+        "wer_clean_mean": 0.0,
+        "render_rtf_mean": 0.143,
+        "duration_mean_s": 2.881,
+        "hf_share_max": 0.0104,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "ml",
+      "name": "Malayalam",
+      "script": "Malayalam",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PARTIAL",
+      "phonetic_checks": [
+        "Vowel length and consonant distinctions",
+        "Complex clusters (ന്ത, ഞ്ച, ക്ത)",
+        "Native pronunciation of എന്റെ / എന്നെ",
+        "Conversational rhythm"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [
+        {
+          "sentence": 2,
+          "take": 2,
+          "wav": "audio/ml_02_r2.wav",
+          "status": "PARTIAL",
+          "reference": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറി ആകും.",
+          "hypothesis": "നാളെ വൈകുന്നേരത്തിനുള്ളിൽ ഡെലിവറിിയകും",
+          "cer_clean": 0.057,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 3,
+          "take": 1,
+          "wav": "audio/ml_03_r1.wav",
+          "status": "PARTIAL",
+          "reference": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+          "hypothesis": "എറെ വിലാസം കൊച്ചിയിലാണ്",
+          "cer_clean": 0.087,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 3,
+          "take": 2,
+          "wav": "audio/ml_03_r2.wav",
+          "status": "PARTIAL",
+          "reference": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+          "hypothesis": "എറെ വിലാസം കൊച്ചിയിലാണ്",
+          "cer_clean": 0.087,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 3,
+          "take": 3,
+          "wav": "audio/ml_03_r3.wav",
+          "status": "PARTIAL",
+          "reference": "എന്റെ വിലാസം കൊച്ചിയിലാണ്.",
+          "hypothesis": "എറെ വിലാസം കൊച്ചിയിലാണ്",
+          "cer_clean": 0.087,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        }
+      ],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 5,
+        "cer_clean_mean": 0.035,
+        "cer_clean_max": 0.087,
+        "wer_clean_mean": 0.167,
+        "render_rtf_mean": 0.176,
+        "duration_mean_s": 2.216,
+        "hf_share_max": 0.0111,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "pa",
+      "name": "Punjabi",
+      "script": "Gurmukhi",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PASS (automated)",
+      "phonetic_checks": [
+        "Tonal distinctions where relevant (ਘਰ/ਕਰ)",
+        "Natural sentence rhythm",
+        "Conversational vocabulary",
+        "Geminate consonants (ਕੱਲ੍ਹ)"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 9,
+        "cer_clean_mean": 0.018,
+        "cer_clean_max": 0.074,
+        "wer_clean_mean": 0.066,
+        "render_rtf_mean": 0.132,
+        "duration_mean_s": 2.718,
+        "hf_share_max": 0.0339,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "or",
+      "name": "Odia",
+      "script": "Odia",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": null,
+      "status": "PARTIAL",
+      "phonetic_checks": [
+        "Vowel and consonant realization",
+        "Native Odia sentence patterns",
+        "Retroflex series",
+        "Natural intonation"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [
+        {
+          "sentence": 3,
+          "take": 1,
+          "wav": "audio/or_03_r1.wav",
+          "status": "PARTIAL",
+          "reference": "ମୋ ଠିକଣା ଭୁବନେଶ୍ୱରରେ ଅଛି।",
+          "hypothesis": "ମୋଠି କଣ ଭୁବନେଶ୍ୱରରେ ଅଛି",
+          "cer_clean": 0.048,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        }
+      ],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 8,
+        "cer_clean_mean": 0.027,
+        "cer_clean_max": 0.048,
+        "wer_clean_mean": 0.139,
+        "render_rtf_mean": 0.184,
+        "duration_mean_s": 2.641,
+        "hf_share_max": 0.0156,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "as",
+      "name": "Assamese",
+      "script": "Bengali",
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "asr_note": "Bengali Conformer alias — no Assamese export",
+      "status": "PARTIAL",
+      "phonetic_checks": [
+        "Assamese-specific phonetics (ৱ, ক্ষ)",
+        "Distinct vowel realization vs Bengali",
+        "Natural intonation",
+        "Assamese vocabulary and sentence patterns"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [
+        {
+          "sentence": 1,
+          "take": 1,
+          "wav": "audio/as_01_r1.wav",
+          "status": "PARTIAL",
+          "reference": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+          "hypothesis": "মোর অর্ডার নম্বর এক দুই তিন",
+          "cer_clean": 0.217,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 1,
+          "take": 2,
+          "wav": "audio/as_01_r2.wav",
+          "status": "PARTIAL",
+          "reference": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+          "hypothesis": "মোর অর্ডার নম্বর এক দুই তিনই",
+          "cer_clean": 0.217,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 1,
+          "take": 3,
+          "wav": "audio/as_01_r3.wav",
+          "status": "PARTIAL",
+          "reference": "মোৰ অৰ্ডাৰ নম্বৰ এক দুই তিনি।",
+          "hypothesis": "মোর অর্ডার নম্বার এক দুই তিনই",
+          "cer_clean": 0.261,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 2,
+          "take": 1,
+          "wav": "audio/as_02_r1.wav",
+          "status": "PARTIAL",
+          "reference": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+          "hypothesis": "কাইল সন্ধ্যিয়ার ভিতরত ডেলিভারি হব",
+          "cer_clean": 0.241,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 2,
+          "take": 2,
+          "wav": "audio/as_02_r2.wav",
+          "status": "PARTIAL",
+          "reference": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+          "hypothesis": "কাইল সন্ধ্যিার ভিতরত ডেলিভারি হব",
+          "cer_clean": 0.241,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 2,
+          "take": 3,
+          "wav": "audio/as_02_r3.wav",
+          "status": "PARTIAL",
+          "reference": "কাইলৈ সন্ধিয়াৰ ভিতৰত ডেলিভাৰী হ'ব।",
+          "hypothesis": "কাইল সন্ধ্যিার ভিতরত ডেলিভারি হব",
+          "cer_clean": 0.241,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 3,
+          "take": 1,
+          "wav": "audio/as_03_r1.wav",
+          "status": "PARTIAL",
+          "reference": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+          "hypothesis": "মোর ঠিকোনা গয়াহাটি আছে",
+          "cer_clean": 0.3,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 3,
+          "take": 2,
+          "wav": "audio/as_03_r2.wav",
+          "status": "PARTIAL",
+          "reference": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+          "hypothesis": "মোর ঠিকোন গুয়াহাটিত আছে",
+          "cer_clean": 0.3,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 3,
+          "take": 3,
+          "wav": "audio/as_03_r3.wav",
+          "status": "PARTIAL",
+          "reference": "মোৰ ঠিকনা গুৱাহাটীত আছে।",
+          "hypothesis": "মোর ঠিকোনা গয়াহাটি আছে",
+          "cer_clean": 0.3,
+          "notes": [
+            "words lost or altered in this render"
+          ]
+        }
+      ],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 0,
+        "cer_clean_mean": 0.258,
+        "cer_clean_max": 0.3,
+        "wer_clean_mean": 0.806,
+        "render_rtf_mean": 0.18,
+        "duration_mean_s": 2.292,
+        "hf_share_max": 0.0553,
+        "audible_all": true
+      }
+    },
+    {
+      "lang": "en",
+      "name": "English",
+      "script": "Latin",
+      "tts_backend": "tiny",
+      "asr_backend": "whisper",
+      "asr_note": null,
+      "status": "PARTIAL",
+      "phonetic_checks": [
+        "Indian English pronunciation where appropriate",
+        "Clear articulation",
+        "Stress, reductions, pauses, intonation",
+        "Code-switching with Indian languages",
+        "Digit/date verbalisation"
+      ],
+      "phonetic_status": "NOT TESTED — requires native-speaker evidence",
+      "defects": [
+        {
+          "sentence": 1,
+          "take": 1,
+          "wav": "audio/en_01_r1.wav",
+          "status": "PARTIAL",
+          "reference": "My order number is one two three.",
+          "hypothesis": "My order number is 123.",
+          "cer_clean": 0.423,
+          "notes": [
+            "miss is whisper digit formatting ('1-2-3' for 'one two three'), not missing speech",
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 1,
+          "take": 2,
+          "wav": "audio/en_01_r2.wav",
+          "status": "PARTIAL",
+          "reference": "My order number is one two three.",
+          "hypothesis": "My order number is 1-2-3.",
+          "cer_clean": 0.423,
+          "notes": [
+            "miss is whisper digit formatting ('1-2-3' for 'one two three'), not missing speech",
+            "words lost or altered in this render"
+          ]
+        },
+        {
+          "sentence": 1,
+          "take": 3,
+          "wav": "audio/en_01_r3.wav",
+          "status": "PARTIAL",
+          "reference": "My order number is one two three.",
+          "hypothesis": "My order number is 123.",
+          "cer_clean": 0.423,
+          "notes": [
+            "miss is whisper digit formatting ('1-2-3' for 'one two three'), not missing speech",
+            "words lost or altered in this render"
+          ]
+        }
+      ],
+      "dataset": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "metrics": {
+        "n": 9,
+        "clean_renders": 6,
+        "cer_clean_mean": 0.141,
+        "cer_clean_max": 0.423,
+        "wer_clean_mean": 0.143,
+        "render_rtf_mean": 0.173,
+        "duration_mean_s": 2.389,
+        "hf_share_max": 0.1041,
+        "audible_all": true
+      }
+    }
+  ],
+  "dataset": {
+    "total_slots": 240,
+    "collected": 0,
+    "verified": 0,
+    "per_lang": {
+      "hi": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "gu": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "mr": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "bn": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "ta": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "te": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "kn": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "ml": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "pa": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "or": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "as": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "en": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      }
+    },
+    "human_dataset_status": "NOT TESTED"
+  },
+  "listening": {
+    "v2": {
+      "program": "indicvoice_human_voice_quality_v2",
+      "metric_label": "mean listener rating (5-point scale) — NOT ITU-T MOS",
+      "recorded_at": "2026-11-17T11:57:32.048875+00:00",
+      "n_response_files": 3,
+      "n_listeners": 1,
+      "status": "COLLECTED",
+      "per_lang": {
+        "mr": {
+          "n_listeners": 1,
+          "n_utterances": 1,
+          "dimensions": {
+            "pronunciation": {
+              "mean": 5.0,
+              "sd": 0.0,
+              "n_ratings": 3
+            },
+            "intelligibility": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            },
+            "naturalness": {
+              "mean": 4.0,
+              "sd": 0.0,
+              "n_ratings": 3
+            },
+            "prosody": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            },
+            "rhythm": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            },
+            "pauses": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            },
+            "sentence_endings": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            },
+            "question_intonation": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            },
+            "conversational_feel": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            },
+            "overall": {
+              "mean": null,
+              "sd": null,
+              "n_ratings": 0
+            }
+          },
+          "repeat_consistency": {
+            "n_pairs_rated": 0,
+            "mean_abs_delta": null,
+            "max_abs_delta": null
+          }
+        }
+      },
+      "qualitative_feedback": {},
+      "problems": []
+    }
+  },
+  "resources": {
+    "console_rss_mb": null,
+    "cpu_logical": 8,
+    "stt_threads": 4,
+    "tts_threads": 2,
+    "historical": {
+      "capacity_v2.json": {
+        "benchmark": "capacity_v2",
+        "started": "2026-11-17T16:28:37",
+        "machine": {
+          "platform": "win32",
+          "cpu_count": 8
+        },
+        "config": {
+          "lang": "hi",
+          "levels": [
+            1,
+            2,
+            3,
+            5
+          ],
+          "turns_per_session": 4,
+          "cooldown_s": 10.0,
+          "note": "level 10 excluded by default on the 4-core/15W reference laptop"
+        },
+        "corpus": "TTS-synthesized starter clips (eval_data/), NOT real recordings",
+        "llm": {
+          "backend": "groq",
+          "model": "openai/gpt-oss-20b",
+          "ready": true
+        },
+        "server_rss": {
+          "available": true,
+          "peak_mb": 880.6,
+          "final_mb": 719.7,
+          "samples": 103
+        },
+        "rss_series_mb": [
+          [
+            0.0,
+            471.1
+          ],
+          [
+            2.1,
+            482.2
+          ],
+          [
+            4.1,
+            490.0
+          ],
+          [
+            6.1,
+            511.2
+          ],
+          [
+            8.1,
+            522.8
+          ],
+          [
+            10.1,
+            551.2
+          ],
+          [
+            12.1,
+            551.3
+          ],
+          [
+            14.1,
+            553.5
+          ],
+          [
+            16.1,
+            556.7
+          ],
+          [
+            18.1,
+            562.4
+          ],
+          [
+            20.2,
+            562.4
+          ],
+          [
+            22.2,
+            564.1
+          ],
+          [
+            24.2,
+            573.8
+          ],
+          [
+            26.2,
+            573.9
+          ],
+          [
+            28.2,
+            574.1
+          ],
+          [
+            30.2,
+            573.2
+          ],
+          [
+            32.2,
+            573.6
+          ],
+          [
+            34.2,
+            573.6
+          ],
+          [
+            36.2,
+            573.5
+          ],
+          [
+            38.2,
+            573.5
+          ],
+          [
+            40.3,
+            573.5
+          ],
+          [
+            42.3,
+            581.9
+          ],
+          [
+            44.3,
+            582.9
+          ],
+          [
+            46.3,
+            583.7
+          ],
+          [
+            48.3,
+            586.3
+          ],
+          [
+            50.3,
+            592.3
+          ],
+          [
+            52.4,
+            601.6
+          ],
+          [
+            54.4,
+            601.9
+          ],
+          [
+            56.4,
+            607.8
+          ],
+          [
+            58.4,
+            610.1
+          ],
+          [
+            60.4,
+            613.1
+          ],
+          [
+            62.4,
+            615.1
+          ],
+          [
+            64.4,
+            621.7
+          ],
+          [
+            66.4,
+            637.9
+          ],
+          [
+            68.5,
+            640.6
+          ],
+          [
+            70.5,
+            640.9
+          ],
+          [
+            72.5,
+            640.9
+          ],
+          [
+            74.5,
+            641.7
+          ],
+          [
+            76.5,
+            641.7
+          ],
+          [
+            78.5,
+            641.6
+          ],
+          [
+            80.5,
+            641.6
+          ],
+          [
+            82.5,
+            641.6
+          ],
+          [
+            84.5,
+            639.8
+          ],
+          [
+            86.5,
+            640.9
+          ],
+          [
+            88.5,
+            641.9
+          ],
+          [
+            90.5,
+            644.6
+          ],
+          [
+            92.6,
+            651.3
+          ],
+          [
+            94.6,
+            654.4
+          ],
+          [
+            96.6,
+            659.0
+          ],
+          [
+            98.6,
+            669.6
+          ],
+          [
+            100.6,
+            679.2
+          ],
+          [
+            102.6,
+            679.4
+          ],
+          [
+            104.7,
+            692.9
+          ],
+          [
+            106.7,
+            693.8
+          ],
+          [
+            108.7,
+            693.8
+          ],
+          [
+            110.7,
+            708.4
+          ],
+          [
+            112.7,
+            711.4
+          ],
+          [
+            114.7,
+            717.4
+          ],
+          [
+            116.7,
+            715.4
+          ],
+          [
+            118.8,
+            716.2
+          ],
+          [
+            120.9,
+            716.6
+          ],
+          [
+            122.9,
+            716.6
+          ],
+          [
+            124.9,
+            716.6
+          ],
+          [
+            126.9,
+            718.5
+          ],
+          [
+            128.9,
+            718.4
+          ],
+          [
+            130.9,
+            718.3
+          ],
+          [
+            132.9,
+            718.2
+          ],
+          [
+            135.0,
+            718.2
+          ],
+          [
+            137.0,
+            718.2
+          ],
+          [
+            139.0,
+            718.2
+          ],
+          [
+            141.0,
+            743.9
+          ],
+          [
+            143.0,
+            746.2
+          ],
+          [
+            145.0,
+            747.1
+          ],
+          [
+            147.1,
+            755.2
+          ],
+          [
+            149.1,
+            757.0
+          ],
+          [
+            151.1,
+            760.2
+          ],
+          [
+            153.1,
+            774.3
+          ],
+          [
+            155.1,
+            775.0
+          ],
+          [
+            157.1,
+            782.3
+          ],
+          [
+            159.2,
+            784.4
+          ],
+          [
+            161.2,
+            800.1
+          ],
+          [
+            163.2,
+            801.9
+          ],
+          [
+            165.2,
+            809.9
+          ],
+          [
+            167.2,
+            819.7
+          ],
+          [
+            169.2,
+            836.0
+          ],
+          [
+            171.2,
+            837.8
+          ],
+          [
+            173.2,
+            851.8
+          ],
+          [
+            175.3,
+            853.3
+          ],
+          [
+            177.3,
+            859.9
+          ],
+          [
+            179.3,
+            861.7
+          ],
+          [
+            181.3,
+            869.7
+          ],
+          [
+            183.3,
+            875.2
+          ],
+          [
+            185.4,
+            880.6
+          ],
+          [
+            187.4,
+            692.2
+          ],
+          [
+            189.4,
+            701.4
+          ],
+          [
+            191.4,
+            704.6
+          ],
+          [
+            193.5,
+            708.8
+          ],
+          [
+            195.5,
+            719.8
+          ],
+          [
+            197.5,
+            719.7
+          ],
+          [
+            199.5,
+            719.7
+          ],
+          [
+            201.5,
+            719.7
+          ],
+          [
+            203.5,
+            719.7
+          ],
+          [
+            205.5,
+            719.7
+          ]
+        ]
+      }
+    },
+    "note": "Live pipeline RSS/CPU belong to the port-8000 process, which this console never touches."
+  }
+}

@@ -1,0 +1,627 @@
+{
+  "generated": "20261118-094800",
+  "languages": [
+    {
+      "lang": "hi",
+      "replies": {
+        "cap": {
+          "user": "नमस्ते, क्या आप मेरी मदद कर सकते हैं?",
+          "reply": "नमस्ते! ज़रूर, मैं आपकी कैसे मदद कर सकती हूँ?",
+          "ms": 2663
+        },
+        "mix": {
+          "user": "मेरा OTP कहाँ आएगा?",
+          "reply": "आपका OTP आपके मोबाइल पर SMS के रूप में भेजा जाएगा। क्या आप अपना मोबाइल नंबर पुष्टि कर सकती हैं?",
+          "ms": 2692
+        },
+        "ask": {
+          "user": "मेरा order कब आएगा?",
+          "reply": "कृपया अपना ऑर्डर नंबर बताइए, ताकि मैं डिलीवरी स्थिति जांच सकूं।",
+          "ms": 2614
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "expected": "feminine",
+        "found": "feminine",
+        "masculine_markers": [],
+        "feminine_markers": [
+          "सकती"
+        ],
+        "pass": true
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 6,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "नमस्ते! ज़रूर",
+          "आपका otp",
+          "कृपया अपना"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 1
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "gu",
+      "replies": {
+        "cap": {
+          "user": "નમસ્તે, તમે મારી મદદ કરી શકો છો?",
+          "reply": "નમસ્તે! શું સમસ્યા છે, હું મદદ કરી શકું?",
+          "ms": 2373
+        },
+        "mix": {
+          "user": "મારો OTP ક્યાં આવશે?",
+          "reply": "તમારું OTP તમારા નોંધાયેલ મોબાઇલ નંબર પર આવશે. શું હું તમારો ફોન નંબર ચેક કરું?",
+          "ms": 2534
+        },
+        "ask": {
+          "user": "મારો order ક્યારે આવશે?",
+          "reply": "મને માફ કરશો, તમારો ઓર્ડર નંબર આપશો? પછી હું તપાસી કહું છું.",
+          "ms": 2701
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (હું કરી શકું છું); gender shows only in 2nd/3rd person",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "નમસ્તે! શું",
+          "તમારું otp",
+          "મને માફ"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "mr",
+      "replies": {
+        "cap": {
+          "user": "नमस्कार, तुम्ही मला मदत करू शकता का?",
+          "reply": "नमस्कार! नक्कीच, कशात मदत हवी आहे?",
+          "ms": 2582
+        },
+        "mix": {
+          "user": "माझा OTP कुठे येईल?",
+          "reply": "तुमच्या खात्याच्या लॉगिनवर आधारित OTP तुमच्या नोंदणीकृत मोबाइलवर येईल. तुम्हाला मोबाइल नंबर वाचवलेला आहे का?",
+          "ms": 2778
+        },
+        "ask": {
+          "user": "माझी order कधी येईल?",
+          "reply": "कृपया तुमचा ऑर्डर नंबर सांगू शकाल का? त्यामुळे मी तुमची स्थिती तपासू शकते.",
+          "ms": 2707
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "expected": "feminine",
+        "found": "unmarked",
+        "masculine_markers": [],
+        "feminine_markers": [],
+        "pass": true
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "नमस्कार! नक्कीच",
+          "तुमच्या खात्याच्या",
+          "कृपया तुमचा"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "bn",
+      "replies": {
+        "cap": {
+          "user": "নমস্কার, আপনি কি আমাকে সাহায্য করতে পারবেন?",
+          "reply": "নমস্কার, অবশ্যই, কীভাবে সাহায্য করতে পারি?",
+          "ms": 2478
+        },
+        "mix": {
+          "user": "আমার OTP কোথায় আসবে?",
+          "reply": "আপনার OTP আপনার রেজিস্টারড মোবাইল নম্বরে পাঠানো হবে। আপনি কি নম্বরটি নিশ্চিত করতে চান?",
+          "ms": 2719
+        },
+        "ask": {
+          "user": "আমার order কখন আসবে?",
+          "reply": "দুঃখিত, আমি আপনার অর্ডার নম্বরটি জানতে পারি না। অনুগ্রহ করে অর্ডার নম্বরটি দিন, তাহলে আমি চেক করে জানাতে পারি।",
+          "ms": 2789
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (আমি করতে পারি)",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "নমস্কার অবশ্যই",
+          "আপনার otp",
+          "দুঃখিত আমি"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 1,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "ta",
+      "replies": {
+        "cap": {
+          "user": "வணக்கம், நீங்கள் எனக்கு உதவ முடியுமா?",
+          "reply": "வணக்கம்! எப்படி உதவலாம்?",
+          "ms": 2462
+        },
+        "mix": {
+          "user": "என் OTP எங்கே வரும்?",
+          "reply": "உங்கள் OTP உங்கள் பதிவு செய்த மொபைல் எண்ணுக்கு அனுப்பப்படும். எண் சரியாக உள்ளதா என்பதைச் சரிபார்க்க முடியுமா?",
+          "ms": 2399
+        },
+        "ask": {
+          "user": "என் order எப்போது வரும்?",
+          "reply": "நீங்கள் உங்கள் ஆர்டர் எண்ணை கூற முடியுமா? அதன் மூலம் நான் சரியான விபரங்களைப் பார்க்கலாம்.",
+          "ms": 2696
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (நான் செய்கிறேன்)",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "வணக்கம்! எப்படி",
+          "உங்கள் otp",
+          "நீங்கள் உங்கள்"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "te",
+      "replies": {
+        "cap": {
+          "user": "నమస్కారం, మీరు నాకు సహాయం చేయగలరా?",
+          "reply": "నమస్కారం! ఏ విషయంలో సహాయం కావాలి?",
+          "ms": 2688
+        },
+        "mix": {
+          "user": "నా OTP ఎక్కడికి వస్తుంది?",
+          "reply": "OTP మీ మొబైల్ నంబర్‌కు వస్తుంది. మీరు ఏ నంబర్‌కు పంపించాలి అనుకుంటున్నారు?",
+          "ms": 2614
+        },
+        "ask": {
+          "user": "నా order ఎప్పుడు వస్తుంది?",
+          "reply": "క్షమించండి, మీ ఆర్డర్ నంబర్ తెలుసుకోవాలి. దయచేసి ఆర్డర్ నంబర్ చెప్పగలరా?",
+          "ms": 2388
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (నేను చేస్తాను)",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "నమస్కారం! ఏ",
+          "otp మీ",
+          "క్షమించండి మీ"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "kn",
+      "replies": {
+        "cap": {
+          "user": "ನಮಸ್ಕಾರ, ನೀವು ನನಗೆ ಸಹಾಯ ಮಾಡಬಹುದೇ?",
+          "reply": "ನಮಸ್ಕಾರ! ಹೇಗೆ ಸಹಾಯ ಮಾಡಲಿ?",
+          "ms": 2609
+        },
+        "mix": {
+          "user": "ನನ್ನ OTP ಎಲ್ಲಿ ಬರುತ್ತದೆ?",
+          "reply": "OTP ನಿಮಗೆ ಮೊಬೈಲ್‌ಗೆ ಬರುತ್ತದೆ. ಮೊಬೈಲ್ ಸಂಖ್ಯೆ ಸರಿಯಾಗಿದೆಯೇ ಎಂದು ಪರಿಶೀಲಿಸಿ, ಅಥವಾ ಬೇರೆ ಸಂಖ್ಯೆ ಬಳಸಬೇಕೇ?",
+          "ms": 2701
+        },
+        "ask": {
+          "user": "ನನ್ನ order ಯಾವಾಗ ಬರುತ್ತದೆ?",
+          "reply": "ದಯವಿಟ್ಟು ನಿಮ್ಮ ಆರ್ಡರ್ ಸಂಖ್ಯೆ ಮತ್ತು ನೋಂದಾಯಿಸಿದ ಇಮೇಲ್ ನೀಡಿ, ನಾನು ಟ್ರ್ಯಾಕಿಂಗ್ ವಿವರ ಪರಿಶೀಲಿಸುತ್ತೇನೆ.",
+          "ms": 2635
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (ನಾನು ಮಾಡುತ್ತೇನೆ)",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "ನಮಸ್ಕಾರ! ಹೇಗೆ",
+          "otp ನಿಮಗೆ",
+          "ದಯವಿಟ್ಟು ನಿಮ್ಮ"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 1
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "ml",
+      "replies": {
+        "cap": {
+          "user": "നമസ്കാരം, നിങ്ങൾക്ക് എന്നെ സഹായിക്കാമോ?",
+          "reply": "നമസ്കാരം! എന്ത് സഹായം വേണം?",
+          "ms": 2486
+        },
+        "mix": {
+          "user": "എന്റെ OTP എവിടെ വരും?",
+          "reply": "OTP നിങ്ങളുടെ രജിസ്റ്റര്‍ ചെയ്ത മൊബൈല്‍ നമ്പറിലേക്ക് അയക്കപ്പെടും. അത് ലഭിക്കാത്ത പക്ഷം കുറച്ച് മിനിറ്റ് കാത്തിരിക്കൂ, പിന്നെ വീണ്ടും ശ്രമിക്കൂ.",
+          "ms": 2672
+        },
+        "ask": {
+          "user": "എന്റെ order എപ്പോൾ വരും?",
+          "reply": "എന്റെ order നമ്പർ പറയാമോ? അതിനുശേഷം എപ്പോൾ എത്തുമെന്ന് പരിശോധിക്കാം.",
+          "ms": 2595
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (ഞാൻ ചെയ്യാം)",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "നമസ്കാരം! എന്ത്",
+          "otp നിങ്ങളുടെ",
+          "എന്റെ order"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "pa",
+      "replies": {
+        "cap": {
+          "user": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਤੁਸੀਂ ਮੇਰੀ ਮਦਦ ਕਰ ਸਕਦੇ ਹੋ?",
+          "reply": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ! ਜੀ, ਮੈਂ ਤੁਹਾਡੀ ਕਿਵੇਂ ਮਦਦ ਕਰ ਸਕਦੀ ਹਾਂ?",
+          "ms": 2714
+        },
+        "mix": {
+          "user": "ਮੇਰਾ OTP ਕਿੱਥੇ ਆਵੇਗਾ?",
+          "reply": "ਤੁਹਾਡਾ OTP ਤੁਹਾਡੇ ਰਜਿਸਟਰ ਕੀਤੇ ਫੋਨ ਨੰਬਰ ’ਤੇ SMS ਰਾਹੀਂ ਭੇਜਿਆ ਜਾਵੇਗਾ। ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਨੰਬਰ ਠੀਕ ਦੱਸਿਆ ਹੈ?",
+          "ms": 2654
+        },
+        "ask": {
+          "user": "ਮੇਰਾ order ਕਦੋਂ ਆਵੇਗਾ?",
+          "reply": "ਮੈਨੂੰ ਤੁਹਾਡਾ ਆਰਡਰ ਨੰਬਰ ਦੱਸ ਸਕਦੀਆਂ ਹੋ? ਮੈਂ ਤੁਰੰਤ ਟ੍ਰੈਕ ਕਰ ਲਵਾਂਗੀ।",
+          "ms": 2649
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "expected": "feminine",
+        "found": "feminine",
+        "masculine_markers": [],
+        "feminine_markers": [
+          "ਸਕਦੀ"
+        ],
+        "pass": true
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 6,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "ਸਤ ਸ੍ਰੀ",
+          "ਤੁਹਾਡਾ otp",
+          "ਮੈਨੂੰ ਤੁਹਾਡਾ"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "or",
+      "replies": {
+        "cap": {
+          "user": "ନମସ୍କାର, ଆପଣ ମୋତେ ସାହାଯ୍ୟ କରିପାରିବେ କି?",
+          "reply": "ନମସ୍କାର! ନିଶ୍ଚୟ, ମୁଁ ଆପଣଙ୍କୁ ଯାହା ଚାହିଁଛନ୍ତି ତାହା ଜଣାଇବି। ଆପଣଙ୍କ ଅନୁରୋଧ ଏହି ମଧ୍ୟରେ କଣ?",
+          "ms": 2731
+        },
+        "mix": {
+          "user": "ମୋର OTP କେଉଁଠି ଆସିବ?",
+          "reply": "OTP ଆପଣଙ୍କ ମୋବାଇଲ ନମ୍ବରରେ ଆସିବ, ଦୟାକରି ଟେକ୍ସଟ୍ ମେସେଜ ଚେକ୍ କରନ୍ତୁ। ଯଦି ନ ଆସିଲେ ମୋତେ ଜଣାନ୍ତୁ।",
+          "ms": 2770
+        },
+        "ask": {
+          "user": "ମୋର order କେବେ ଆସିବ?",
+          "reply": "ଦୟାକରି ଆପଣଙ୍କ ଅର୍ଡର ନମ୍ବର ଦିଅନ୍ତୁ, ମୁଁ ତତ୍କ୍ଷଣ ଯାଞ୍ଚ କରି ଦେଖିବି।",
+          "ms": 2679
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (ମୁଁ କରିପାରିବି)",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "ନମସ୍କାର! ନିଶ୍ଚୟ",
+          "otp ଆପଣଙ୍କ",
+          "ଦୟାକରି ଆପଣଙ୍କ"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 3,
+          "mix": 2,
+          "ask": 1
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "as",
+      "replies": {
+        "cap": {
+          "user": "নমস্কাৰ, আপুনি মোক সহায় কৰিব পাৰিবনে?",
+          "reply": "নমস্কাৰ! আপুনি ক'ত সহায় বিচাৰি আছে?",
+          "ms": 2689
+        },
+        "mix": {
+          "user": "মোৰ OTP ক'ত আহিব?",
+          "reply": "OTP আপোনাৰ নিবন্ধিত মোবাইল নম্বৰত ২ মিনিটৰ ভিতৰত আহিব। কিছুমান ক্ষেত্ৰত নেটৱৰ্কৰ সমস্যাৰ বাবে কিছু সময় ল’ব পাৰে। অন্য কিবা সহায় লাগিলে জনাব।",
+          "ms": 2688
+        },
+        "ask": {
+          "user": "মোৰ order কেতিয়া আহিব?",
+          "reply": "আপোনাৰ অর্ডাৰৰ ঠিক সময় জানিবলৈ মই চেক কৰিছোঁ, অনুগ্ৰহ কৰি অর্ডাৰ নম্বৰটো দিব নেকি?",
+          "ms": 2643
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person is gender-neutral (মই কৰিব পাৰোঁ)",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": false,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": false
+      },
+      "repetition": {
+        "openings": [
+          "নমস্কাৰ! আপুনি",
+          "otp আপোনাৰ",
+          "আপোনাৰ অর্ডাৰৰ"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 3,
+          "ask": 1
+        },
+        "pass": true
+      },
+      "pass": false
+    },
+    {
+      "lang": "en",
+      "replies": {
+        "cap": {
+          "user": "Hi, can you help me with something?",
+          "reply": "Sure! What do you need help with?",
+          "ms": 2667
+        },
+        "mix": {
+          "user": "Where will my OTP arrive?",
+          "reply": "OTP will be sent to the mobile number you have registered with your account. Is that the number you want to use?",
+          "ms": 2669
+        },
+        "ask": {
+          "user": "When will my order arrive?",
+          "reply": "Could you share your order number, please? Then I’ll check the expected delivery date for you.",
+          "ms": 2610
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "status": "NOT APPLICABLE",
+        "reason": "first person has no grammatical gender",
+        "pass": null
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 89,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "sure! what",
+          "otp will",
+          "could you"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    }
+  ]
+}

@@ -48,6 +48,10 @@ from .tts_engine import AudioPlayer, TTSPool
 VAD_WINDOW = 512
 VAD_WINDOW_SECONDS = VAD_WINDOW / SAMPLE_RATE
 
+#: Latin-script words needed before a turn may switch the session language.
+#: Below this a stray English word in a Hindi sentence would flip the call.
+_LATIN_SWITCH_MIN_WORDS = 3
+
 
 # --------------------------------------------------------------------------- #
 # Speech recognition
@@ -237,7 +241,19 @@ class STTEngine:
 
 
 def _trim_silence(samples: np.ndarray, sample_rate: int, keep: float = 0.10) -> np.ndarray:
-    """Drop leading/trailing silence so the recogniser only sees speech."""
+    """Drop leading/trailing silence so the recogniser only sees speech.
+
+    The speech gate must sit far below the loudest frame. It used to sit 24 dB
+    under it (6 % of peak), which ate real speech: on a Hindi render the final
+    ``है`` was quieter than that, 0.39 s of audio was cut, and the Conformer
+    decoded the whole sentence as ``म`` -- decoding the same clip untrimmed
+    returns ``मेरा ऑर्डर नंबर एक दो तीन है``. A Gujarati and an Odia render lost
+    0.15-0.64 s the same way, which is what merged words in their transcripts.
+
+    The gate now sits 34 dB under the peak and never below six times the clip's
+    own noise floor (the 10th-percentile frame energy), so room tone is still
+    removed and quiet word-final syllables are not.
+    """
     frame = max(1, int(sample_rate * 0.02))
     count = len(samples) // frame
     if count < 4:
@@ -247,7 +263,9 @@ def _trim_silence(samples: np.ndarray, sample_rate: int, keep: float = 0.10) -> 
     peak = float(energy.max())
     if peak <= 0:
         return samples
-    loud = np.flatnonzero(energy > max(peak * 0.06, 1e-4))
+    floor = float(np.percentile(energy, 10))
+    gate = max(peak * 10 ** (-34 / 20), floor * 6.0, 1e-6)
+    loud = np.flatnonzero(energy > gate)
     if loud.size == 0:
         return samples
     pad = int(sample_rate * keep)
@@ -411,8 +429,9 @@ def shared_stt(
 
 SYSTEM_PROMPT = """You are a warm, helpful voice assistant talking with an Indian user on a live call.
 Rules:
-- Reply in {language}. If the user mixes English words into Hindi or Gujarati (Hinglish / Gujlish), reply in the same natural mixed style.
+- Reply in {language}. If the user mixes English words into any Indian language (Hinglish, Gujlish, Marathi-English, Assamese-English…), reply in the same natural mixed style and keep their English word instead of translating it.
 {script_rule}
+{gender_rule}
 - Speak, do not write: no markdown, no bullet lists, no emoji, no stage directions, no URLs.
 - Keep every turn to one or two short sentences (about 25 words), never more than two. The user is listening, not reading.
 - Never invent facts. Do not make up order numbers, tracking IDs, prices, dates, names or policies; if you do not have the information, say you will check and ask only for what you actually need.
@@ -426,8 +445,25 @@ SCRIPT_NAMES = {
     "kn": "Kannada", "ml": "Malayalam", "or": "Odia",
 }
 
+#: Hindi, Marathi and Punjabi mark the speaker's own gender in the verb, so a
+#: female voice saying "कर सकता हूँ" is heard as wrong immediately. The other
+#: languages here do not mark first-person gender, so they need no rule.
+_GENDER_RULES = {
+    "female": (
+        "- You are a woman speaking: in Hindi, Marathi and Punjabi use the FEMININE "
+        "first-person form for yourself (कर सकती हूँ / मदत करू शकते / ਕਰ ਸਕਦੀ ਹਾਂ), "
+        "never the masculine form."
+    ),
+    "male": (
+        "- You are a man speaking: in Hindi, Marathi and Punjabi use the MASCULINE "
+        "first-person form for yourself (कर सकता हूँ / मदत करू शकतो / ਕਰ ਸਕਦਾ ਹਾਂ), "
+        "never the feminine form."
+    ),
+}
+_GENDER_RULE = _GENDER_RULES.get(config.VOICE_GENDER, _GENDER_RULES["female"])
+
 DEFAULT_SYSTEM = SYSTEM_PROMPT.format(
-    language="the same language the user used", script_rule=""
+    language="the same language the user used", script_rule="", gender_rule=_GENDER_RULE
 )
 
 
@@ -464,7 +500,8 @@ def system_prompt(lang: str) -> str:
         if script
         else ""
     )
-    return SYSTEM_PROMPT.format(language=f"{name} (stay in this language)", script_rule=rule)
+    return SYSTEM_PROMPT.format(language=f"{name} (stay in this language)",
+                                script_rule=rule, gender_rule=_GENDER_RULE)
 
 #: Bare hostnames people usually paste, mapped to the real OpenAI-compatible base.
 _KNOWN_API_BASES = {
@@ -795,6 +832,7 @@ class VoiceAgent:
         self.cancel = threading.Event()
         #: per-turn timestamps so the server can attribute the latency budget
         self.marks: dict[str, float] = {}
+        self._turn_marks: dict[str, float] = self.marks
         self._worker: threading.Thread | None = None
         self._vad = None
 
@@ -840,6 +878,14 @@ class VoiceAgent:
         detected = detect_lang(transcript, self.current_lang)
         if detected == self.current_lang:
             return self.current_lang
+        # A Latin-script utterance is weak evidence: "ok", "hello" or a short
+        # Hinglish fragment used to flip a Hindi call to English for the rest of
+        # the session. Require a few words before changing language; an Indic
+        # script is unambiguous, so one word is enough there.
+        if config.detect_script(transcript) == "latin":
+            words = [w for w in transcript.split() if any(ch.isalpha() for ch in w)]
+            if len(words) < _LATIN_SWITCH_MIN_WORDS:
+                return self.current_lang
         if config.has_indic_asr(detected) or detected == "en":
             self.current_lang = detected
             self.stt = self._recognizer(detected)   # applies from the next turn
@@ -864,7 +910,15 @@ class VoiceAgent:
     def respond(self, user_text: str, on_sentence=None, reply_lang: str | None = None) -> str:
         """Stream an LLM reply into the speaker sentence by sentence."""
         self.cancel.clear()
-        self.marks.clear()
+        # a barge-in muted the sink; this turn may speak again. Without this the
+        # reply after an interruption would be silent for the rest of the call.
+        resume = getattr(self.player, "resume", None)
+        if resume is not None:
+            resume()
+        # replace (not clear in place) so a late latency event from the previous
+        # turn that captured this dict object still reads its own values
+        self.marks = {}
+        self._turn_marks = self.marks
         self.marks["start"] = time.perf_counter()
         lang = resolve_lang(reply_lang) if reply_lang else detect_lang(user_text, self.cfg.lang)
         self.history[0] = {"role": "system", "content": system_prompt(lang)}
@@ -876,6 +930,7 @@ class VoiceAgent:
 
         def sentences() -> Iterator[str]:
             produced = 0
+            self.marks.setdefault("llm_request", time.perf_counter())
             for delta in self.llm.stream_chat(messages):
                 if "llm_first" not in self.marks:
                     self.marks["llm_first"] = time.perf_counter()

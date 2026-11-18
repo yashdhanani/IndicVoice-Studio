@@ -1,0 +1,270 @@
+{
+  "results": [
+    {
+      "name": "overview renders KPIs",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "overview matrix 12 rows",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "honesty banner present",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "gate slider recomputes matrix",
+      "pass": true,
+      "detail": "pass badges 6→4"
+    },
+    {
+      "name": "gate reset restores",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "language filter applied",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "evidence 108 rows",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "defects-only filter",
+      "pass": true,
+      "detail": "19 flagged rows"
+    },
+    {
+      "name": "sort worst-CER first",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "compact density",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "search filters rows",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "bulk select all",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "audio playback advances",
+      "pass": true,
+      "detail": "1.19→2.11s"
+    },
+    {
+      "name": "evidence drawer opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "drag reorder switches to custom order",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "saved view stored",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "view delete offers undo",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "view delete undo restores",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "master mute state",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "12 language cards",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "language drawer phonetic checklist",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "dataset 240 rows",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "dataset NOT TESTED banner",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "record modal opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "recording started",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "recording captured preview",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "ingest landed COLLECTED",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "server shows 1 collected (QA)",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "name": "clear modal opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "clear returns to 0",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "name": "clear toast undo restores slot",
+      "pass": true,
+      "detail": "1"
+    },
+    {
+      "name": "undo chain restores pristine 0/240",
+      "pass": true,
+      "detail": "0"
+    },
+    {
+      "name": "listening package loaded",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "10 rating dimensions",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "blind sample plays",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "stars reflect rating",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "response submitted",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "results drawer shows means",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark job launched",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "benchmark job completed",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "new run directory created",
+      "pass": true,
+      "detail": "9"
+    },
+    {
+      "name": "final report rendered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "report has all 14 sections",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "baseline markdown rendered",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no horizontal overflow desktop",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile overview renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "no horizontal overflow mobile",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile nav opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile rail opens",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile rail has >=7 tools",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile evidence table scrolls",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "mobile listening renders",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "zero runtime console errors",
+      "pass": true,
+      "detail": ""
+    }
+  ],
+  "errors": []
+}

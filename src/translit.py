@@ -212,7 +212,7 @@ def localize_text(text: str, lang: str, vocab: set[str] | None = None) -> str:
     if not text:
         return ""
 
-    if code not in {"en", "hi", "mr", "gu"}:
+    if code not in ({"en", "hi", "mr", "gu"} | set(_SCRIPT_SHIFT)):
         # Unknown script mapping for this voice: leave the text alone.
         localized = text
     else:

@@ -1,0 +1,279 @@
+{
+  "benchmark": "latency_v3",
+  "started": "2026-11-17T17:37:16",
+  "machine": {
+    "platform": "win32",
+    "cpu_count": 8
+  },
+  "config": {
+    "langs": [
+      "hi"
+    ],
+    "turns_per_lang": 12,
+    "streaming": true,
+    "backchannel": false,
+    "stt_threads": 4,
+    "tts_threads": 2,
+    "endpoint_override_s": 0.2,
+    "endpoint_default_s": {
+      "hi": 0.26
+    },
+    "endpoint_note": "e2e_client_ms includes the endpoint-silence wait plus localhost transport; stage timings overlap and are never summed"
+  },
+  "corpus": "TTS-synthesized starter clips (eval_data/), NOT real recordings",
+  "llm": {
+    "backend": "groq",
+    "model": "openai/gpt-oss-20b",
+    "ready": true
+  },
+  "server_rss": {
+    "available": true,
+    "peak_mb": 681.1,
+    "final_mb": 681.1,
+    "samples": 34
+  },
+  "per_lang": {
+    "hi": {
+      "e2e_client_ms": {
+        "n": 12,
+        "min": 631.0,
+        "p50": 1030.9,
+        "p90": 1871.4,
+        "p95": 2022.0,
+        "max": 2022.0,
+        "mean": 1106.7
+      },
+      "first_audio_ms": {
+        "n": 12,
+        "min": 396.0,
+        "p50": 840.9,
+        "p90": 1669.7,
+        "p95": 1805.1,
+        "max": 1805.1,
+        "mean": 903.5
+      },
+      "asr_ms": {
+        "n": 12,
+        "min": 0.4,
+        "p50": 0.6,
+        "p90": 36.1,
+        "p95": 87.4,
+        "max": 87.4,
+        "mean": 12.4
+      },
+      "llm_ms": {
+        "n": 12,
+        "min": 175.1,
+        "p50": 520.4,
+        "p90": 1573.2,
+        "p95": 1708.1,
+        "max": 1708.1,
+        "mean": 722.4
+      },
+      "llm_ttft_ms": {
+        "n": 12,
+        "min": 173.6,
+        "p50": 519.0,
+        "p90": 1571.4,
+        "p95": 1706.7,
+        "max": 1706.7,
+        "mean": 709.1
+      },
+      "tts_ms": {
+        "n": 12,
+        "min": 75.6,
+        "p50": 142.7,
+        "p90": 227.6,
+        "p95": 316.7,
+        "max": 316.7,
+        "mean": 161.6
+      },
+      "asr_strategy_counts": {
+        "speculative": 12
+      },
+      "failed_turns": 0
+    }
+  },
+  "turns": [
+    {
+      "lang": "hi",
+      "clip": "hi_01.wav",
+      "turn": 1,
+      "audio_s": 2.2,
+      "e2e_client_ms": 858.4,
+      "asr_ms": 16.1,
+      "llm_ms": 469.0,
+      "llm_ttft_ms": 452.0,
+      "tts_ms": 180.3,
+      "first_audio_ms": 651.8,
+      "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_02.wav",
+      "turn": 2,
+      "audio_s": 1.97,
+      "e2e_client_ms": 1049.8,
+      "asr_ms": 87.4,
+      "llm_ms": 624.0,
+      "llm_ttft_ms": 535.9,
+      "tts_ms": 221.4,
+      "first_audio_ms": 856.3,
+      "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_03.wav",
+      "turn": 3,
+      "audio_s": 1.58,
+      "e2e_client_ms": 1122.5,
+      "asr_ms": 0.6,
+      "llm_ms": 776.9,
+      "llm_ttft_ms": 774.2,
+      "tts_ms": 107.7,
+      "first_audio_ms": 887.2,
+      "transcript": "मेरा पता दिल्ली में है",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_01.wav",
+      "turn": 4,
+      "audio_s": 2.2,
+      "e2e_client_ms": 1215.2,
+      "asr_ms": 0.5,
+      "llm_ms": 796.6,
+      "llm_ttft_ms": 795.2,
+      "tts_ms": 227.6,
+      "first_audio_ms": 1040.4,
+      "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_02.wav",
+      "turn": 5,
+      "audio_s": 1.97,
+      "e2e_client_ms": 711.7,
+      "asr_ms": 36.1,
+      "llm_ms": 223.4,
+      "llm_ttft_ms": 186.5,
+      "tts_ms": 214.4,
+      "first_audio_ms": 521.6,
+      "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_03.wav",
+      "turn": 6,
+      "audio_s": 1.58,
+      "e2e_client_ms": 2022.0,
+      "asr_ms": 0.5,
+      "llm_ms": 1708.1,
+      "llm_ttft_ms": 1706.7,
+      "tts_ms": 83.8,
+      "first_audio_ms": 1805.1,
+      "transcript": "मेरा पता दिल्ली में है",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_01.wav",
+      "turn": 7,
+      "audio_s": 2.2,
+      "e2e_client_ms": 1030.9,
+      "asr_ms": 0.4,
+      "llm_ms": 520.4,
+      "llm_ttft_ms": 519.0,
+      "tts_ms": 316.7,
+      "first_audio_ms": 840.9,
+      "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_02.wav",
+      "turn": 8,
+      "audio_s": 1.97,
+      "e2e_client_ms": 725.3,
+      "asr_ms": 0.5,
+      "llm_ms": 440.5,
+      "llm_ttft_ms": 439.4,
+      "tts_ms": 75.6,
+      "first_audio_ms": 526.4,
+      "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_03.wav",
+      "turn": 9,
+      "audio_s": 1.58,
+      "e2e_client_ms": 1186.3,
+      "asr_ms": 0.5,
+      "llm_ms": 845.0,
+      "llm_ttft_ms": 843.7,
+      "tts_ms": 106.8,
+      "first_audio_ms": 965.2,
+      "transcript": "मेरा पता दिल्ली में है",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_01.wav",
+      "turn": 10,
+      "audio_s": 2.2,
+      "e2e_client_ms": 855.6,
+      "asr_ms": 4.7,
+      "llm_ms": 517.2,
+      "llm_ttft_ms": 511.7,
+      "tts_ms": 142.7,
+      "first_audio_ms": 680.9,
+      "transcript": "मेरा ऑर्डर नंबर एक दो तीन है",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_02.wav",
+      "turn": 11,
+      "audio_s": 1.97,
+      "e2e_client_ms": 1871.4,
+      "asr_ms": 0.7,
+      "llm_ms": 1573.2,
+      "llm_ttft_ms": 1571.4,
+      "tts_ms": 76.4,
+      "first_audio_ms": 1669.7,
+      "transcript": "कल शाम तक डिलीवरी हो जाएगी",
+      "asr_strategy": "speculative",
+      "ok": true
+    },
+    {
+      "lang": "hi",
+      "clip": "hi_03.wav",
+      "turn": 12,
+      "audio_s": 1.58,
+      "e2e_client_ms": 631.0,
+      "asr_ms": 0.7,
+      "llm_ms": 175.1,
+      "llm_ttft_ms": 173.6,
+      "tts_ms": 185.5,
+      "first_audio_ms": 396.0,
+      "transcript": "मेरा पता दिल्ली में है",
+      "asr_strategy": "speculative",
+      "ok": true
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "generated_at": "2026-11-18T11:21:12",
+  "host": {
+    "machine": "i7-8565U 4c/8t",
+    "sample_rate": 16000,
+    "repeats": 2
+  },
+  "note": "Synthetic round-trip: local TTS -> local ASR. Measures cascade engineering cost and intelligibility, NOT human speech accuracy or naturalness (those are NOT TESTED).",
+  "languages": {
+    "hi": {
+      "status": "measured",
+      "tts_backend": "tiny",
+      "tts_ms_p50": 318.0,
+      "tts_rtf": 0.08,
+      "audio_seconds": 3.91,
+      "asr_ms_p50": 192.8,
+      "asr_format": "indic",
+      "roundtrip_cer_p50": 0.0,
+      "asr_text_sample": "मेरा ऑर्डर नंबर एक दो तीन है कल तक पहुँच जाएगा",
+      "endpoint_setting_s": 0.26,
+      "vad_onset_ms": 768.0,
+      "vad_endpoint_delay_ms": -64.0,
+      "vad_captured_s": 3.45,
+      "vad_speech_s": 3.93,
+      "vad_unsegmented_s_note": "speech minus captured is mostly silence the VAD trims at segment edges, not lost words",
+      "vad_turn_splits": 0,
+      "vad_false_positive_segments_on_5s_silence": 0
+    },
+    "gu": {
+      "status": "measured",
+      "tts_backend": "tiny",
+      "tts_ms_p50": 496.4,
+      "tts_rtf": 0.09,
+      "audio_seconds": 5.47,
+      "asr_ms_p50": 1876.8,
+      "asr_format": "indic",
+      "roundtrip_cer_p50": 0.0,
+      "asr_text_sample": "મારો ઓર્ડર નંબર એક બે ત્રણ છે કાલ સુધીમાં પહોંચી જશે",
+      "endpoint_setting_s": 0.26,
+      "vad_onset_ms": 1248.0,
+      "vad_endpoint_delay_ms": -2304.0,
+      "vad_captured_s": 4.01,
+      "vad_speech_s": 5.5,
+      "vad_unsegmented_s_note": "speech minus captured is mostly silence the VAD trims at segment edges, not lost words",
+      "vad_turn_splits": 1,
+      "vad_false_positive_segments_on_5s_silence": 0
+    },
+    "mr": {
+      "status": "measured",
+      "tts_backend": "tiny",
+      "tts_ms_p50": 430.0,
+      "tts_rtf": 0.09,
+      "audio_seconds": 4.86,
+      "asr_ms_p50": 1913.4,
+      "asr_format": "indic",
+      "roundtrip_cer_p50": 0.037,
+      "asr_text_sample": "माझा ऑर्डर नंबर एक दो तीन आहे उद्यापर्यंत पोचेल",
+      "endpoint_setting_s": 0.26,
+      "vad_onset_ms": 768.0,
+      "vad_endpoint_delay_ms": -32.0,
+      "vad_captured_s": 4.41,
+      "vad_speech_s": 4.88,
+      "vad_unsegmented_s_note": "speech minus captured is mostly silence the VAD trims at segment edges, not lost words",
+      "vad_turn_splits": 0,
+      "vad_false_positive_segments_on_5s_silence": 0
+    },
+    "bn": {
+      "status": "measured",
+      "tts_backend": "tiny",
+      "tts_ms_p50": 324.4,
+      "tts_rtf": 0.09,
+      "audio_seconds": 3.51,
+      "asr_ms_p50": 1319.5,
+      "asr_format": "indic",
+      "roundtrip_cer_p50": 0.0,
+      "asr_text_sample": "আমার অর্ডার নম্বর এক দুই তিন কাল পৌঁছে যাবে",
+      "endpoint_setting_s": 0.26,
+      "vad_onset_ms": 672.0,
+      "vad_endpoint_delay_ms": -32.0,
+      "vad_captured_s": 3.16,
+      "vad_speech_s": 3.53,
+      "vad_unsegmented_s_note": "speech minus captured is mostly silence the VAD trims at segment edges, not lost words",
+      "vad_turn_splits": 0,
+      "vad_false_positive_segments_on_5s_silence": 0
+    },
+    "ta": {
+      "status": "measured",
+      "tts_backend": "tiny",
+      "tts_ms_p50": 335.0,
+      "tts_rtf": 0.1,
+      "audio_seconds": 3.3,
+      "asr_ms_p50": 1221.7,
+      "asr_format": "indic",
+      "roundtrip_cer_p50": 0.0,
+      "asr_text_sample": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று நாளைக்குள் வந்துவிடும்",
+      "endpoint_setting_s": 0.26,
+      "vad_onset_ms": 672.0,
+      "vad_endpoint_delay_ms": -32.0,
+      "vad_captured_s": 2.93,
+      "vad_speech_s": 3.31,
+      "vad_unsegmented_s_note": "speech minus captured is mostly silence the VAD trims at segment edges, not lost words",
+      "vad_turn_splits": 0,
+      "vad_false_positive_segments_on_5s_silence": 0
+    },
+    "te": {
+      "status": "skipped",
+      "reason": "no test phrase"
+    },
+    "kn": {
+      "status": "skipped",
+      "reason": "no test phrase"
+    },
+    "ml": {
+      "status": "skipped",
+      "reason": "no test phrase"
+    },
+    "pa": {
+      "status": "skipped",
+      "reason": "no test phrase"
+    },
+    "or": {
+      "status": "skipped",
+      "reason": "no test phrase"
+    },
+    "as": {
+      "status": "skipped",
+      "reason": "no test phrase"
+    },
+    "en": {
+      "status": "measured",
+      "tts_backend": "tiny",
+      "tts_ms_p50": 502.5,
+      "tts_rtf": 0.12,
+      "audio_seconds": 4.05,
+      "asr_ms_p50": 592.5,
+      "asr_format": "groq",
+      "roundtrip_cer_p50": 0.216,
+      "asr_text_sample": "My order number is 123 and it should arrive tomorrow.",
+      "endpoint_setting_s": 0.45,
+      "vad_onset_ms": 736.0,
+      "vad_endpoint_delay_ms": 64.0,
+      "vad_captured_s": 3.54,
+      "vad_speech_s": 4.07,
+      "vad_unsegmented_s_note": "speech minus captured is mostly silence the VAD trims at segment edges, not lost words",
+      "vad_turn_splits": 0,
+      "vad_false_positive_segments_on_5s_silence": 0
+    }
+  },
+  "rss_mb_end": 1945.3
+}

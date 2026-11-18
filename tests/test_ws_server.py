@@ -134,6 +134,11 @@ class WSTests(unittest.IsolatedAsyncioTestCase):
         self.assertIn("latency", kinds)
         latency = next(e for e in events if e.get("type") == "latency")
         self.assertGreater(latency["first_audio_ms"], 0)
+        # stub LLM answers in <0.05 ms, so TTFT may round to 0.0; it must
+        # exist and never exceed the speech-end->first-token span
+        self.assertIsNotNone(latency["llm_ttft_ms"])
+        self.assertGreaterEqual(latency["llm_ttft_ms"], 0)
+        self.assertLessEqual(latency["llm_ttft_ms"], latency["llm_ms"])
         self.assertGreater(audio_bytes, 0)
 
     async def test_block_turn_end_to_end(self):

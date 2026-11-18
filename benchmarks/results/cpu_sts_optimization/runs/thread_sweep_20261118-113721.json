@@ -1,0 +1,115 @@
+{
+  "generated_at": "2026-11-18T11:36:08",
+  "host": "i7-8565U 4c/8t, 15.88GB RAM, Windows 11, Python 3.13",
+  "repeats": 4,
+  "langs": {
+    "gu": [
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "tts_ms_median": 344.8,
+        "tts_ms_min": 326.1,
+        "asr_ms_median": 1763.2,
+        "asr_ms_min": 1617.0,
+        "audio_s": 5.53,
+        "rss_mb": 502.8
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "tts_ms_median": 342.4,
+        "tts_ms_min": 299.9,
+        "asr_ms_median": 2222.4,
+        "asr_ms_min": 1916.4,
+        "audio_s": 5.53,
+        "rss_mb": 841.0
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "tts_ms_median": 397.2,
+        "tts_ms_min": 352.7,
+        "asr_ms_median": 2224.1,
+        "asr_ms_min": 2150.0,
+        "audio_s": 5.53,
+        "rss_mb": 1207.6
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "tts_ms_median": 446.3,
+        "tts_ms_min": 318.8,
+        "asr_ms_median": 1895.6,
+        "asr_ms_min": 1735.0,
+        "audio_s": 5.53,
+        "rss_mb": 1574.9
+      }
+    ],
+    "mr": [
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "error": "'mr'"
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "error": "'mr'"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "error": "'mr'"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "error": "'mr'"
+      }
+    ],
+    "bn": [
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "error": "'bn'"
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "error": "'bn'"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "error": "'bn'"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "error": "'bn'"
+      }
+    ],
+    "ta": [
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "error": "'ta'"
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "error": "'ta'"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "error": "'ta'"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "error": "'ta'"
+      }
+    ]
+  }
+}

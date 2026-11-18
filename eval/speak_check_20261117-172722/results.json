@@ -1,0 +1,99 @@
+{
+  "generated": "2026-11-17 17:27:29",
+  "run": "speak_check_20261117-172722",
+  "source": "synthetic (TTS render of the fixed eval corpus)",
+  "repeats_per_sentence": 1,
+  "cloud_inference": false,
+  "playback_on_host": false,
+  "human_listening": "NOT TESTED",
+  "objective_hiss_detection": "NOT TESTED",
+  "gates": {
+    "min_duration_s": 0.4,
+    "min_rms_dbfs": -35.0,
+    "min_voiced_frac": 0.3,
+    "max_clip_frac": 0.002,
+    "min_voice_band_ratio": 0.7,
+    "max_cer_clean": 0.15,
+    "max_wer_clean": 0.3
+  },
+  "languages": [
+    {
+      "lang": "mr",
+      "sentences": 1,
+      "repeats": 1,
+      "n": 1,
+      "tts_backend": "tiny",
+      "asr_backend": "indic",
+      "sample_rate": 24000,
+      "cer_mean": 0.0,
+      "wer_mean": 0.0,
+      "cer_clean_mean": 0.0,
+      "wer_clean_mean": 0.0,
+      "cer_clean_max": 0.0,
+      "clean_renders": 1,
+      "clean_render_rate": 1.0,
+      "word_miss_renders": 0,
+      "script_miss_renders": 0,
+      "duration_mean_s": 3.431,
+      "render_rtf_mean": 0.151,
+      "hf_share_max": 0.0157,
+      "audible_all": true,
+      "status": "PASS (automated)",
+      "per_sentence": [
+        {
+          "sentence": 1,
+          "reference": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+          "takes": 1,
+          "clean_takes": 1,
+          "cer_clean_mean": 0.0,
+          "cer_clean_max": 0.0,
+          "worst_hypothesis": "माझा ऑर्डर नंबर एक दोन तीन आहे"
+        }
+      ],
+      "rows": [
+        {
+          "sentence": 1,
+          "take": 1,
+          "wav": "audio/mr_01_r1.wav",
+          "reference": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+          "prepared": "माझा ऑर्डर नंबर एक दोन तीन आहे.",
+          "hypothesis": "माझा ऑर्डर नंबर एक दोन तीन आहे",
+          "cer": 0.0,
+          "wer": 0.0,
+          "cer_clean": 0.0,
+          "wer_clean": 0.0,
+          "cer_clean_digit_expanded": null,
+          "script": "devanagari",
+          "script_ok": true,
+          "tts_backend": "tiny",
+          "asr_backend": "indic",
+          "render_ms": 518.3,
+          "asr_ms": 2431.9,
+          "render_rtf": 0.151,
+          "signal": {
+            "samples": 82336,
+            "sample_rate": 24000,
+            "duration_s": 3.431,
+            "rms_dbfs": -23.39,
+            "peak_dbfs": -7.66,
+            "clip_frac": 0.0,
+            "dc_offset": 0.00015,
+            "voiced_frac": 0.637,
+            "lead_silence_s": 0.2,
+            "trail_silence_s": 0.431,
+            "voice_band_ratio": 0.985,
+            "speech_band_ratio": 0.76,
+            "low_band_ratio": 0.223,
+            "hf_share": 0.0157,
+            "hf_dominant_voiced_frac": 0.037,
+            "spectral_centroid_hz": 711.0
+          },
+          "signal_gate_fails": [],
+          "intelligible": true,
+          "notes": [],
+          "status": "PASS (automated)"
+        }
+      ]
+    }
+  ]
+}

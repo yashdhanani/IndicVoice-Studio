@@ -251,15 +251,29 @@ class AudioSink:
         self._on_flush = on_flush
         self._lock = threading.Lock()
         self._until = 0.0
+        #: False between cancel() and the next turn's resume(). A barge-in
+        #: cancels while the TTS worker is mid-clause; that clause finishes
+        #: synthesising 100-600 ms later and would otherwise be spoken over the
+        #: user who interrupted. Dropping it is the whole point of barge-in.
+        self._accepting = True
 
     def push(self, samples: np.ndarray, sample_rate: int = SAMPLE_RATE) -> None:
         if samples is None or len(samples) == 0:
             return
-        audio = resample(np.asarray(samples, dtype=np.float32), sample_rate, self.target_rate)
         with self._lock:
+            if not self._accepting:
+                return                             # stale audio of a cancelled turn
+            audio = resample(np.asarray(samples, dtype=np.float32), sample_rate, self.target_rate)
+            if audio.size == 0:
+                return
             self._emit(audio)                      # thread-safe send
             duration = audio.size / float(self.target_rate)
             self._until = max(self._until, time.monotonic() + duration)
+
+    def resume(self) -> None:
+        """Accept audio again: called when a new turn starts speaking."""
+        with self._lock:
+            self._accepting = True
 
     @property
     def is_speaking(self) -> bool:
@@ -275,6 +289,7 @@ class AudioSink:
 
     def cancel(self) -> None:
         with self._lock:
+            self._accepting = False
             self._until = 0.0
             if self._on_flush is not None:
                 self._on_flush()
@@ -330,14 +345,16 @@ class CallSession:
             target_rate=SAMPLE_RATE,
             on_flush=lambda: self._send_event({"type": "flush"}),
         )
+        #: explicit ?endpoint= / --endpoint wins; otherwise the turn's language
+        #: sets it (English callers pause longer than hi-family ones)
+        self._endpoint_override = min_silence
         cfg = AgentConfig(
             lang=resolve_lang(lang),
             stt_lang=resolve_lang(stt_lang or lang),
             auto_lang=True,
             backchannel=backchannel,
             humanize=True,
-            min_silence=min_silence or config.endpoint_for(lang),
-            llm_backend=llm_backend,
+            min_silence=min_silence or config.endpoint_for(lang),            llm_backend=llm_backend,
             llm_model=llm_model,
         )
         self.streamer = StreamingSTT(
@@ -390,14 +407,24 @@ class CallSession:
         self.last_activity = time.perf_counter()
         turn, self._turn = self._turn, None
         if turn is not None:
-            marks = dict(getattr(self.agent, "marks", {}) or {})
+            # snapshot the marks dict object now (during this turn's respond) so a
+            # late emit after the next turn started still reads this turn's values
+            if "_marks" not in turn:
+                turn["_marks"] = getattr(self.agent, "_turn_marks", None)
+            marks_source = turn.get("_marks")
+            if marks_source is None:
+                marks_source = getattr(self.agent, "marks", None)
+            marks = dict(marks_source or {})
             now = time.perf_counter()
             llm_first = marks.get("llm_first")
+            llm_request = marks.get("llm_request")
             tts_start = marks.get("tts_start")
             self._send_event({
                 "type": "latency",
                 "asr_ms": round(turn["asr_ms"], 1),
                 "llm_ms": round((llm_first - turn["t_speech_end"]) * 1000.0, 1) if llm_first else None,
+                "llm_ttft_ms": round((llm_first - llm_request) * 1000.0, 1)
+                if llm_first and llm_request else None,
                 "tts_ms": round((now - tts_start) * 1000.0, 1) if tts_start else None,
                 "first_audio_ms": round((now - turn["t_speech_end"]) * 1000.0, 1),
             })
@@ -553,6 +580,7 @@ class CallSession:
                 event["asr_strategy"] = asr_info["strategy"]
             self._send_event(event)
             reply_lang = self.agent.maybe_switch_language(text)
+            self._retune_endpoint(reply_lang)
             self._send_event({"type": "state", "value": "thinking", "lang": reply_lang})
             self.agent.start_response(
                 text,
@@ -562,6 +590,20 @@ class CallSession:
                     {"type": "reply", "text": s, "lang": reply_lang, "partial": True}
                 ),
             )
+
+    def _retune_endpoint(self, lang: str) -> None:
+        """Follow the turn's language after an auto switch.
+
+        The session used to keep the endpoint silence of the language the call
+        *started* in, so a Hindi call that switched to English ended its turns
+        at 0.26 s although English needs 0.45 s (measured earlier: 0.45 s
+        truncated two-sentence English turns).
+        """
+        if self._endpoint_override is not None:
+            return
+        endpoint = config.endpoint_for(lang)
+        self.min_silence = endpoint
+        self.streamer.endpoint_silence = endpoint
 
     def close(self) -> None:
         self.closed = True

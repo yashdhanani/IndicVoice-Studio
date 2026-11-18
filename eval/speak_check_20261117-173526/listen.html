@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>IndicVoice — listening bench</title>
+<style>
+:root{--bg:#0a0716;--surface:#150f2a;--line:#2b2145;--ink:#f5efe6;--muted:#9a93b8;
+--saffron:#ffb703;--magenta:#ff2e88;--teal:#00e5c0;--ok:#2dd4a7;--warn:#ffb020;--danger:#ff4d5e;
+color-scheme:dark}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(1200px 600px at 15% -10%,#241a44 0%,var(--bg) 60%);
+color:var(--ink);font:15px/1.55 "Segoe UI",Inter,system-ui,sans-serif;padding:28px 20px 60px}
+body::-webkit-scrollbar{width:11px}body::-webkit-scrollbar-track{background:var(--bg)}
+body::-webkit-scrollbar-thumb{background:linear-gradient(var(--saffron),var(--magenta));border-radius:9px;border:2px solid var(--bg)}
+.wrap{max-width:1080px;margin:0 auto}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.02em}
+h1 span{background:linear-gradient(90deg,var(--saffron),var(--magenta));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 0 18px;font-size:13.5px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 18px;padding:12px;
+background:var(--surface);border:1px solid var(--line);border-radius:14px}
+.bar label{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+select,button{font:inherit;color:var(--ink);background:#1d1636;border:1px solid var(--line);
+border-radius:9px;padding:7px 11px;cursor:pointer}
+button:hover,select:hover{border-color:var(--saffron)}
+button.primary{background:linear-gradient(90deg,var(--saffron),var(--magenta));color:#20142b;border:0;font-weight:600}
+.count{margin-left:auto;color:var(--muted);font-size:13px}
+.lang{margin:0 0 22px}
+.lang h2{font-size:17px;margin:0 0 10px;display:flex;gap:10px;align-items:center}
+.pill{font-size:11.5px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pill.pass{color:var(--ok);border-color:#1d4d40}.pill.partial{color:var(--warn);border-color:#5a4520}
+.pill.fail{color:var(--danger);border-color:#5d2530}
+.sent{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 10px}
+.ref{font-size:16px;margin:0 0 4px}
+.meta{color:var(--muted);font-size:12.5px;margin:0 0 10px}
+.takes{display:grid;gap:8px}
+.take{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+background:#1b1433;border:1px solid var(--line);border-radius:11px;padding:9px 11px;transition:border-color .2s,box-shadow .2s}
+.take.bad{border-color:#5a4520}.take.worst{border-color:#5d2530}
+.take.playing{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),0 0 22px -6px var(--teal)}
+.hyp{font-size:14.5px;margin:0}
+.hyp.empty{color:var(--danger)}
+.stats{color:var(--muted);font-size:12px;margin:2px 0 0}
+.note{color:var(--warn);font-size:12px;margin:3px 0 0}
+audio{width:230px;height:34px}
+.right{display:flex;flex-direction:column;gap:5px;align-items:flex-end}
+.badge{font-size:11px;padding:2px 8px;border-radius:999px;background:#241b41;color:var(--muted)}
+.badge.pass{color:var(--ok)}.badge.partial{color:var(--warn)}.badge.fail{color:var(--danger)}
+.empty-state{color:var(--muted);padding:30px;text-align:center}
+@media(max-width:720px){.take{grid-template-columns:1fr}.right{align-items:flex-start}audio{width:100%}}
+</style></head><body><div class="wrap">
+<h1>IndicVoice <span>listening bench</span></h1>
+<p class="sub">Every clip below was rendered by the production voice path on CPU. Judge naturalness,
+pronunciation and artefacts by ear — the CER numbers only say whether a local recogniser recovered the words.
+Synthetic audio, not real callers. Multiple takes per sentence because synthesis is non-deterministic.</p>
+<div class="bar">
+<label for="lang">Language</label><select id="lang"></select>
+<label for="filter">Show</label><select id="filter">
+<option value="all">all takes</option><option value="miss">word-miss takes only</option>
+<option value="clean">clean takes only</option></select>
+<button id="playAll" class="primary">Play shown clips in order</button>
+<button id="stop">Stop</button>
+<span class="count" id="count"></span>
+</div>
+<div id="list"></div>
+</div>
+<script id="data" type="application/json">{"run": "speak_check_20261117-173526", "clips": [{"lang": "mr", "sentence": 1, "take": 1, "wav": "audio/mr_01_r1.wav", "ref": "माझा ऑर्डर नंबर एक दोन तीन आहे.", "hyp": "माझा ऑर्डर नंबर एक दोन तीन आहे", "cer": 0.0, "wer": 0.0, "status": "PASS (automated)", "notes": [], "dur": 3.431, "rms": -23.39}]}</script>
+<script>
+const DATA=JSON.parse(document.getElementById('data').textContent);
+const LANGS=[...new Set(DATA.clips.map(c=>c.lang))];
+const NAMES={hi:'Hindi',gu:'Gujarati',mr:'Marathi',bn:'Bengali',ta:'Tamil',te:'Telugu',kn:'Kannada',
+ml:'Malayalam',pa:'Punjabi',or:'Odia',as:'Assamese',en:'English'};
+const langSel=document.getElementById('lang'),filterSel=document.getElementById('filter'),
+list=document.getElementById('list'),count=document.getElementById('count');
+langSel.innerHTML='<option value="all">All languages</option>'+LANGS.map(l=>
+`<option value="${l}">${NAMES[l]||l} (${l})</option>`).join('');
+let queue=[],playing=null;
+function cls(s){return s.startsWith('PASS')?'pass':s==='FAIL'?'fail':'partial'}
+function render(){
+const lang=langSel.value,filter=filterSel.value;
+const clips=DATA.clips.filter(c=>(lang==='all'||c.lang===lang)&&
+(filter==='all'||(filter==='miss'?c.status!=='PASS (automated)':c.status==='PASS (automated)')));
+count.textContent=clips.length+' clips · run '+DATA.run;
+if(!clips.length){list.innerHTML='<p class="empty-state">No clips match this filter.</p>';return}
+const byLang={};clips.forEach(c=>{(byLang[c.lang]??=[]).push(c)});
+list.innerHTML=Object.entries(byLang).map(([l,items])=>{
+const sents={};items.forEach(c=>{(sents[c.sentence]??=[]).push(c)});
+const bad=items.filter(c=>c.status!=='PASS (automated)').length;
+return `<section class="lang"><h2>${NAMES[l]||l} <span class="pill ${bad?'partial':'pass'}">${
+bad?bad+' of '+items.length+' takes flagged':'all '+items.length+' takes clean'}</span></h2>`+
+Object.entries(sents).map(([s,takes])=>{
+const worst=Math.max(...takes.map(t=>t.cer));
+return `<div class="sent"><p class="ref">${takes[0].ref}</p>
+<p class="meta">sentence ${s} · ${takes.length} takes · worst CER ${worst.toFixed(3)}</p>
+<div class="takes">${takes.map(t=>`<div class="take ${t.status==='PASS (automated)'?'':(t.cer>=worst&&worst>0?'worst':'bad')}">
+<div><p class="hyp ${t.hyp?'':'empty'}">${t.hyp||'(empty transcript)'}</p>
+<p class="stats">take ${t.take} · CER ${t.cer.toFixed(3)} · WER ${t.wer.toFixed(3)} · ${t.dur.toFixed(2)}s · ${t.rms} dBFS</p>
+${t.notes.map(n=>`<p class="note">${n}</p>`).join('')}</div>
+<div class="right"><span class="badge ${cls(t.status)}">${t.status}</span>
+<audio preload="metadata" controls src="${t.wav}"></audio></div></div>`).join('')}</div></div>`}).join('')+
+'</section>'}).join('');
+}
+langSel.onchange=filterSel.onchange=render;
+function clearPlaying(){document.querySelectorAll('.take.playing').forEach(t=>t.classList.remove('playing'))}
+document.getElementById('stop').onclick=()=>{queue=[];if(playing){playing.pause();playing=null}
+document.querySelectorAll('audio').forEach(a=>a.pause());clearPlaying()};
+document.getElementById('playAll').onclick=()=>{
+queue=[...list.querySelectorAll('audio')];if(!queue.length)return;
+const next=()=>{clearPlaying();const a=queue.shift();if(!a){playing=null;return}
+playing=a;a.closest('.take').classList.add('playing');
+a.currentTime=0;a.play().catch(()=>{});a.onended=next};
+next()};
+render();
+</script></body></html>

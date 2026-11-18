@@ -1,311 +1,119 @@
-"""V3 Phase B: controlled inference-thread sweep (microbenchmark).
+"""Thread sweep for IndicVoice on the reference CPU.
 
-Measures ASR decode and TTS synthesis latency, CPU and memory under explicit
-thread counts on the reference 4-core/8-thread i7-8565U, plus a combined
-ASR+TTS contention run that reproduces the live-call overlap (speculative
-decode while the previous turn is still being synthesised).
+Vary INDICVOICE_STT_THREADS and INDICVOICE_TTS_THREADS without code changes
+(env vars are read by config at import time), measuring ASR decode and TTS
+render latency on a fixed phrase. Fully local; no network, no paid calls.
 
-No server, no cloud calls, no microphone. Models are loaded fresh per
-configuration and released afterwards. Background machine load is sampled
-before every block and recorded, because IDE/webview processes on this
-machine are not under the benchmark's control.
-
-Usage:
-    python benchmarks/run_thread_sweep.py
-    python benchmarks/run_thread_sweep.py --stt-threads 8 4 2 --tts-threads 0 2
+    .venv313/Scripts/python.exe -m benchmarks.run_thread_sweep --langs hi en --repeats 5
 """
 from __future__ import annotations
 
 import argparse
-import gc
 import json
 import os
+import statistics
 import sys
-import threading
 import time
+from datetime import datetime
 from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(ROOT))
-
-from src import config  # noqa: E402
-
-
-def _cpu_times():
-    if sys.platform == "win32":
-        import ctypes
-        from ctypes import wintypes
-
-        class FT(ctypes.Structure):
-            _fields_ = [("lo", wintypes.DWORD), ("hi", wintypes.DWORD)]
-
-        idle, kernel, user = FT(), FT(), FT()
-        ok = ctypes.windll.kernel32.GetSystemTimes(
-            ctypes.byref(idle), ctypes.byref(kernel), ctypes.byref(user))
-        if not ok:
-            return None
-        conv = lambda f: (f.hi << 32) | f.lo  # noqa: E731
-        return conv(idle), conv(kernel) + conv(user)
-    try:
-        parts = [int(x) for x in Path("/proc/stat").read_text().splitlines()[0].split()[1:]]
-        return parts[3] + (parts[4] if len(parts) > 4 else 0), sum(parts)
-    except OSError:
-        return None
-
-
-def cpu_pct(seconds: float) -> float | None:
-    a = _cpu_times()
-    time.sleep(seconds)
-    b = _cpu_times()
-    if not a or not b or b[1] <= a[1]:
-        return None
-    return round((1.0 - (b[0] - a[0]) / (b[1] - a[1])) * 100.0, 1)
-
-
-class cpu_window:
-    """Mean whole-machine CPU between enter and exit."""
-
-    def __enter__(self):
-        self.t0 = time.perf_counter()
-        self.a = _cpu_times()
-        return self
-
-    def __exit__(self, *exc):
-        self.b = _cpu_times()
-        self.wall = time.perf_counter() - self.t0
-        if self.a and self.b and self.b[1] > self.a[1]:
-            self.pct = round((1.0 - (self.b[0] - self.a[0]) / (self.b[1] - self.a[1])) * 100.0, 1)
-        else:
-            self.pct = None
-
-
-def rss_mb() -> float | None:
-    from src.call_server import _process_rss_mb
-    return _process_rss_mb()
-
-
-def stats(values: list[float]) -> dict:
-    if not values:
-        return {}
-    ordered = sorted(values)
-    pick = lambda q: ordered[min(len(ordered) - 1, int(q * len(ordered)))]  # noqa: E731
-    return {
-        "n": len(values),
-        "p50": round(pick(0.50), 1),
-        "p90": round(pick(0.90), 1),
-        "p95": round(pick(0.95), 1),
-        "max": round(ordered[-1], 1),
-        "mean": round(sum(values) / len(values), 1),
-    }
-
-
-def load_wav(path: Path) -> np.ndarray:
-    from src.evaluate import read_wav
-    return read_wav(path)
-
-
-def sweep_asr(lang: str, thread_counts: list[int], clips: list[Path], repeats: int) -> list[dict]:
-    from src.sts_pipeline import STTEngine
-
-    results = []
-    reference: dict[str, str] | None = None
-    for threads in thread_counts:
-        gc.collect()
-        bg = cpu_pct(2.0)
-        rss_before = rss_mb()
-        t_load = time.perf_counter()
-        engine = STTEngine(backend="indic", lang=lang, num_threads=threads)
-        load_ms = (time.perf_counter() - t_load) * 1000.0
-        rss_loaded = rss_mb()
-        per_clip = {}
-        transcripts = {}
-        all_ms = []
-        with cpu_window() as cw:
-            for clip in clips:
-                audio = load_wav(clip)
-                times = []
-                text = ""
-                for _ in range(repeats):
-                    t0 = time.perf_counter()
-                    text = engine.transcribe(audio)
-                    times.append((time.perf_counter() - t0) * 1000.0)
-                per_clip[clip.stem] = stats(times)
-                transcripts[clip.stem] = text
-                all_ms.extend(times)
-        identical = reference is None or transcripts == reference
-        if reference is None:
-            reference = transcripts
-        results.append({
-            "threads": threads,
-            "background_cpu_pct_before": bg,
-            "load_ms": round(load_ms, 1),
-            "rss_delta_mb": round((rss_loaded or 0) - (rss_before or 0), 1),
-            "decode_ms": stats(all_ms),
-            "per_clip": per_clip,
-            "cpu_pct_during": cw.pct,
-            "transcripts_identical_to_first_config": identical,
-            "transcripts": transcripts,
-        })
-        print(f"  asr threads={threads}: p50={results[-1]['decode_ms'].get('p50')}ms "
-              f"cpu={cw.pct}% bg={bg}% identical={identical}")
-        del engine
-        gc.collect()
-        time.sleep(2.0)
-    return results
-
-
-TTS_TEXT = {
-    "hi": "नमस्ते, आपका ऑर्डर कल दोपहर तक डिलीवर हो जाएगा। क्या मैं आपकी कोई और मदद कर सकता हूँ?",
-    "en": "Hello, your order will be delivered by tomorrow afternoon. Is there anything else I can help you with?",
+PHRASES = {
+    "hi": "मेरा ऑर्डर नंबर एक दो तीन है, कल तक पहुँच जाएगा।",
+    "en": "My order number is one two three and it should arrive tomorrow.",
+    "gu": "મારો ઓર્ડર નંબર એક બે ત્રણ છે, કાલ સુધીમાં પહોંચી જશે.",
+    "ta": "என் ஆர்டர் எண் ஒன்று இரண்டு மூன்று, நாளைக்குள் வந்துவிடும்.",
+    "mr": "माझा ऑर्डर नंबर एक दो तीन आहे, उद्या पर्यंत पोहोचेल.",
+    "bn": "আমার অর্ডার নম্বর এক দুই তিন, কাল পৌঁছে যাবে।",
 }
 
-
-def _tiny_cls(lang: str):
-    directory = config.TINY_DIRS[lang]
-    if str(directory) not in sys.path:
-        sys.path.insert(0, str(directory))
-    from indic_tiny_tts import TinyTTSOnnx
-    return TinyTTSOnnx
+OUT = Path("benchmarks/results/cpu_sts_optimization/runs")
 
 
-def sweep_tts(lang: str, thread_counts: list[int], repeats: int) -> list[dict]:
-    cls = _tiny_cls(lang)
-    text = TTS_TEXT.get(lang, TTS_TEXT["hi"])
-    results = []
-    for threads in thread_counts:
-        gc.collect()
-        bg = cpu_pct(2.0)
-        rss_before = rss_mb()
-        t_load = time.perf_counter()
-        tts = cls.from_pretrained(str(config.TINY_DIRS[lang]), threads=threads or None)
-        load_ms = (time.perf_counter() - t_load) * 1000.0
-        rss_loaded = rss_mb()
-        times, durations = [], []
-        with cpu_window() as cw:
-            for _ in range(repeats):
-                t0 = time.perf_counter()
-                audio = tts.synthesize(text, voice="female", speed=config.TINY_SPEED)
-                times.append((time.perf_counter() - t0) * 1000.0)
-                durations.append(len(audio) / tts.sample_rate)
-        results.append({
-            "threads": threads if threads else "ort-default",
-            "background_cpu_pct_before": bg,
-            "load_ms": round(load_ms, 1),
-            "rss_delta_mb": round((rss_loaded or 0) - (rss_before or 0), 1),
-            "synth_ms": stats(times),
-            "audio_s_mean": round(sum(durations) / len(durations), 2),
-            "rtf_p50": round(sorted(times)[len(times) // 2] / 1000.0 / (sum(durations) / len(durations)), 3),
-            "cpu_pct_during": cw.pct,
-        })
-        print(f"  tts threads={threads or 'default'}: p50={results[-1]['synth_ms'].get('p50')}ms "
-              f"rtf={results[-1]['rtf_p50']} cpu={cw.pct}% bg={bg}%")
-        del tts
-        gc.collect()
-        time.sleep(2.0)
-    return results
+def rss_mb() -> float:
+    try:
+        import psutil
+        return psutil.Process(os.getpid()).memory_info().rss / (1024 * 1024)
+    except Exception:
+        try:
+            from src.call_server import _process_rss_mb
+            return _process_rss_mb()
+        except Exception:
+            return -1.0
 
 
-def contention(lang: str, stt_threads: int, tts_threads: int, clips: list[Path],
-               repeats: int) -> dict:
-    """ASR decodes in a worker thread while TTS synthesises on this thread."""
-    from src.sts_pipeline import STTEngine
+def run_one(lang, stt_threads, tts_threads, repeats):
+    os.environ["INDICVOICE_STT_THREADS"] = str(stt_threads)
+    os.environ["INDICVOICE_TTS_THREADS"] = str(tts_threads)
+    # config reads env at import; force reimport
+    for m in ("src.config", "src.sts_pipeline", "src.tts_engine"):
+        sys.modules.pop(m, None)
+    from src import config
+    from src.sts_pipeline import shared_stt
+    from src.tts_engine import TTSEngine
 
-    gc.collect()
-    bg = cpu_pct(2.0)
-    engine = STTEngine(backend="indic", lang=lang, num_threads=stt_threads)
-    tts = _tiny_cls(lang).from_pretrained(str(config.TINY_DIRS[lang]), threads=tts_threads or None)
-    text = TTS_TEXT.get(lang, TTS_TEXT["hi"])
-    audio = load_wav(clips[0])
-    asr_ms: list[float] = []
-    tts_ms: list[float] = []
-    stop = threading.Event()
-
-    def asr_loop():
-        while not stop.is_set():
-            t0 = time.perf_counter()
-            engine.transcribe(audio)
-            asr_ms.append((time.perf_counter() - t0) * 1000.0)
-
-    worker = threading.Thread(target=asr_loop, daemon=True)
-    with cpu_window() as cw:
-        worker.start()
-        for _ in range(repeats):
-            t0 = time.perf_counter()
-            tts.synthesize(text, voice="female", speed=config.TINY_SPEED)
-            tts_ms.append((time.perf_counter() - t0) * 1000.0)
-        stop.set()
-        worker.join(timeout=30)
-    out = {
+    engine = TTSEngine(lang)
+    stt = shared_stt("auto", lang)
+    phrase = PHRASES[lang]
+    tts_times, asr_times = [], []
+    audio = None
+    for _ in range(repeats):
+        t0 = time.perf_counter()
+        audio = engine.render_sentence(phrase, cancel_event=None)
+        tts_times.append((time.perf_counter() - t0) * 1000.0)
+        t1 = time.perf_counter()
+        _ = stt.transcribe(audio, engine.sample_rate)
+        asr_times.append((time.perf_counter() - t1) * 1000.0)
+    return {
         "stt_threads": stt_threads,
-        "tts_threads": tts_threads if tts_threads else "ort-default",
-        "background_cpu_pct_before": bg,
-        "asr_ms_under_contention": stats(asr_ms),
-        "tts_ms_under_contention": stats(tts_ms),
-        "cpu_pct_during": cw.pct,
+        "tts_threads": tts_threads,
+        "tts_ms_median": round(statistics.median(tts_times), 1),
+        "tts_ms_min": round(min(tts_times), 1),
+        "asr_ms_median": round(statistics.median(asr_times), 1),
+        "asr_ms_min": round(min(asr_times), 1),
+        "audio_s": round(audio.size / engine.sample_rate, 2),
+        "rss_mb": round(rss_mb(), 1),
     }
-    print(f"  contention stt={stt_threads} tts={tts_threads or 'default'}: "
-          f"asr p50={out['asr_ms_under_contention'].get('p50')}ms "
-          f"tts p50={out['tts_ms_under_contention'].get('p50')}ms cpu={cw.pct}%")
-    del engine, tts
-    gc.collect()
-    time.sleep(2.0)
-    return out
 
 
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    parser.add_argument("--lang", default="hi")
-    parser.add_argument("--stt-threads", nargs="+", type=int, default=[8, 4, 2, 1])
-    parser.add_argument("--tts-threads", nargs="+", type=int, default=[0, 4, 2, 1],
-                        help="0 = onnxruntime default (current production behaviour)")
-    parser.add_argument("--repeats", type=int, default=6)
-    parser.add_argument("--contention", nargs="*", default=None,
-                        help="pairs as stt:tts, e.g. 8:0 4:2 (default: first/last of each sweep)")
-    parser.add_argument("--out", default=str(ROOT / "benchmarks" / "results" / "realworld_v3" / "thread_sweep_v3.json"))
-    args = parser.parse_args(argv)
+def main():
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+    p = argparse.ArgumentParser()
+    p.add_argument("--langs", nargs="+", default=["hi"])
+    p.add_argument("--repeats", type=int, default=5)
+    p.add_argument("--stt-threads", nargs="+", type=int, default=[1, 2, 3, 4])
+    p.add_argument("--tts-threads", nargs="+", type=int, default=[1, 2, 4])
+    args = p.parse_args()
 
-    clips = sorted((ROOT / "eval_data").glob(f"{args.lang}_*.wav"))
-    if not clips:
-        print(f"no starter clips for {args.lang}")
-        return 1
-
-    pairs = args.contention
-    if pairs is None:
-        pairs = [f"{args.stt_threads[0]}:{args.tts_threads[0]}",
-                 f"{args.stt_threads[-2] if len(args.stt_threads) > 1 else args.stt_threads[0]}:"
-                 f"{args.tts_threads[-2] if len(args.tts_threads) > 1 else args.tts_threads[0]}"]
-
-    print(f"machine background CPU: {cpu_pct(3.0)}%")
-    print("ASR sweep")
-    asr = sweep_asr(args.lang, args.stt_threads, clips, args.repeats)
-    print("TTS sweep")
-    tts = sweep_tts(args.lang, args.tts_threads, args.repeats)
-    print("contention runs")
-    cont = []
-    for pair in pairs:
-        stt_t, tts_t = (int(x) for x in pair.split(":"))
-        cont.append(contention(args.lang, stt_t, tts_t, clips, args.repeats))
-
-    report = {
-        "benchmark": "thread_sweep_v3",
-        "started": time.strftime("%Y-%m-%dT%H:%M:%S"),
-        "machine": {"platform": sys.platform, "cpu_count_logical": os.cpu_count(),
-                    "physical_cores": 4, "model": "i7-8565U (15W laptop)",
-                    "note": "IDE/webview background load present; recorded per block"},
-        "runtime": {"python": sys.version.split()[0]},
-        "config": {"lang": args.lang, "repeats": args.repeats,
-                   "stt_threads": args.stt_threads, "tts_threads": args.tts_threads},
-        "corpus": "TTS-synthesized starter clips (eval_data/), NOT real recordings",
-        "asr": asr,
-        "tts": tts,
-        "contention": cont,
+    OUT.mkdir(parents=True, exist_ok=True)
+    results = {
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+        "host": "i7-8565U 4c/8t, 15.88GB RAM, Windows 11, Python 3.13",
+        "repeats": args.repeats,
+        "langs": {},
     }
-    out = Path(args.out)
-    out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
-    print(f"wrote {out}")
+    for lang in args.langs:
+        rows = []
+        for st in args.stt_threads:
+            for tt in args.tts_threads:
+                print(f"[{lang}] stt={st} tts={tt} ...", flush=True)
+                try:
+                    r = run_one(lang, st, tt, args.repeats)
+                    rows.append(r)
+                    print(f"   {r}", flush=True)
+                except Exception as exc:
+                    rows.append({"stt_threads": st, "tts_threads": tt, "error": str(exc)[:200]})
+                    print(f"   ERROR: {exc}", flush=True)
+        results["langs"][lang] = rows
+
+    stamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    out = OUT / f"thread_sweep_{stamp}.json"
+    out.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
+    print(f"\nwrote {out}")
     return 0
 
 

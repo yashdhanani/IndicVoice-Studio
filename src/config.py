@@ -49,7 +49,7 @@ ENDPOINT_SILENCE = 0.26
 #: English callers pause longer, and the English voice leaves ~0.5 s between
 #: sentences, so 0.45 s truncated two-sentence turns (measured: half the turn was
 #: lost at 0.45, fully captured at 0.7).
-ENDPOINT_SILENCE_BY_LANG = {"en": 0.45}
+ENDPOINT_SILENCE_BY_LANG = {"en": 0.45, "gu": 0.35}
 
 
 def endpoint_for(lang: str) -> float:
@@ -237,10 +237,20 @@ INDIC_ASR.update({
 })
 # Gujarati was verified with this exact repo; keep its directory naming stable.
 INDIC_ASR["gu"]["dir"] = "asr-gu"
-#: No Assamese ONNX export has been published (the OpenVoiceOS repo holds only a
-#: README), so Assamese audio is decoded with the Bengali Conformer: same script,
-#: closely related language. Expect Bengali orthography in the transcript.
-INDIC_ASR["as"] = dict(INDIC_ASR["bn"], alias_of="bn")
+#: Assamese now has its own export (parismitaglobalsolutions/indicconformer-
+#: sherpa-onnx, MIT source model, validated end to end by its publisher). Before
+#: this existed Assamese audio was decoded with the Bengali Conformer and
+#: measured CER 0.344; the Bengali alias is kept as the fallback for installs
+#: that never downloaded the Assamese model.
+INDIC_ASR["as"] = {
+    "repo": "parismitaglobalsolutions/indicconformer-sherpa-onnx",
+    "dir": "asr-as",
+    # local name -> remote path inside the repo (one folder per language, and a
+    # token file shared by every export there)
+    "files": {"model": "model.int8.onnx", "tokens": "tokens.txt"},
+    "remote": {"model": "as/model.int8.onnx", "tokens": "tokens.txt"},
+    "fallback_dir": "asr-bn",            # used only when asr-as is absent
+}
 
 #: Streaming Zipformer fallback (optional; download separately).
 TRANSDUCER_DIR = MODELS_DIR / "zipformer-streaming"
@@ -285,6 +295,13 @@ ALLOWED_ORIGINS = tuple(
 
 #: A call with no audio in either direction for this long is closed (4408).
 SESSION_IDLE_SECONDS = float(os.environ.get("INDICVOICE_IDLE_TIMEOUT", "180"))
+
+#: Gender of the voice this build speaks through. ``TTSEngine`` defaults to
+#: ``sid=0``, the female voice of every tiny model. Hindi, Marathi and Punjabi
+#: mark the speaker's own gender in the verb, so the LLM's wording has to agree
+#: with the voice it is spoken through (measured: it did not, see
+#: benchmarks/results/human_voice_quality/conversational_prefixed).
+VOICE_GENDER = os.environ.get("INDICVOICE_VOICE_GENDER", "female").strip().lower()
 
 #: Abuse caps (Hardening V1 B5). Utterances longer than MAX_UTTERANCE_SECONDS
 #: are truncated (with a warning event); calls older than MAX_SESSION_SECONDS
@@ -370,18 +387,35 @@ def stt_file(model: str, part: str) -> Path:
     return stt_model_dir(model) / name
 
 
+def _indic_asr_effective(lang: str = "hi") -> tuple[Path, dict]:
+    """Directory and file spec for this language's recogniser.
+
+    A language may name a ``fallback_dir`` for installs that never downloaded
+    its own model (Assamese falls back to the Bengali Conformer, whose token
+    file has a different name — hence returning the whole spec, not just a path).
+    """
+    spec = INDIC_ASR[resolve_lang(lang)]
+    directory = MODELS_DIR / spec["dir"]
+    fallback = spec.get("fallback_dir")
+    if fallback and not directory.is_dir():
+        for other in INDIC_ASR.values():
+            if other["dir"] == fallback:
+                return MODELS_DIR / fallback, other
+    return directory, spec
+
+
 def indic_asr_dir(lang: str = "hi") -> Path:
-    return MODELS_DIR / INDIC_ASR[resolve_lang(lang)]["dir"]
+    return _indic_asr_effective(lang)[0]
 
 
 def indic_asr_model(lang: str = "hi") -> Path:
-    spec = INDIC_ASR[resolve_lang(lang)]
-    return indic_asr_dir(lang) / spec["files"]["model"]
+    directory, spec = _indic_asr_effective(lang)
+    return directory / spec["files"]["model"]
 
 
 def indic_asr_tokens(lang: str = "hi") -> Path:
-    spec = INDIC_ASR[resolve_lang(lang)]
-    return indic_asr_dir(lang) / spec["files"]["tokens"]
+    directory, spec = _indic_asr_effective(lang)
+    return directory / spec["files"]["tokens"]
 
 
 def has_indic_asr(lang: str) -> bool:
@@ -413,11 +447,22 @@ def detect_script(text: str) -> str:
     return max(counts.items(), key=lambda kv: kv[1])[0]
 
 
+ #: Language-specific marker words used to break script ties (hi/mr, bn/as).
+_LANG_MARKERS = {
+    "mr": {"आहे", "माझा", "माझी", "तुम्ही", "तुमचा", "काय", "नाही", "होय", "आणि"},
+    "hi": {"है", "मेरा", "मेरी", "आप", "क्या", "नहीं", "हाँ", "और", "करो"},
+    "as": {"অসমীয়া", "মই", "তুমি", "আছে", "নহয়", "আৰু"},
+    "bn": {"আমি", "তুমি", "আছে", "না", "এবং", "করছি"},
+}
+
+
 def detect_lang(text: str, default: str = "hi") -> str:
     """Guess ``text``'s language from its script, preferring ``default`` on ties.
 
     Devanagari is shared by Hindi and Marathi, and Bengali by Bengali and
-    Assamese, so the session default wins when it is a candidate.
+    Assamese, so the session default wins when it is a candidate. A small
+    marker-word check can override the tie when the transcript clearly uses
+    one language's distinctive words.
     """
     try:
         default = resolve_lang(default)
@@ -427,6 +472,16 @@ def detect_lang(text: str, default: str = "hi") -> str:
     if not script:
         return default
     candidates = SCRIPT_LANGS.get(script, (default,))
+    if default in candidates and len(candidates) > 1:
+        # try to break the tie with marker words before defaulting
+        words = set(text.split())
+        for cand in candidates:
+            if cand == default:
+                continue
+            markers = _LANG_MARKERS.get(cand)
+            if markers and (words & markers):
+                return cand
+        return default
     if default in candidates:
         return default
     return candidates[0]

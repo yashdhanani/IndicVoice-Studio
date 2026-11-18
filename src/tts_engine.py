@@ -54,6 +54,8 @@ class AudioPlayer:
         self._pending = 0
         self._stream: sd.OutputStream | None = None
         self._tail = float(info.get("default_low_output_latency") or 0.05)
+        #: False between cancel() and the next turn's resume(); see AudioSink
+        self._accepting = True
 
     # -- stream lifecycle --------------------------------------------------- #
 
@@ -97,11 +99,20 @@ class AudioPlayer:
     def push(self, samples: np.ndarray, sample_rate: int = SAMPLE_RATE) -> None:
         if samples is None or len(samples) == 0:
             return
-        self._ensure_stream()
+        if not self._accepting:
+            return                         # a cancelled turn must not speak again
+        self._ensure_stream()          # outside the lock: the callback needs it
         audio = self._resample(np.asarray(samples, dtype=np.float32), sample_rate)
         with self._lock:
+            if not self._accepting:
+                return
             self._chunks.append(audio)
             self._pending += len(audio)
+
+    def resume(self) -> None:
+        """Accept audio again: called at the start of a new speaking turn."""
+        with self._lock:
+            self._accepting = True
 
     @property
     def is_speaking(self) -> bool:
@@ -121,6 +132,7 @@ class AudioPlayer:
     def cancel(self) -> None:
         """Drop queued audio immediately (used for barge-in)."""
         with self._lock:
+            self._accepting = False
             self._chunks.clear()
             self._pending = 0
         stream = self._stream
@@ -373,7 +385,10 @@ class TTSEngine:
                     spoken,
                     voice="male" if self.sid == 1 else "female",
                     speed=float(speed) * config.TINY_SPEED,
+                    cancel_event=cancel_event,
                 )
+                if cancel_event is not None and cancel_event.is_set():
+                    return np.zeros(0, dtype=np.float32)
                 return _normalize_level(
                     np.asarray(audio, dtype=np.float32).reshape(-1),
                     target_rms=config.TINY_TARGET_RMS,
@@ -540,6 +555,8 @@ class TTSEngine:
             for chunk in chunks:
                 audio = self.render_sentence(chunk, speed=speed, cancel_event=cancel_event)
                 if audio.size:
+                    if cancel_event is not None and cancel_event.is_set():
+                        break
                     pieces.append(audio)
                     self._emit(audio)
         self.finish()
@@ -675,6 +692,8 @@ class TTSPool:
                 current = engine
                 audio = engine.render_sentence(chunk, speed=speed, cancel_event=cancel_event)
                 if audio.size:
+                    if cancel_event is not None and cancel_event.is_set():
+                        break             # barge-in landed while rendering this clause
                     pieces.append(audio)
                     engine._emit(audio)   # noqa: SLF001 - same package
         if current is not None:

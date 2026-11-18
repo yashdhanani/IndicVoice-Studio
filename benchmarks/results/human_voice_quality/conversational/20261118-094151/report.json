@@ -1,0 +1,168 @@
+{
+  "generated": "20261118-094151",
+  "languages": [
+    {
+      "lang": "hi",
+      "replies": {
+        "cap": {
+          "user": "नमस्ते, क्या आप मेरी मदद कर सकते हैं?",
+          "reply": "नमस्ते! ज़रूर, मैं आपकी कैसे सहायता कर सकता हूँ?",
+          "ms": 447
+        },
+        "mix": {
+          "user": "मेरा OTP कहाँ आएगा?",
+          "reply": "आपका OTP आपके पंजीकृत मोबाइल पर भेजा जाएगा। क्या आप अपना मोबाइल नंबर पुष्टि कर सकते हैं?",
+          "ms": 465
+        },
+        "ask": {
+          "user": "मेरा order कब आएगा?",
+          "reply": "कृपया अपना ऑर्डर नंबर बताइए, ताकि मैं ट्रैकिंग स्थिति देख सकूँ।",
+          "ms": 448
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "expected": "feminine",
+        "found": "masculine",
+        "masculine_markers": [
+          "सकता"
+        ],
+        "feminine_markers": [],
+        "pass": false
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "नमस्ते! ज़रूर",
+          "आपका otp",
+          "कृपया अपना"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 1
+        },
+        "pass": true
+      },
+      "pass": false
+    },
+    {
+      "lang": "mr",
+      "replies": {
+        "cap": {
+          "user": "नमस्कार, तुम्ही मला मदत करू शकता का?",
+          "reply": "नमस्कार! कशात मदत हवी आहे?",
+          "ms": 395
+        },
+        "mix": {
+          "user": "माझा OTP कुठे येईल?",
+          "reply": "आपला OTP लवकरच आपल्या नोंदणीकृत मोबाईल नंबरवर येईल. काही मिनिटे थांबून बघा, जर आला नाही तर आम्हाला कळवा.",
+          "ms": 510
+        },
+        "ask": {
+          "user": "माझी order कधी येईल?",
+          "reply": "माफ करा, तुमचा ऑर्डर नंबर मला माहित नाही. कृपया ऑर्डर नंबर द्या, मग मी तपासून सांगतो.",
+          "ms": 302
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "expected": "feminine",
+        "found": "unmarked",
+        "masculine_markers": [],
+        "feminine_markers": [],
+        "pass": true
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "नमस्कार! कशात",
+          "आपला otp",
+          "माफ करा"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 2
+        },
+        "pass": true
+      },
+      "pass": true
+    },
+    {
+      "lang": "pa",
+      "replies": {
+        "cap": {
+          "user": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ, ਤੁਸੀਂ ਮੇਰੀ ਮਦਦ ਕਰ ਸਕਦੇ ਹੋ?",
+          "reply": "ਸਤ ਸ੍ਰੀ ਅਕਾਲ! ਬਿਲਕੁਲ, ਮੈਂ ਤੁਹਾਡੀ ਕਿਵੇਂ ਮਦਦ ਕਰ ਸਕਦਾ ਹਾਂ?",
+          "ms": 458
+        },
+        "mix": {
+          "user": "ਮੇਰਾ OTP ਕਿੱਥੇ ਆਵੇਗਾ?",
+          "reply": "OTP ਤੁਹਾਡੇ ਰਜਿਸਟਰ ਕੀਤੇ ਮੋਬਾਈਲ ਨੰਬਰ ’ਤੇ ਜਾਂ ਈ‑ਮੇਲ ’ਤੇ ਭੇਜਿਆ ਜਾਵੇਗਾ। ਕੀ ਤੁਸੀਂ ਆਪਣਾ ਨੰਬਰ ਜਾਂ ਈ‑ਮੇਲ ਪੁਸ਼ਟੀ ਕਰ ਸਕਦੇ ਹੋ?",
+          "ms": 419
+        },
+        "ask": {
+          "user": "ਮੇਰਾ order ਕਦੋਂ ਆਵੇਗਾ?",
+          "reply": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਆਰਡਰ ਨੰਬਰ ਦੱਸੋ, ਤਾਂ ਜੋ ਮੈਂ ਡਿਲਿਵਰੀ ਦੀ ਸਥਿਤੀ ਚੈੱਕ ਕਰ ਸਕਾਂ।",
+          "ms": 719
+        }
+      },
+      "script_ok": true,
+      "gender": {
+        "voice": "female",
+        "expected": "feminine",
+        "found": "masculine",
+        "masculine_markers": [
+          "ਸਕਦਾ"
+        ],
+        "feminine_markers": [],
+        "pass": false
+      },
+      "code_switch": {
+        "otp_term_kept": true,
+        "order_term_kept": true,
+        "latin_letters_in_mixed_reply": 3,
+        "pass": true
+      },
+      "repetition": {
+        "openings": [
+          "ਸਤ ਸ੍ਰੀ",
+          "otp ਤੁਹਾਡੇ",
+          "ਕਿਰਪਾ ਕਰਕੇ"
+        ],
+        "duplicate_opening": false,
+        "pass": true
+      },
+      "length": {
+        "sentences": {
+          "cap": 2,
+          "mix": 2,
+          "ask": 1
+        },
+        "pass": true
+      },
+      "pass": false
+    }
+  ]
+}

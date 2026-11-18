@@ -1,0 +1,108 @@
+{
+  "generated": "2026-11-17T11:46:39.033058+00:00",
+  "problems": {},
+  "summary": {
+    "total_slots": 240,
+    "collected": 0,
+    "verified": 0,
+    "per_lang": {
+      "hi": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "gu": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "mr": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "bn": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "ta": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "te": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "kn": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "ml": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "pa": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "or": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "as": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      },
+      "en": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0,
+        "speakers": 0,
+        "validation_problems": [],
+        "status": "NOT TESTED"
+      }
+    },
+    "human_dataset_status": "NOT TESTED"
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "generated_at": "2026-11-18T11:37:43",
+  "host": "i7-8565U 4c/8t, 15.88GB RAM, Windows 11, Python 3.13",
+  "repeats": 4,
+  "langs": {
+    "mr": [
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "tts_ms_median": 369.3,
+        "tts_ms_min": 309.0,
+        "asr_ms_median": 1958.8,
+        "asr_ms_min": 1519.3,
+        "audio_s": 4.91,
+        "rss_mb": 497.7
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "tts_ms_median": 409.9,
+        "tts_ms_min": 299.5,
+        "asr_ms_median": 2850.7,
+        "asr_ms_min": 1903.7,
+        "audio_s": 4.91,
+        "rss_mb": 868.0
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "tts_ms_median": 306.6,
+        "tts_ms_min": 295.1,
+        "asr_ms_median": 1916.3,
+        "asr_ms_min": 1870.8,
+        "audio_s": 4.91,
+        "rss_mb": 1194.4
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "tts_ms_median": 343.5,
+        "tts_ms_min": 269.4,
+        "asr_ms_median": 1690.4,
+        "asr_ms_min": 1617.2,
+        "audio_s": 4.91,
+        "rss_mb": 1521.3
+      }
+    ],
+    "bn": [
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "tts_ms_median": 282.6,
+        "tts_ms_min": 252.9,
+        "asr_ms_median": 1221.4,
+        "asr_ms_min": 1147.0,
+        "audio_s": 3.55,
+        "rss_mb": 1177.6
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "tts_ms_median": 201.1,
+        "tts_ms_min": 190.0,
+        "asr_ms_median": 1753.7,
+        "asr_ms_min": 1552.2,
+        "audio_s": 3.55,
+        "rss_mb": 1471.8
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "tts_ms_median": 244.6,
+        "tts_ms_min": 221.3,
+        "asr_ms_median": 1564.0,
+        "asr_ms_min": 1392.8,
+        "audio_s": 3.55,
+        "rss_mb": 1770.7
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "tts_ms_median": 397.1,
+        "tts_ms_min": 190.3,
+        "asr_ms_median": 1749.6,
+        "asr_ms_min": 1532.7,
+        "audio_s": 3.55,
+        "rss_mb": 2071.8
+      }
+    ],
+    "ta": [
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "tts_ms_median": 363.0,
+        "tts_ms_min": 342.5,
+        "asr_ms_median": 1576.7,
+        "asr_ms_min": 1361.6,
+        "audio_s": 3.32,
+        "rss_mb": 1512.1
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "tts_ms_median": 227.2,
+        "tts_ms_min": 195.9,
+        "asr_ms_median": 1429.1,
+        "asr_ms_min": 1308.2,
+        "audio_s": 3.32,
+        "rss_mb": 1785.6
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "tts_ms_median": 248.6,
+        "tts_ms_min": 220.1,
+        "asr_ms_median": 1537.0,
+        "asr_ms_min": 1463.6,
+        "audio_s": 3.32,
+        "rss_mb": 2096.7
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "tts_ms_median": 266.2,
+        "tts_ms_min": 211.4,
+        "asr_ms_median": 1241.3,
+        "asr_ms_min": 1186.0,
+        "audio_s": 3.32,
+        "rss_mb": 2416.6
+      }
+    ]
+  }
+}

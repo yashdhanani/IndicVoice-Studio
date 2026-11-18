@@ -1,0 +1,547 @@
+{
+  "generated": "2026-11-18 09:55:56",
+  "language_count": 12,
+  "worst_severity": 2,
+  "resources": {
+    "latency_run": {
+      "source": "benchmarks\\results\\realworld_v3\\latency_v3.json",
+      "peak_mb": 875.6,
+      "final_mb": 838.8,
+      "cpu_count": 8
+    },
+    "concurrency_run": {
+      "source": "benchmarks\\results\\production_v1\\concurrency_v1.json",
+      "peak_mb": 732.5,
+      "final_mb": 731.8,
+      "cpu_count": 8
+    }
+  },
+  "dataset": {
+    "total": {
+      "slots": 240,
+      "collected": 0,
+      "verified": 0
+    },
+    "per_language": {
+      "hi": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "gu": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "mr": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "bn": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "ta": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "te": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "kn": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "ml": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "pa": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "or": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "as": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      },
+      "en": {
+        "slots": 20,
+        "collected": 0,
+        "verified": 0
+      }
+    },
+    "listener_responses": 0,
+    "status": "NOT TESTED"
+  },
+  "languages": {
+    "hi": {
+      "lang": "hi",
+      "name": "Hindi",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.082,
+        "wer": 0.237,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "feminine",
+        "gender_pass": true,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1250.9,
+        "perceived_p95": 1251.7,
+        "asr_p50": 108.4,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "gu": {
+      "lang": "gu",
+      "name": "Gujarati",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1946.5,
+        "perceived_p95": 1981.2,
+        "asr_p50": 1219.4,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "mr": {
+      "lang": "mr",
+      "name": "Marathi",
+      "round_trip": {
+        "source": "eval\\speak_check_20261117-173526\\results.json",
+        "tts_backend": "tiny",
+        "asr_backend": "indic",
+        "cer_clean_mean": 0.0,
+        "clean_render_rate": 1.0,
+        "clean_renders": 1,
+        "renders": 1,
+        "word_miss_renders": 0,
+        "script_miss_renders": 0
+      },
+      "asr": {
+        "cer": 0.0,
+        "wer": 0.167,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "unmarked",
+        "gender_pass": true,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1839.5,
+        "perceived_p95": 1925.2,
+        "asr_p50": 1089.4,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "PASS (automated)",
+        "pronunciation": "PARTIAL — automated candidates only, no native verdict",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "bn": {
+      "lang": "bn",
+      "name": "Bengali",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.067,
+        "wer": 0.3,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1780.1,
+        "perceived_p95": 2244.1,
+        "asr_p50": 727.1,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "ta": {
+      "lang": "ta",
+      "name": "Tamil",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1467.4,
+        "perceived_p95": 1679.0,
+        "asr_p50": 724.7,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "te": {
+      "lang": "te",
+      "name": "Telugu",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.0,
+        "wer": 0.133,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1020.1,
+        "perceived_p95": 1337.8,
+        "asr_p50": 743.6,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "kn": {
+      "lang": "kn",
+      "name": "Kannada",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.0,
+        "wer": 0.0,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1912.2,
+        "perceived_p95": 1954.1,
+        "asr_p50": 931.3,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "ml": {
+      "lang": "ml",
+      "name": "Malayalam",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.081,
+        "wer": 0.389,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1803.6,
+        "perceived_p95": 2602.1,
+        "asr_p50": 688.6,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "pa": {
+      "lang": "pa",
+      "name": "Punjabi",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.056,
+        "wer": 0.265,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "feminine",
+        "gender_pass": true,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1674.0,
+        "perceived_p95": 2595.9,
+        "asr_p50": 831.5,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "or": {
+      "lang": "or",
+      "name": "Odia",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.133,
+        "wer": 0.483,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1746.6,
+        "perceived_p95": 1919.0,
+        "asr_p50": 710.4,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "as": {
+      "lang": "as",
+      "name": "Assamese",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.344,
+        "wer": 0.889,
+        "backend": "indic",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": false,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": false,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1656.3,
+        "perceived_p95": 1757.1,
+        "asr_p50": 664.3,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [
+        {
+          "severity": 1,
+          "kind": "asr_accuracy_corpus",
+          "detail": "corpus CER 0.344 > 0.15",
+          "evidence": "eval\\accuracy.json"
+        },
+        {
+          "severity": 2,
+          "kind": "code_switch",
+          "detail": "caller's English term not preserved",
+          "evidence": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+        }
+      ],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    },
+    "en": {
+      "lang": "en",
+      "name": "Indian English",
+      "round_trip": null,
+      "asr": {
+        "cer": 0.141,
+        "wer": 0.143,
+        "backend": "groq",
+        "n": 3,
+        "source": "eval\\accuracy.json"
+      },
+      "conversational": {
+        "gender_status": "NOT APPLICABLE",
+        "gender_pass": null,
+        "code_switch_pass": true,
+        "script_ok": true,
+        "repetition_ok": true,
+        "length_ok": true,
+        "pass": true,
+        "source": "benchmarks\\results\\human_voice_quality\\conversational_postfix\\20261118-094800\\report.json"
+      },
+      "latency": {
+        "perceived_p50": 1350.5,
+        "perceived_p95": 1454.3,
+        "asr_p50": 486.6,
+        "n": 3,
+        "source": "eval\\latency.json"
+      },
+      "defects": [],
+      "claims": {
+        "automated_speech_generation": "NOT TESTED",
+        "pronunciation": "NOT TESTED",
+        "human_naturalness": "NOT TESTED — no listener ratings",
+        "production_ready": "NOT TESTED — no human evidence"
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IndicVoice · Quality Console</title>
+<link rel="stylesheet" href="/assets/styles.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%23ff9d2e'/%3E%3Cpath d='M9 16h2l2-5 3 10 2-7 2 2h3' stroke='%2317101f' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-aurora a1"></div><div class="bg-aurora a2"></div><div class="bg-aurora a3"></div>
+  <div class="bg-grain"></div>
+</div>
+
+<header class="topbar">
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">☰</button>
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">
+      <svg viewBox="0 0 32 32" width="26" height="26"><circle cx="16" cy="16" r="14" fill="url(#bg)"/><defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ff9d2e"/><stop offset="1" stop-color="#ff4d8d"/></linearGradient></defs><path d="M8 16h2.4l2.2-5.4 3.2 10.8 2.4-7.6 1.8 2.2H24" stroke="#17101f" stroke-width="2.3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </span>
+    <div class="brand-text">
+      <strong>IndicVoice</strong>
+      <span>Quality Console · 12 languages · CPU-only</span>
+    </div>
+  </div>
+  <div class="top-status">
+    <span class="pill" id="serverPill"><i class="dot"></i><span>connecting…</span></span>
+    <span class="pill ghost" id="clockPill">--:--:--</span>
+  </div>
+  <button class="mute-btn" id="masterMute" aria-pressed="false" title="Mute every sound in the console">
+    <span class="mute-ico" aria-hidden="true">🔊</span><span class="mute-label">Sound on</span>
+  </button>
+</header>
+
+<div class="shell">
+  <nav class="sidenav" id="sidenav" aria-label="Sections">
+    <a href="#/overview" data-nav="overview"><i>◈</i>Overview</a>
+    <a href="#/languages" data-nav="languages"><i>অ</i>Languages</a>
+    <a href="#/evidence" data-nav="evidence"><i>≋</i>Evidence</a>
+    <a href="#/benchmarks" data-nav="benchmarks"><i>⏱</i>Benchmarks</a>
+    <a href="#/dataset" data-nav="dataset"><i>🎙</i>Human dataset</a>
+    <a href="#/listening" data-nav="listening"><i>🎧</i>Listening test</a>
+    <a href="#/reports" data-nav="reports"><i>▤</i>Reports</a>
+    <a href="#/baseline" data-nav="baseline"><i>⌂</i>Baseline</a>
+    <div class="sidenav-foot">
+      <span class="tiny">Port 8000 untouched<br>No cloud inference<br>.env never read</span>
+    </div>
+  </nav>
+
+  <main class="main" id="main">
+    <div id="view" class="view" tabindex="-1"></div>
+  </main>
+
+  <aside class="rail" id="rail" aria-label="Live controls">
+    <div class="rail-head">
+      <strong>Live controls</strong>
+      <button class="rail-collapse" id="railCollapse" title="Collapse rail">⟩</button>
+    </div>
+    <div class="rail-body" id="railBody">
+      <div class="rail-group">
+        <label class="rail-title">Gate what-if <span class="tiny" id="gateHint">recomputes the matrix</span></label>
+        <div class="ctl"><span>Max CER clean</span><input type="range" id="gCer" min="0" max="0.5" step="0.01" value="0.15"><output id="gCerOut">0.15</output></div>
+        <div class="ctl"><span>Min RMS dBFS</span><input type="range" id="gRms" min="-50" max="-15" step="1" value="-35"><output id="gRmsOut">-35</output></div>
+        <div class="ctl"><span>Min voiced frac</span><input type="range" id="gVoiced" min="0" max="1" step="0.05" value="0.30"><output id="gVoicedOut">0.30</output></div>
+        <div class="ctl"><span>Min voice-band</span><input type="range" id="gBand" min="0" max="1" step="0.05" value="0.70"><output id="gBandOut">0.70</output></div>
+        <div class="ctl"><span>Max clip frac</span><input type="range" id="gClip" min="0" max="0.01" step="0.0005" value="0.002"><output id="gClipOut">0.002</output></div>
+        <div class="ctl"><span>Min duration s</span><input type="range" id="gDur" min="0.1" max="2" step="0.1" value="0.4"><output id="gDurOut">0.4</output></div>
+      </div>
+      <div class="rail-group">
+        <label class="rail-title">Playback</label>
+        <div class="ctl"><span>Rate</span><input type="range" id="pRate" min="0.5" max="2" step="0.05" value="1"><output id="pRateOut">1.00×</output></div>
+        <div class="ctl"><span>Volume</span><input type="range" id="pVol" min="0" max="1" step="0.05" value="0.9"><output id="pVolOut">90%</output></div>
+      </div>
+      <div class="rail-group">
+        <label class="rail-title">View</label>
+        <div class="ctl"><span>Language</span>
+          <select id="fLang"><option value="">all 12</option></select></div>
+        <div class="ctl"><span>Sort rows</span>
+          <select id="fSort">
+            <option value="default">run order</option>
+            <option value="cer">worst CER first</option>
+            <option value="status">defects first</option>
+            <option value="lang">language A→Z</option>
+            <option value="custom">my drag order</option>
+          </select></div>
+        <div class="ctl toggle"><span>Compact density</span>
+          <button class="switch" id="tDensity" role="switch" aria-checked="false"><i></i></button></div>
+        <div class="ctl toggle"><span>Show only defects</span>
+          <button class="switch" id="tDefects" role="switch" aria-checked="false"><i></i></button></div>
+      </div>
+      <div class="rail-actions">
+        <button class="btn small" id="gateReset">Reset gates</button>
+        <button class="btn small ghost" id="viewExport">Export view</button>
+      </div>
+      <div class="rail-group saved">
+        <label class="rail-title">Saved views</label>
+        <div class="saved-row">
+          <input type="text" id="viewName" placeholder="name this view" maxlength="28">
+          <button class="btn small" id="viewSave">Save</button>
+        </div>
+        <ul class="saved-list" id="savedList"></ul>
+      </div>
+    </div>
+  </aside>
+</div>
+
+<div class="drawer-scrim" id="drawerScrim" hidden></div>
+<aside class="drawer" id="drawer" aria-label="Details" hidden>
+  <div class="drawer-head"><strong id="drawerTitle">Details</strong>
+    <button class="icon-btn" id="drawerClose" aria-label="Close">✕</button></div>
+  <div class="drawer-body" id="drawerBody"></div>
+</aside>
+
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<div class="modal-scrim" id="modalScrim" hidden>
+  <div class="modal" role="dialog" aria-modal="true" id="modalBox"></div>
+</div>
+
+<audio id="player" preload="metadata"></audio>
+<script src="/assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+{
+  "generated_at": "2026-11-18T11:50:13",
+  "langs": {
+    "en": {
+      "status": "measured",
+      "combos": [
+        {
+          "threshold": 0.5,
+          "min_silence_s": 0.45,
+          "turn_splits": 0,
+          "onset_ms": 736.0,
+          "endpoint_delay_ms": 32.0,
+          "captured_s": 3.48,
+          "speech_s": 4.03,
+          "false_pos_on_5s_silence": 0
+        }
+      ]
+    }
+  }
+}

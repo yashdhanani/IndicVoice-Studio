@@ -1,0 +1,59 @@
+{
+  "generated_at": "2026-11-18",
+  "final_verdict": "READY FOR INTERNAL ALPHA",
+  "tests": {
+    "command": ".venv313/Scripts/python.exe -m unittest discover -s tests -t .",
+    "passed": 186,
+    "failed": 0,
+    "errors": 0,
+    "duration_s": 137.369,
+    "exit_code": 0
+  },
+  "stage_bench": {
+    "file": "stage_bench_20261118-112145.json",
+    "repeats": 2,
+    "measured_languages": ["hi", "gu", "mr", "bn", "ta", "en"],
+    "skipped_languages": ["te", "kn", "ml", "pa", "or", "as"],
+    "roundtrip_cer_p50": {
+      "hi": 0.0,
+      "gu": 0.0,
+      "mr": 0.037,
+      "bn": 0.0,
+      "ta": 0.0,
+      "en": 0.216
+    },
+    "tts_ms_p50": {"hi": 318.0, "gu": 496.4, "mr": 430.0, "bn": 324.4, "ta": 335.0, "en": 502.5},
+    "asr_ms_p50": {"hi": 192.8, "gu": 1876.8, "mr": 1913.4, "bn": 1319.5, "ta": 1221.7, "en": 592.5},
+    "tts_rtf": {"hi": 0.08, "gu": 0.09, "mr": 0.09, "bn": 0.09, "ta": 0.1, "en": 0.12},
+    "vad_turn_splits": {"hi": 0, "gu": 1, "mr": 0, "bn": 0, "ta": 0, "en": 0},
+    "vad_false_positives_on_5s_silence": {"hi": 0, "gu": 0, "mr": 0, "bn": 0, "ta": 0, "en": 0},
+    "rss_mb_end": 1344.4
+  },
+  "e2e_latency_ms": {
+    "source": "docs/INDICVOICE_E2E_LATENCY_REPORT.md",
+    "hi_run2": {"p50": 1130.1, "p90": 1937.2, "p95": 2766.2, "max": 2766.2, "n": 20, "failed": 0},
+    "en_run2": {"p50": 1264.2, "p90": 1589.8, "p95": 2886.6, "max": 2886.6, "n": 20, "failed": 0},
+    "target_ms": "300-500",
+    "target_met": false
+  },
+  "concurrency": {
+    "source": "INDICVOICE_CONCURRENCY_REPORT.md (prior)",
+    "sessions_tested": [1, 2, 3, 5],
+    "turns_ok": "33/33",
+    "rss_peak_mb": 732.5,
+    "recommended_max_concurrent": "2-3"
+  },
+  "languages": {
+    "total_supported": 12,
+    "real_human_recordings_collected": 0,
+    "total_target_recordings": 240,
+    "human_mos_tested": false,
+    "physical_mic_tested": false,
+    "phone_tested": false
+  },
+  "security": {
+    "auth_modes": ["open-dev (localhost)", "token (non-localhost)"],
+    "tls": "self-signed (LAN only)",
+    "public_internet_hardened": false
+  }
+}

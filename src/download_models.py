@@ -138,8 +138,11 @@ def download_indic_asr(lang: str) -> None:
     spec = config.INDIC_ASR[lang]
     dest = config.indic_asr_dir(lang)
     print(f"[ASR:{lang}] {spec['repo']}")
-    for filename in spec["files"].values():
-        _fetch(spec["repo"], filename, dest)
+    # Some repos keep one folder per language (``as/model.int8.onnx``) and share a
+    # single token file, so the local name and the remote path can differ.
+    remote = spec.get("remote") or {}
+    for key, filename in spec["files"].items():
+        _fetch(spec["repo"], remote.get(key, filename), dest, name=filename)
     patch = spec.get("patch_metadata")
     if patch:
         _patch_onnx_metadata(

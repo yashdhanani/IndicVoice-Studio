@@ -1,0 +1,211 @@
+{
+  "generated_at": "2026-11-18T11:33:36",
+  "host": "i7-8565U 4c/8t, 15.88GB RAM, Windows 11, Python 3.13",
+  "repeats": 5,
+  "langs": {
+    "hi": [
+      {
+        "stt_threads": 1,
+        "tts_threads": 1,
+        "tts_ms_median": 297.3,
+        "tts_ms_min": 279.0,
+        "asr_ms_median": 302.5,
+        "asr_ms_min": 290.4,
+        "audio_s": 3.85,
+        "rss_mb": 521.9
+      },
+      {
+        "stt_threads": 1,
+        "tts_threads": 2,
+        "tts_ms_median": 193.1,
+        "tts_ms_min": 184.8,
+        "asr_ms_median": 311.5,
+        "asr_ms_min": 302.8,
+        "audio_s": 3.85,
+        "rss_mb": 897.7
+      },
+      {
+        "stt_threads": 1,
+        "tts_threads": 4,
+        "tts_ms_median": 204.7,
+        "tts_ms_min": 182.2,
+        "asr_ms_median": 331.2,
+        "asr_ms_min": 312.8,
+        "audio_s": 3.85,
+        "rss_mb": 1249.7
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 1,
+        "tts_ms_median": 311.3,
+        "tts_ms_min": 297.5,
+        "asr_ms_median": 327.5,
+        "asr_ms_min": 323.3,
+        "audio_s": 3.85,
+        "rss_mb": 1287.4
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "tts_ms_median": 250.5,
+        "tts_ms_min": 217.9,
+        "asr_ms_median": 238.7,
+        "asr_ms_min": 228.6,
+        "audio_s": 3.85,
+        "rss_mb": 1640.0
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "tts_ms_median": 248.0,
+        "tts_ms_min": 212.4,
+        "asr_ms_median": 277.0,
+        "asr_ms_min": 261.2,
+        "audio_s": 3.85,
+        "rss_mb": 1990.3
+      },
+      {
+        "stt_threads": 3,
+        "tts_threads": 1,
+        "tts_ms_median": 380.3,
+        "tts_ms_min": 333.6,
+        "asr_ms_median": 281.3,
+        "asr_ms_min": 200.0,
+        "audio_s": 3.85,
+        "rss_mb": 1973.6
+      },
+      {
+        "stt_threads": 3,
+        "tts_threads": 2,
+        "tts_ms_median": 311.9,
+        "tts_ms_min": 284.0,
+        "asr_ms_median": 279.1,
+        "asr_ms_min": 201.7,
+        "audio_s": 3.85,
+        "rss_mb": 2323.9
+      },
+      {
+        "stt_threads": 3,
+        "tts_threads": 4,
+        "tts_ms_median": 313.3,
+        "tts_ms_min": 294.4,
+        "asr_ms_median": 246.4,
+        "asr_ms_min": 225.6,
+        "audio_s": 3.85,
+        "rss_mb": 2694.3
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 1,
+        "tts_ms_median": 418.3,
+        "tts_ms_min": 366.3,
+        "asr_ms_median": 176.8,
+        "asr_ms_min": 161.4,
+        "audio_s": 3.85,
+        "rss_mb": 1295.0
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "tts_ms_median": 271.9,
+        "tts_ms_min": 207.3,
+        "asr_ms_median": 193.9,
+        "asr_ms_min": 181.4,
+        "audio_s": 3.85,
+        "rss_mb": 1641.6
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "tts_ms_median": 464.7,
+        "tts_ms_min": 209.0,
+        "asr_ms_median": 286.6,
+        "asr_ms_min": 265.7,
+        "audio_s": 3.85,
+        "rss_mb": 2004.1
+      }
+    ],
+    "en": [
+      {
+        "stt_threads": 1,
+        "tts_threads": 1,
+        "tts_ms_median": 500.3,
+        "tts_ms_min": 364.3,
+        "asr_ms_median": 514.1,
+        "asr_ms_min": 492.9,
+        "audio_s": 3.97,
+        "rss_mb": 2132.0
+      },
+      {
+        "stt_threads": 1,
+        "tts_threads": 2,
+        "tts_ms_median": 288.7,
+        "tts_ms_min": 216.3,
+        "asr_ms_median": 527.1,
+        "asr_ms_min": 472.8,
+        "audio_s": 3.97,
+        "rss_mb": 1571.9
+      },
+      {
+        "stt_threads": 1,
+        "tts_threads": 4,
+        "tts_ms_median": 355.7,
+        "tts_ms_min": 313.2,
+        "asr_ms_median": 497.0,
+        "asr_ms_min": 473.7,
+        "audio_s": 3.97,
+        "rss_mb": 1694.2
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 1,
+        "tts_ms_median": 496.1,
+        "tts_ms_min": 366.2,
+        "asr_ms_median": 491.4,
+        "asr_ms_min": 444.5,
+        "audio_s": 3.97,
+        "rss_mb": 1815.3
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 2,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      },
+      {
+        "stt_threads": 2,
+        "tts_threads": 4,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      },
+      {
+        "stt_threads": 3,
+        "tts_threads": 1,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      },
+      {
+        "stt_threads": 3,
+        "tts_threads": 2,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      },
+      {
+        "stt_threads": 3,
+        "tts_threads": 4,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 1,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 2,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      },
+      {
+        "stt_threads": 4,
+        "tts_threads": 4,
+        "error": "groq asr HTTP 429: {\"error\":{\"message\":\"Rate limit reached for model `whisper-large-v3-turbo` in organization `org_01katgb0vdfg8tpmng63qs0bkp` service tier `on_demand` on requests per minute (RPM): Li"
+      }
+    ]
+  }
+}
